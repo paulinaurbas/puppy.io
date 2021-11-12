@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:puppy_io/main.dart';
+import 'package:puppy_io/screens/main_screen/view/main_screen_page.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
