@@ -334,6 +334,8 @@ components:
       items:
         type: 'object'
         properties:
+          id:
+            type: 'integer'
           name:
             type: 'string'
           breed:
@@ -347,6 +349,7 @@ components:
             items:
               type: 'string'
         required:
+          - 'id'
           - 'name'
     ErrorResponse:
       type: 'object'
