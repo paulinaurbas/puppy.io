@@ -1,0 +1,355 @@
+openapi: '3.0.0'
+info:
+  version: '1.0.0'
+  title: 'Puppy.io'
+  description: 'API for dogs adoption'
+paths:
+  /signIn:
+    post:
+      summary: 'Signs into the app'
+      operationId: 'postSignIn'
+      requestBody:
+        description: 'Sign in data'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SignInRequest'
+      responses:
+        '201':
+          description: 'Successfully signed in'
+        '403':
+          description: 'Failed to signed in, user already exists'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /logIn:
+    post:
+      summary: 'Logs into the app'
+      operationId: 'postLogIn'
+      requestBody:
+        description: 'Log in credentials'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LogInRequest'
+      responses:
+        '200':
+          description: 'Successfully logged in'
+        '409':
+          description: 'Failed to log in, incorrect login credentials'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /dogOffer:
+    post:
+      summary: 'Creates a dog offer'
+      operationId: 'postDogOffer'
+      requestBody:
+        description: 'Dog offer details'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DogOfferRequest'
+      responses:
+        '201':
+          description: 'Successfully created a dog offer'
+        '400':
+          description: 'Dog offer is invalid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: 'Not logged in'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /dogOffer/{id}:
+    get:
+      summary: 'Gets details of the dog offer'
+      operationId: 'getDogOffer'
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          description: 'An ID of the selected dog offer'
+          schema:
+            type: 'integer'
+      responses:
+        '200':
+          description: 'Successfully got dog offer details'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DogOfferResponse'
+        '404':
+          description: 'Dog offer not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: 'Not logged in'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      summary: 'Updates details of the dog offer'
+      operationId: 'putDogOffer'
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          description: 'An ID of the selected dog offer'
+          schema:
+            type: 'integer'
+      requestBody:
+        description: 'Dog offer details'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DogOfferRequest'
+      responses:
+        '204':
+          description: 'Successfully updated a dog offer'
+        '404':
+          description: 'Dog offer not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: 'Not logged in or it s not the user s offer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      summary: 'Deletes the dog offer'
+      operationId: 'deleteDogOffer'
+      parameters:
+        - in: 'path'
+          name: 'id'
+          required: true
+          description: 'An ID of the selected dog offer'
+          schema:
+            type: 'integer'
+      responses:
+        '204':
+          description: 'Successfully deleted a dog offer'
+        '404':
+          description: 'Dog offer not found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '409':
+          description: 'Not logged in or it s not the user s offer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /dogOffers:
+    get:
+      summary: 'Gets a list of the dog offers'
+      operationId: 'getDogOffers'
+      parameters:
+        - in: 'query'
+          name: 'localization'
+          schema:
+            type: 'array'
+            items:
+              type: 'number'
+          description: 'Actual localization in latitude longitude schema (for example 41.43206,-81.38992). If no or invalid localization send, do not use localizationRange parameter'
+        - in: 'query'
+          name: 'breeds'
+          schema:
+            type: 'array'
+            items:
+              type: 'string'
+          description: 'List of breeds selected in the filter. No breeds selected equals all of them'
+        - in: 'query'
+          name: 'ageLow'
+          schema:
+            type: 'integer'
+          description: 'Lower bound of the age selected in the filter. No ageLow selected equals ageLow=0'
+        - in: 'query'
+          name: 'ageHigh'
+          schema:
+            type: 'integer'
+          description: 'Higher bound of the age selected in the filter. No ageHigh selected equals ageHigh=100'
+        - in: 'query'
+          name: 'sexes'
+          schema:
+            type: 'array'
+            items:
+              type: 'string'
+          description: 'List of sexes (m/f) selected in the filter. No sexes selected equals all of them'
+        - in: 'query'
+          name: 'localizationRange'
+          schema:
+            type: 'integer'
+          description: 'Maximal distance of the offer from actual localization in kilometers. No localizationRange selected means the distance can be infinite'
+      responses:
+        '200':
+          description: 'Successfully created a dog offer'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DogOffersResponse'
+        '400':
+          description: 'The query parameters are invalid'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: 'Something went wrong on the servers side'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    SignInRequest:
+      type: 'object'
+      properties:
+        username:
+          type: 'string'
+        password:
+          type: 'string'
+        email:
+          type: 'string'
+      required:
+        - 'username'
+        - 'password'
+        - 'email'
+    LogInRequest:
+      type: 'object'
+      properties:
+        username:
+          type: 'string'
+        password:
+          type: 'string'
+      required:
+        - 'username'
+        - 'password'
+    DogOfferRequest:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+        breed:
+          type: 'string'
+        age:
+          type: 'integer'
+        sex:
+          type: 'string'
+        description:
+          type: 'string'
+        pictures:
+          type: 'array'
+          items:
+            type: 'string'
+        localization:
+          type: 'array'
+          items:
+            type: 'number'
+          description: 'Actual localization in latitude longitude schema (for example 41.43206,-81.38992)'
+      required:
+        - 'name'
+    DogOfferResponse:
+      type: 'object'
+      properties:
+        name:
+          type: 'string'
+        breed:
+          type: 'string'
+        age:
+          type: 'integer'
+        sex:
+          type: 'string'
+        description:
+          type: 'string'
+        pictures:
+          type: 'array'
+          items:
+            type: 'string'
+        localization:
+          type: 'array'
+          items:
+            type: 'number'
+          description: 'Actual localization in latitude longitude schema (for example 41.43206,-81.38992)'
+        ownerEmail:
+          type: 'string'
+      required:
+        - 'name'
+        - 'ownerEmail'
+    DogOffersResponse:
+      type: 'array'
+      items:
+        type: 'object'
+        properties:
+          name:
+            type: 'string'
+          breed:
+            type: 'string'
+          age:
+            type: 'integer'
+          sex:
+            type: 'string'
+          pictures:
+            type: 'array'
+            items:
+              type: 'string'
+        required:
+          - 'name'
+    ErrorResponse:
+      type: 'object'
+      properties:
+        error:
+          type: 'string'
