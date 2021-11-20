@@ -1,4 +1,4 @@
-part of 'main_screen_bloc.dart';
+part of 'register_screen_bloc.dart';
 
 class CounterState {
   int counter;

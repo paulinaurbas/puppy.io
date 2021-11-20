@@ -1,3 +1,1 @@
-class Repository{
-
-}
+class Repository {}
