@@ -11,7 +11,6 @@ import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart'
 import 'package:puppy_io/screens/autorization_screen/registration/bloc/register_screen_bloc.dart';
 import 'package:puppy_io/screens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'auth/auth_repository.dart';
 
 GetIt getIt = GetIt.instance;
@@ -29,6 +28,7 @@ Future<void> init() async {
   ));
   getIt.registerFactory(() => LoginBloc(authenticationRepository: getIt.get<AuthenticationRepository>()));
   getIt.registerFactory(() => RegistrationBloc());
+
 }
 
 void main() async {
@@ -50,3 +50,4 @@ void main() async {
     ),
   ));
 }
+
