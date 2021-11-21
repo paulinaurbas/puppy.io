@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:puppy_io/auth/auth_repository.dart';
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
 import 'package:puppy_io/screens/autorization_screen/login/view/login_form.dart';
 
@@ -22,15 +21,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: BlocProvider(
-          create: (context) {
-            return getIt.get<LoginBloc>();
-          },
-          child: const LoginForm(),
-        ),
+      body: BlocProvider(
+        create: (context) {
+          return getIt.get<LoginBloc>();
+        },
+        child: const LoginForm(),
       ),
     );
   }

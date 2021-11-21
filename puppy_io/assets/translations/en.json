@@ -1,3 +1,7 @@
 {
-  "hello": "hello"
+  "hello": "hello",
+  "username": "Username",
+  "password": "Password",
+  "logout": "Logout",
+  "login": "Login"
 }

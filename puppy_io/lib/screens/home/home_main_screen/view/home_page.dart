@@ -26,6 +26,12 @@ class HomePage extends StatelessWidget {
               },
             ),
             ElevatedButton(
+              child: const Text('Create offer with puppy'),
+              onPressed: () {
+                //TODO
+              },
+            ),
+            ElevatedButton(
               child: const Text('Logout'),
               onPressed: () {
                 context

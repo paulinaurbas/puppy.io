@@ -1,3 +1,7 @@
 {
-  "hello": "czesc"
+  "hello": "czesc",
+  "username": "Username",
+  "password": "Hasło",
+  "logout": "Wyloguj",
+  "login": "Zaloguj się"
 }
