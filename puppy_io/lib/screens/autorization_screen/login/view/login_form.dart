@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
+import 'package:puppy_io/widgets/outline_button.dart';
 import 'package:puppy_io/widgets/primary_button.dart';
 
 class LoginForm extends StatelessWidget {
@@ -34,6 +35,8 @@ class LoginForm extends StatelessWidget {
             _PasswordInput(),
             const SizedBox(height: 12),
             _LoginButton(),
+            const SizedBox(height: 12),
+            _RegistrationButton(),
           ],
         ),
       ),
@@ -133,6 +136,18 @@ class _LoginButton extends StatelessWidget {
                       }
                     : null,
               );
+      },
+    );
+  }
+}
+
+class _RegistrationButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<LoginBloc, LoginState>(
+      buildWhen: (previous, current) => previous.status != current.status,
+      builder: (context, state) {
+        return PuppyIoOutlineButton(buttonDescription: LocaleKeys.login.tr(), onPressed: () {});
       },
     );
   }
