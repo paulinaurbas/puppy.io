@@ -16,6 +16,20 @@ class LoginPasswordChanged extends LoginEvent {
   final String password;
 }
 
+class LoginEmailChanged extends LoginEvent {
+  const LoginEmailChanged(this.email);
+
+  final String email;
+}
+
+class ChangedPageEvent extends LoginEvent {
+  const ChangedPageEvent();
+}
+
 class LoginSubmitted extends LoginEvent {
   const LoginSubmitted();
+}
+
+class RegisterSubmitted extends LoginEvent {
+  const RegisterSubmitted();
 }

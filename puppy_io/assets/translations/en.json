@@ -3,5 +3,10 @@
   "username": "Username",
   "password": "Password",
   "logout": "Logout",
-  "login": "Login"
+  "login": "Login",
+  "registration": "Registration",
+  "authenticationFailure": "Authentication Failure",
+  "invalidUsername": "Invalid username",
+  "register": "Register!",
+  "email": "Email"
 }

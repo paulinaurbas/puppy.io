@@ -8,7 +8,6 @@ import 'package:puppy_io/data/repository.dart';
 import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
 import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
-import 'package:puppy_io/screens/autorization_screen/registration/bloc/register_screen_bloc.dart';
 import 'package:puppy_io/screens/main_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'auth/auth_repository.dart';
@@ -27,7 +26,6 @@ Future<void> init() async {
     userRepository: getIt.get<UserRepository>(),
   ));
   getIt.registerFactory(() => LoginBloc(authenticationRepository: getIt.get<AuthenticationRepository>()));
-  getIt.registerFactory(() => RegistrationBloc());
 
 }
 

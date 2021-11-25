@@ -12,44 +12,52 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<LoginBloc, LoginState>(
-      listener: (context, state) {
-        if (state.status.isSubmissionFailure) {
-          ScaffoldMessenger.of(context)
-            ..hideCurrentSnackBar()
-            ..showSnackBar(
-              const SnackBar(content: Text('Authentication Failure')),
-            );
-        }
-      },
-      child: SingleChildScrollView(
+    return BlocConsumer<LoginBloc, LoginState>(listener: (context, state) {
+      if (state.status.isSubmissionFailure) {
+        ScaffoldMessenger.of(context)
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(content: Text(LocaleKeys.authenticationFailure.tr())),
+          );
+      }
+    }, builder: (context, state) {
+      return SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _BackgroundPhoto(),
             const SizedBox(height: 12),
-            _TitleLabel(),
+            _TitleLabel(
+              labelName: state.registration ? LocaleKeys.registration.tr() : LocaleKeys.login.tr(),
+            ),
             const SizedBox(height: 12),
-            _UsernameInput(),
+            _EmailInput(),
             const SizedBox(height: 12),
+            if (state.registration) _UsernameInput(),
+            if (state.registration) const SizedBox(height: 12),
             _PasswordInput(),
             const SizedBox(height: 12),
-            _LoginButton(),
+            _MainButton(),
             const SizedBox(height: 12),
-            _RegistrationButton(),
+            _NavigationButton(),
+            const SizedBox(height: 36),
           ],
         ),
-      ),
-    );
+      );
+    });
   }
 }
 
 class _TitleLabel extends StatelessWidget {
+  final String labelName;
+
+  const _TitleLabel({required this.labelName});
+
   @override
   Widget build(BuildContext context) {
     return Text(
-      LocaleKeys.login.tr(),
-      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+      labelName,
+      style: const TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
     );
   }
 }
@@ -68,7 +76,7 @@ class _UsernameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
       child: BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => previous.username != current.username,
         builder: (context, state) {
@@ -78,11 +86,11 @@ class _UsernameInput extends StatelessWidget {
             decoration: InputDecoration(
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(width: 3, style: BorderStyle.solid, color: Colors.black),
+                borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
               ),
               hintStyle: TextStyle(color: Colors.grey[800]),
               labelText: LocaleKeys.username.tr(),
-              errorText: state.username.invalid ? 'invalid username' : null,
+              errorText: state.username!.invalid ? LocaleKeys.invalidUsername.tr() : null,
             ),
           );
         },
@@ -95,7 +103,7 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
       child: BlocBuilder<LoginBloc, LoginState>(
         buildWhen: (previous, current) => previous.password != current.password,
         builder: (context, state) {
@@ -107,7 +115,7 @@ class _PasswordInput extends StatelessWidget {
               labelText: LocaleKeys.password.tr(),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12.0),
-                borderSide: const BorderSide(width: 3, style: BorderStyle.solid, color: Colors.black),
+                borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
               ),
               hintStyle: TextStyle(
                 color: Colors.grey[800],
@@ -120,19 +128,53 @@ class _PasswordInput extends StatelessWidget {
   }
 }
 
-class _LoginButton extends StatelessWidget {
+class _EmailInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
+      child: BlocBuilder<LoginBloc, LoginState>(
+        buildWhen: (previous, current) => previous.email != current.email,
+        builder: (context, state) {
+          return TextField(
+            key: const Key('loginForm_emailInput_textField'),
+            onChanged: (password) => context.read<LoginBloc>().add(LoginEmailChanged(password)),
+            obscureText: true,
+            decoration: InputDecoration(
+              labelText: LocaleKeys.email.tr(),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12.0),
+                borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
+              ),
+              hintStyle: TextStyle(
+                color: Colors.grey[800],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _MainButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      buildWhen: (previous, current) =>
+          previous.status != current.status || previous.registration != current.registration,
       builder: (context, state) {
         return state.status.isSubmissionInProgress
             ? const CircularProgressIndicator()
             : PrimaryButton(
-                buttonDescription: LocaleKeys.login.tr(),
+                buttonDescription: state.registration ? LocaleKeys.register.tr() : LocaleKeys.login.tr(),
                 onPressed: state.status.isValidated
                     ? () {
-                        context.read<LoginBloc>().add(const LoginSubmitted());
+                        if (!state.registration) {
+                          context.read<LoginBloc>().add(const LoginSubmitted());
+                        } else {
+                          context.read<LoginBloc>().add(const RegisterSubmitted());
+                        }
                       }
                     : null,
               );
@@ -141,13 +183,19 @@ class _LoginButton extends StatelessWidget {
   }
 }
 
-class _RegistrationButton extends StatelessWidget {
+class _NavigationButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
-      buildWhen: (previous, current) => previous.status != current.status,
+      buildWhen: (previous, current) =>
+          previous.status != current.status || previous.registration != current.registration,
       builder: (context, state) {
-        return PuppyIoOutlineButton(buttonDescription: LocaleKeys.login.tr(), onPressed: () {});
+        return PuppyIoOutlineButton(
+          buttonDescription: state.registration ? LocaleKeys.login.tr() : LocaleKeys.registration.tr(),
+          onPressed: () {
+            context.read<LoginBloc>().add(const ChangedPageEvent());
+          },
+        );
       },
     );
   }

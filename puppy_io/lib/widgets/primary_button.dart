@@ -15,14 +15,14 @@ class PrimaryButton extends StatelessWidget {
         child: Text(
           buttonDescription,
           style:
-          const TextStyle(fontSize: 14, color: Colors.black, letterSpacing: 0.8),
+          const TextStyle(fontSize: 16, color: Colors.black, letterSpacing: 0.8),
         ),
       ),
       color: Colors.amber,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12)),
       onPressed: onPressed,
-      disabledColor: Colors.grey,
+      disabledColor: Colors.grey.shade300,
     );
   }
 }

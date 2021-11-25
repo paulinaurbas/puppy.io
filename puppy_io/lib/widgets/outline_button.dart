@@ -15,7 +15,7 @@ class PuppyIoOutlineButton extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Text(
           buttonDescription,
-          style: const TextStyle(fontSize: 14, color: Colors.black, letterSpacing: 0.8),
+          style: const TextStyle(fontSize: 16, color: Colors.black, letterSpacing: 0.8),
         ),
       ),
       style: OutlinedButton.styleFrom(

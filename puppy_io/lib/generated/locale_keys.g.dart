@@ -6,5 +6,10 @@ abstract class  LocaleKeys {
   static const password = 'password';
   static const logout = 'logout';
   static const login = 'login';
+  static const registration = 'registration';
+  static const authenticationFailure = 'authenticationFailure';
+  static const invalidUsername = 'invalidUsername';
+  static const register = 'register';
+  static const email = 'email';
 
 }

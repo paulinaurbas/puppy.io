@@ -23,6 +23,19 @@ class AuthenticationRepository {
     );
   }
 
+  Future<void> register({
+    required String username,
+    required String password,
+    required String email,
+  }) async {
+    await Future.delayed(
+      const Duration(milliseconds: 300),
+          () {
+        _controller.add(AuthenticationStatus.authenticated);
+      },
+    );
+  }
+
   void logOut() {
     _controller.add(AuthenticationStatus.unauthenticated);
   }
