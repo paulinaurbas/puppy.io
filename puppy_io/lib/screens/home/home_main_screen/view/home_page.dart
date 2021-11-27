@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class HomePage extends StatelessWidget {
             },
           ),
           ElevatedButton(
-            child: const Text('Logout'),
+            child: Text(LocaleKeys.logout.tr()),
             onPressed: () {
               context
                   .read<AuthenticationBloc>()
