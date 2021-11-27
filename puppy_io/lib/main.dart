@@ -9,16 +9,14 @@ import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_he
 import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
 import 'package:puppy_io/screens/main_screen.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'auth/auth_repository.dart';
 
 GetIt getIt = GetIt.instance;
 
 Future<void> init() async {
-  SharedPreferences sharedPref = await SharedPreferences.getInstance();
-  getIt.registerFactory(() => SharedPreferencesHelper(sharedPref));
-  getIt.registerLazySingleton(() => AuthenticationRepository());
-  getIt.registerFactory(() => UserRepository());
+  getIt.registerFactory(() => SharedPreferencesHelper());
+  getIt.registerLazySingleton(() => AuthenticationRepository(getIt.get<SharedPreferencesHelper>()));
+  getIt.registerFactory(() => UserRepository(getIt.get<SharedPreferencesHelper>()));
   getIt.registerFactory(() => ApiProvider());
   getIt.registerFactory(() => Repository());
   getIt.registerFactory(() => AuthenticationBloc(

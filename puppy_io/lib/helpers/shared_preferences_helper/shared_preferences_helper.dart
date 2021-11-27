@@ -1,11 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesHelper {
-  SharedPreferences prefs;
-
-  SharedPreferencesHelper(this.prefs);
-
   static const String isUserLogIn = 'IS_USER_LOG_IN';
+
 }
 
 extension SettingAndGettingValues on SharedPreferencesHelper {
@@ -14,9 +11,10 @@ extension SettingAndGettingValues on SharedPreferencesHelper {
     prefs.setString(key, value);
   }
 
-  void setBoolPreference(String key, bool value) async {
+  Future<bool> setBoolPreference(String key, bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(key, value);
+    await prefs.setBool(key, value);
+    return true;
   }
 
   void setDoublePreference(String key, double value) async {

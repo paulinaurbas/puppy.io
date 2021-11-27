@@ -12,36 +12,44 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home')),
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Builder(
-              builder: (context) {
-                final userId = context.select(
-                      (AuthenticationBloc bloc) => bloc.state.user.id,
-                );
-                return Text('UserID: $userId');
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Create offer with puppy'),
-              onPressed: () {
-                //TODO
-              },
-            ),
-            ElevatedButton(
-              child: const Text('Logout'),
-              onPressed: () {
-                context
-                    .read<AuthenticationBloc>()
-                    .add(AuthenticationLogoutRequested());
-              },
-            ),
-          ],
-        ),
+      body: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          _BackgroundPhoto(),
+          Builder(
+            builder: (context) {
+              final userId = context.select(
+                    (AuthenticationBloc bloc) => bloc.state.user.id,
+              );
+              return Text('UserID: $userId');
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Create offer with puppy'),
+            onPressed: () {
+              //TODO
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Logout'),
+            onPressed: () {
+              context
+                  .read<AuthenticationBloc>()
+                  .add(AuthenticationLogoutRequested());
+            },
+          ),
+        ],
       ),
+    );
+  }
+}
+
+class _BackgroundPhoto extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Image(
+      image: AssetImage('assets/images/backgroun_main_scree.png'),
+      fit: BoxFit.cover,
     );
   }
 }
