@@ -6,9 +6,8 @@ import 'package:uuid/uuid.dart';
 
 class UserRepository {
   User? _user;
-  final SharedPreferencesHelper _preferencesHelper;
 
-  UserRepository(this._preferencesHelper);
+  UserRepository();
 
   Future<User?> getUser() async {
     if (_user != null) {

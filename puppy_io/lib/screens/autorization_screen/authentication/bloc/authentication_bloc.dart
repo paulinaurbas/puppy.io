@@ -59,6 +59,7 @@ class AuthenticationBloc
       AuthenticationLogoutRequested event,
       Emitter<AuthenticationState> emit,
       ) {
+
     _authenticationRepository.logOut();
   }
 

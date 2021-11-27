@@ -1,14 +1,18 @@
 import 'dart:async';
 
 import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
+import 'package:puppy_io/auth/auth_api_provider.dart';
+import 'package:puppy_io/data/models/login_model.dart';
+import 'package:puppy_io/data/models/register_model.dart';
 
 enum AuthenticationStatus { unknown, authenticated, unauthenticated }
 
 class AuthenticationRepository {
   final SharedPreferencesHelper _preferencesHelper;
   final _controller = StreamController<AuthenticationStatus>();
+  final AuthApiProvider _apiProvider;
 
-  AuthenticationRepository(this._preferencesHelper);
+  AuthenticationRepository(this._apiProvider, this._preferencesHelper);
 
   Stream<AuthenticationStatus> get status async* {
     bool isUserLogin = await _preferencesHelper.getBoolPreference(SharedPreferencesHelper.isUserLogIn) ?? false;
@@ -25,8 +29,11 @@ class AuthenticationRepository {
     required String username,
     required String password,
   }) async {
+
+    await _apiProvider.login(Login(password: password, email: username));
     await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, true);
     await _preferencesHelper.getBoolPreference(SharedPreferencesHelper.isUserLogIn);
+
     await Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -40,6 +47,7 @@ class AuthenticationRepository {
     required String password,
     required String email,
   }) async {
+    _apiProvider.register(Register(password: password, email: email, userName: username));
     await Future.delayed(
       const Duration(milliseconds: 300),
       () {
@@ -48,7 +56,8 @@ class AuthenticationRepository {
     );
   }
 
-  void logOut() {
+  Future<void> logOut() async {
+    await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, false);
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 
