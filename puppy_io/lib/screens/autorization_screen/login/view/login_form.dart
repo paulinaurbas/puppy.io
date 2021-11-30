@@ -138,8 +138,7 @@ class _EmailInput extends StatelessWidget {
         builder: (context, state) {
           return TextField(
             key: const Key('loginForm_emailInput_textField'),
-            onChanged: (password) => context.read<LoginBloc>().add(LoginEmailChanged(password)),
-            obscureText: true,
+            onChanged: (email) => context.read<LoginBloc>().add(LoginEmailChanged(email)),
             decoration: InputDecoration(
               labelText: LocaleKeys.email.tr(),
               border: OutlineInputBorder(
