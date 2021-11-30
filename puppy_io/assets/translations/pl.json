@@ -1,3 +1,12 @@
 {
-  "hello": "czesc"
+  "hello": "czesc",
+  "username": "Username",
+  "password": "Hasło",
+  "logout": "Wyloguj",
+  "login": "Zaloguj się",
+  "registration": "Rejestracja",
+  "authenticationFailure": "Autotyzacja nie powiodła się, spróbuj ponownie",
+  "invalidUsername": "Niepoprawny użytkownik",
+  "register": "Zarejestruj się!",
+  "email": "Email"
 }

@@ -1,3 +1,12 @@
 {
-  "hello": "hello"
+  "hello": "hello",
+  "username": "Username",
+  "password": "Password",
+  "logout": "Logout",
+  "login": "Login",
+  "registration": "Registration",
+  "authenticationFailure": "Authentication Failure",
+  "invalidUsername": "Invalid username",
+  "register": "Register!",
+  "email": "Email"
 }
