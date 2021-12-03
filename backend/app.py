@@ -27,7 +27,7 @@ def log_in():
     data = request.get_json(force=True)
     if not data.get('username') or not data.get('password'):
         return jsonify(error='Failed to log in, incorrect login credentials'), 400
-    return 200
+    return {}, 200
 
 @app.route('/dogOffer', methods=['POST'])
 def dog_offer():
@@ -35,7 +35,7 @@ def dog_offer():
     data = request.get_json(force=True)
     if not data.get('name'):
         return jsonify(error='Dog offer is invalid'), 400
-    return 201
+    return {}, 201
 
 @app.route('/dogOffer/<id>', methods=['GET', 'PUT', 'DELETE'])
 def dog_offer_id(id):
@@ -54,10 +54,10 @@ def dog_offer_id(id):
         data = request.get_json(force=True)
         if not data.get('name'):
             return jsonify(error='Dog offer is invalid'), 400
-        return 204
+        return {}, 204
     elif request.method == 'DELETE':
         app.logger.info('DELETE /dogOffer/{}'.format(id))
-        return 204
+        return {}, 204
 
 @app.route('/dogOffers', methods=['GET'])
 def dog_offers():
