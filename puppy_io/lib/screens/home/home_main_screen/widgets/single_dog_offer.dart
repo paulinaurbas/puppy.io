@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
+import 'package:puppy_io/screens/home/dog_details/view/dog_details_screen_page.dart';
 
 class SingleDogOffer extends StatelessWidget {
   final DogOffer _dog;
@@ -11,25 +12,35 @@ class SingleDogOffer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          border: Border.all(color: PuppyIoColors.mainPuppyIoColor, width: 2),
-        ),
-        child: Row(
-          children: [
-            DogNameAndAge(
-              name: _dog.name,
-              age: _dog.age,
-              icon: Icons.male,
-            ),
-            const Spacer(),
-            DogPhoto(
-              photoUrl: _dog.photoUrl,
-            ),
-          ],
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+          return DogDetailsPage(
+            arg: DogDetailsArg(_dog),
+          );
+        }));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
+        child: Container(
+          decoration: BoxDecoration(
+            color: PuppyIoColors.mainPuppyIoColorWithOpacity,
+            borderRadius: BorderRadius.circular(12.0),
+            border: Border.all(color: PuppyIoColors.mainPuppyIoColor, width: 2),
+          ),
+          child: Row(
+            children: [
+              DogNameAndAge(
+                name: _dog.name,
+                age: _dog.age,
+                icon: Icons.male,
+              ),
+              const Spacer(),
+              DogPhoto(
+                photoUrl: _dog.photoUrl,
+              ),
+            ],
+          ),
         ),
       ),
     );
