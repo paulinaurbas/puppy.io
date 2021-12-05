@@ -141,7 +141,7 @@ class AgeFiled extends StatelessWidget {
                   flex: 2,
                   child: TileWithValue(
                     LocaleKeys.treeYears.tr(),
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.detailsDarkerGreen,
                     state.age == Age.threeSixYears,
                     () {
                       context.read<HomeScreenMainBloc>().add(
@@ -157,7 +157,7 @@ class AgeFiled extends StatelessWidget {
                   flex: 2,
                   child: TileWithValue(
                     LocaleKeys.sixYears.tr(),
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.oceanBlue,
                     state.age == Age.sixPlusYear,
                     () {
                       context.read<HomeScreenMainBloc>().add(
@@ -218,7 +218,7 @@ class OfferDistance extends StatelessWidget {
                   flex: 2,
                   child: TileWithValue(
                     LocaleKeys.twentyKm.tr(),
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.detailsDarkerGreen,
                     state.distance == Distance.twentyKm,
                     () {
                       context.read<HomeScreenMainBloc>().add(
@@ -234,7 +234,7 @@ class OfferDistance extends StatelessWidget {
                   flex: 2,
                   child: TileWithValue(
                     LocaleKeys.moreThan30km.tr(),
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.oceanBlue,
                     state.distance == Distance.moreThanThirtyKm,
                     () {
                       context.read<HomeScreenMainBloc>().add(
@@ -276,7 +276,7 @@ class GenderSection extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: TileWithIcon(
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.genderManColor,
                     state.sex == Sex.male,
                     Icons.male,
                     () {
@@ -292,7 +292,7 @@ class GenderSection extends StatelessWidget {
                 Expanded(
                   flex: 2,
                   child: TileWithIcon(
-                    PuppyIoColors.detailsLightGreen,
+                    PuppyIoColors.genderWomenColor,
                     state.sex == Sex.female,
                     Icons.female,
                     () {
