@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
-class TileWithValue extends StatelessWidget {
-  const TileWithValue(this.title, this.color, this.isSelected, this.onChanged);
+class TileWithIcon extends StatelessWidget {
+  TileWithIcon(
+    this.color,
+    this.isSelected,
+    this.icon,
+    this.onChanged,
+  );
 
   final Color color;
-  final String title;
   final bool isSelected;
+  final IconData icon;
   final Function() onChanged;
 
   @override
@@ -20,10 +25,7 @@ class TileWithValue extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 8.0),
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-          ),
+          child: Icon(icon),
         ),
       ),
     );

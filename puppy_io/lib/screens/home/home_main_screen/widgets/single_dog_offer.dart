@@ -5,14 +5,14 @@ import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 
 class SingleDogOffer extends StatelessWidget {
-  final Dog _dog;
+  final DogOffer _dog;
 
   const SingleDogOffer(this._dog);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -81,11 +81,11 @@ class DogNameAndAge extends StatelessWidget {
             children: [
               Text(
                 LocaleKeys.age.tr() + ': ',
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
               Text(
                 age.toString(),
-                style: TextStyle(fontSize: 18),
+                style: const TextStyle(fontSize: 18),
               ),
             ],
           ),
