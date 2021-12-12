@@ -1,10 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
-import 'package:easy_localization/easy_localization.dart';
-import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
-
-
+import 'package:puppy_io/widgets/photo_in_frame.dart';
 
 class AboutDogCard extends StatelessWidget {
   final DogOffer dog;
@@ -13,29 +11,67 @@ class AboutDogCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
-          child: Container(
-            decoration: BoxDecoration(
-              color: PuppyIoColors.mainPuppyIoColorWithOpacity,
-              borderRadius: BorderRadius.circular(12.0),
-              border: Border.all(color: Colors.white38, width: 2),
-            ),
-            child: Row(
-              children: [
-                DogNameAndAge(
-                  name: dog.name,
-                  age: dog.age,
-                  icon: Icons.male,
-                ),
-                const Spacer(),
-              ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 16),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 60),
+            child: Container(
+              height: 250.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.black26,
+                    blurRadius: 8.0,
+                    offset: Offset(0.0, 5.0),
+                  ),
+                ],
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 80,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      DogNameAndAge(
+                        name: dog.name,
+                        age: dog.age,
+                        icon: Icons.male,
+                      ),
+                    ],
+                  ),
+                  DogDescription(dog.description),
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+          PhotoInFrame(dog.photoUrl),
+        ],
+      ),
+    );
+  }
+}
+
+
+class DogDescription extends StatelessWidget {
+  const DogDescription(this.description);
+
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Text(
+        description,
+        textAlign: TextAlign.left,
+      ),
     );
   }
 }
@@ -52,11 +88,22 @@ class DogNameAndAge extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            name,
-            style: const TextStyle(fontSize: 18),
+          Row(
+            children: [
+              Text(
+                name,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              Icon(icon),
+            ],
           ),
           const SizedBox(
             height: 4,
@@ -74,10 +121,6 @@ class DogNameAndAge extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(
-            height: 32,
-          ),
-          Icon(icon),
         ],
       ),
     );

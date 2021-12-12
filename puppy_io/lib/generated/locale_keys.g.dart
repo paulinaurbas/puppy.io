@@ -23,5 +23,6 @@ abstract class  LocaleKeys {
   static const twentyKm = 'twentyKm';
   static const moreThan30km = 'moreThan30km';
   static const search = 'search';
+  static const photos = 'photos';
 
 }

@@ -4,6 +4,7 @@ import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 import 'package:puppy_io/screens/home/dog_details/view/dog_details_screen_page.dart';
+import 'package:puppy_io/widgets/dog_photo.dart';
 
 class SingleDogOffer extends StatelessWidget {
   final DogOffer _dog;
@@ -24,9 +25,15 @@ class SingleDogOffer extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
         child: Container(
           decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15.0),
             color: PuppyIoColors.mainPuppyIoColorWithOpacity,
-            borderRadius: BorderRadius.circular(12.0),
-            border: Border.all(color: PuppyIoColors.mainPuppyIoColor, width: 2),
+            boxShadow: const [
+              BoxShadow(
+                color: PuppyIoColors.mainPuppyIoColorWithOpacity,
+                blurRadius: 8.0,
+                offset: Offset(0.0, 5.0),
+              ),
+            ],
           ),
           child: Row(
             children: [
@@ -41,27 +48,6 @@ class SingleDogOffer extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class DogPhoto extends StatelessWidget {
-  final String photoUrl;
-
-  const DogPhoto({required this.photoUrl});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Container(
-        width: 120,
-        height: 120,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(image: NetworkImage(photoUrl), fit: BoxFit.cover),
         ),
       ),
     );
@@ -84,7 +70,7 @@ class DogNameAndAge extends StatelessWidget {
         children: [
           Text(
             name,
-            style: TextStyle(fontSize: 18),
+            style: const TextStyle(fontSize: 18),
           ),
           const SizedBox(height: 4,),
           Row(

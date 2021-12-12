@@ -18,7 +18,7 @@ class DogDetailsForm extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    //DownPhotoAppBar(dog: state.dogOffer,),
+                    DownPhotoAppBar(dog: state.dogOffer,),
                     const SizedBox(height: 4,),
                     PhotoGallery(
                       listOfUrls: [(state).dogOffer.photoUrl, (state).dogOffer.photoUrl, (state).dogOffer.photoUrl],

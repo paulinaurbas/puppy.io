@@ -13,29 +13,50 @@ class DownPhotoAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: Alignment.topCenter,
+      alignment: Alignment.topLeft,
       children: <Widget>[
         const Image(
-          image: AssetImage('assets/images/details_backgoround_photo.png'),
-          fit: BoxFit.fitWidth,
+          image: AssetImage('assets/images/backgroun_main_scree.png'),
+          fit: BoxFit.cover,
         ),
         Padding(
           padding: const EdgeInsets.only(left: 8.0),
           child: Align(
-            alignment: Alignment.topLeft,
-            child: Column(
-              children: [
-                const SizedBox(
-                  height: 40,
-                ),
-                AboutDogCard(
-                  dog: dog,
-                ),
-              ],
-            ),
-          ),
+              alignment: Alignment.topLeft,
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 32,
+                  ),
+                  const BackButton(),
+                  const SizedBox(
+                    height: 52,
+                  ),
+                  AboutDogCard(dog: dog),
+                ],
+              )),
         ),
       ],
+    );
+  }
+}
+
+class BackButton extends StatelessWidget {
+  const BackButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.topLeft,
+      child: InkWell(
+        onTap: (){
+          Navigator.pop(context);
+        },
+        child: const Icon(
+          Icons.arrow_back_ios_new, //TODO: change icon
+          size: 25,
+        ),
+      ),
     );
   }
 }

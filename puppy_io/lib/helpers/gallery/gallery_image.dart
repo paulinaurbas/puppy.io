@@ -37,29 +37,6 @@ class _GalleryImageState extends State<GalleryImage> {
       children: [
         GridView.builder(
           primary: false,
-          itemCount: galleryItems.length > 1 ? 1 : galleryItems.length,
-          padding: const EdgeInsets.all(16),
-          semanticChildCount: 1,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1, mainAxisSpacing: 0, crossAxisSpacing: 5),
-          shrinkWrap: true,
-          itemBuilder: (BuildContext context, int index) {
-            return ClipRRect(
-              borderRadius: const BorderRadius.all(Radius.circular(8)),
-              child: galleryItems.length > 3 && index == 2
-                  ? buildImageNumbers(index)
-                  : GalleryItemThumbnail(
-                      galleryItem: galleryItems[index],
-                      onTap: () {
-                        openImageFullScreen(index);
-                      },
-                    ),
-            );
-          },
-        ),
-        const SizedBox(height: 16,),
-        GridView.builder(
-          primary: false,
           itemCount: galleryItems.length > 3 ? 3 : galleryItems.length,
           padding: const EdgeInsets.all(0),
           semanticChildCount: 1,

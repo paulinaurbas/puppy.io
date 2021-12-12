@@ -16,19 +16,6 @@ class DogDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white38,
-        elevation: 0,
-        title: Text(
-          arg.dogOffer.name,
-          textAlign: TextAlign.center,
-        ),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-      ),
       body: BlocProvider(
         create: (BuildContext context) {
           return getIt.get<DogDetailsBloc>()
