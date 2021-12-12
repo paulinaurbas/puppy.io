@@ -24,5 +24,8 @@ abstract class  LocaleKeys {
   static const moreThan30km = 'moreThan30km';
   static const search = 'search';
   static const photos = 'photos';
+  static const contactWithOwner = 'contactWithOwner';
+  static const iWantAdoptYourDog = 'iWantAdoptYourDog';
+  static const iWantAdoptYourDogMessage = 'iWantAdoptYourDogMessage';
 
 }
