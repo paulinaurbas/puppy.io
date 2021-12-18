@@ -75,7 +75,7 @@ class AboutDogCard extends StatelessWidget {
               ),
             ),
           ),
-          PhotoInFrame(dog.photoUrl),
+          PhotoInFrame(dog.photoUrl.first),
         ],
       ),
     );

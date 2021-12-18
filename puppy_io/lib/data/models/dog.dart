@@ -4,7 +4,7 @@ part 'dog.g.dart';
 
 @JsonSerializable()
 class DogOffer {
-  final String photoUrl;
+  final List<String> photoUrl;
   final String name;
   final int age;
   final String gender;

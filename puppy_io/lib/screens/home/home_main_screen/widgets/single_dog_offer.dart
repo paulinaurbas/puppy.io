@@ -44,7 +44,7 @@ class SingleDogOffer extends StatelessWidget {
               ),
               const Spacer(),
               DogPhoto(
-                photoUrl: _dog.photoUrl,
+                photoUrl: _dog.photoUrl.first,
               ),
             ],
           ),
