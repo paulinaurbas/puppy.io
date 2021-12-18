@@ -9,12 +9,13 @@ class UserRepository {
   UserRepository();
 
   Future<User?> getUser() async {
+    final User user = User(const Uuid().v4(), 'Ala', 'Ala ma kota', 'Ala');
     if (_user != null) {
       return _user;
     }
     return Future.delayed(
       const Duration(milliseconds: 300),
-      () => _user = User(const Uuid().v4()),
+      () => _user = user,
     );
   }
 }
