@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+backend/database.db
 
 # IntelliJ related
 *.iml
