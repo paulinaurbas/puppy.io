@@ -1,24 +1,12 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
-</p>
-
-<h3 align="center">Project Title</h3>
+<h3 align="center">Puppy.io</h3>
 
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/issues)
-[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/kylelobo/The-Documentation-Compendium/pulls)
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
+[![GitHub Issues](https://img.shields.io/github/issues/kylelobo/The-Documentation-Compendium.svg)](https://github.com/paulinaurbas/puppy.io/issues)
+[![GitHub Pull Requests](https://img.shields.io/github/issues-pr/kylelobo/The-Documentation-Compendium.svg)](https://github.com/paulinaurbas/puppy.io/pulls)
 
 </div>
-
----
-
-<p align="center"> Few lines describing your project.
-    <br> 
-</p>
 
 ## 📝 Table of Contents
 
@@ -27,88 +15,113 @@
 - [Deployment](#deployment)
 - [Usage](#usage)
 - [Built Using](#built_using)
-- [TODO](../TODO.md)
-- [Contributing](../CONTRIBUTING.md)
 - [Authors](#authors)
-- [Acknowledgments](#acknowledgement)
 
 ## 🧐 About <a name = "about"></a>
 
-Write about 1-2 paragraphs describing the purpose of your project.
+The purpose of the application was to create a tool to help adopt dogs. Users can add adoption offers, view them, and communicate with the person offering the offer (by sending email). Application supports two language: polish/english 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+### Mobile app
+First run:
+1. Install Flutter 2.5.3 (Dart 2.14.4) 
+2. run `flutter pub get`
+3. run `flutter run`
 
-### Prerequisites
+### Backend app 
+#### Develop it locally
 
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you how to get a development env running.
-
-Say what the step will be
-
-```
-Give the example
+To prepare your shell for development run:
+```sh
+virtualenv .env
+source .env/bin/activate
+pip install -r requirements.txt
 ```
 
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo.
-
-## 🔧 Running the tests <a name = "tests"></a>
-
-Explain how to run the automated tests for this system.
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
+To run unit tests run:
+```sh
+pytest
 ```
 
-### And coding style tests
+To run the app locally run:
+```sh
+export FLASK_APP=app.py
+flask run
 
-Explain what these tests test and why
-
+# or
+gunicorn app:app --log-level=info
 ```
-Give an example
+
+Before creatin PR, update the `requirements.txt` file and the `runtime.txt` file!
+> Keep the requirements.txt as minimal as possible
+```sh
+pip freeze > requirements.txt
+
+# Check the Python version to update the runtime.txt file
+python -V
 ```
 
 ## 🎈 Usage <a name="usage"></a>
 
-Add notes about how to use the system.
+#### Registration & login 
+1. Open app 
+2. Register if you haven't had an account before or log in if you have already created an account. When registering, please provide your e-mail, username and password. 
 
-## 🚀 Deployment <a name = "deployment"></a>
+#### Searching offer 
+1. Log in to the application
+2. Choose the filters you are interested in
 
-Add additional notes about how to deploy this on a live system.
+#### Displaying offers
+1. Log in to the application
+2. Choose the filters you are interested in
+3. Click search
+
+#### Displaying offer details 
+1. Log in to the application
+2. Choose the filters you are interested in
+3. Click search
+4. Click on offer card 
+
+#### Contact with user by email 
+1. Log in to the application
+2. Choose the filters you are interested in
+3. Click search
+4. Click on offer card 
+5. Press contact with owner 
+
+#### Add offer 
+
+#### Edit offer  
+
+#### Display user profile 
+
+## 🚀 Deployment <a name = "deployment">Host it on Heroku</a>
+
+To push commited hanges to Heroku run:
+
+```sh
+git subtree push --prefix backend heroku master
+```
+
+To recreate Heroku app in case of some crush or bad master branch rebase run:
+
+```sh
+heroku create # After that rename created app to "puppy-io-backend" in the Heroku dashboard
+git remote rm heroku # Only if you already have heroku remote in the repository
+heroku git:remote -a puppy-io-backend #
+git subtree push --prefix backend heroku  master
+```
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [MongoDB](https://www.mongodb.com/) - Database
-- [Express](https://expressjs.com/) - Server Framework
-- [VueJs](https://vuejs.org/) - Web Framework
-- [NodeJs](https://nodejs.org/en/) - Server Environment
+- [DataBase] - Database //TODO 
+- [Flask](https://flask.palletsprojects.com) - Server Framework
+- [Flutter](https://flutter.dev) - Mobile Framework
+- [Python](https://www.python.org) - Server Environment
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@kylelobo](https://github.com/kylelobo) - Idea & Initial work
-
-See also the list of [contributors](https://github.com/kylelobo/The-Documentation-Compendium/contributors) who participated in this project.
-
-## 🎉 Acknowledgements <a name = "acknowledgement"></a>
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- References
+- [Michał Herjan](https://github.com/Argo123)
+- [Franciszek Pogodziński](https://github.com/franpog859)
+- [Paulina Urbaś](https://github.com/paulinaurbas)
