@@ -102,7 +102,7 @@ python -V
 
 #### Display user profile 
 
-## 🚀 Deployment <a name = "deployment">Host it on Heroku</a>
+## 🚀 Deployment, host it on Heroku <a name = "deployment"></a>
 
 To push commited hanges to Heroku run:
 
