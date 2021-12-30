@@ -13,7 +13,8 @@ SearchForDog _$SearchForDogFromJson(Map<String, dynamic> json) => SearchForDog(
       $enumDecode(_$DistanceEnumMap, json['distance']),
     );
 
-Map<String, dynamic> _$SearchForDogToJson(SearchForDog instance) => <String, dynamic>{
+Map<String, dynamic> _$SearchForDogToJson(SearchForDog instance) =>
+    <String, dynamic>{
       'age': _$AgeEnumMap[instance.age],
       'breed': instance.breed,
       'sex': _$SexEnumMap[instance.sex],

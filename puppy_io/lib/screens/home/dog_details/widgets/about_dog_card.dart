@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
+import 'package:puppy_io/helpers/encode_query_parameters.dart';
 import 'package:puppy_io/widgets/outline_button.dart';
 import 'package:puppy_io/widgets/photo_in_frame.dart';
-import 'package:share/share.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class AboutDogCard extends StatelessWidget {
   final DogOffer dog;
@@ -53,10 +55,18 @@ class AboutDogCard extends StatelessWidget {
                   PuppyIoOutlineButton(
                     buttonDescription: LocaleKeys.contactWithOwner.tr(),
                     onPressed: () {
-                      Share.share(
-                        LocaleKeys.iWantAdoptYourDogMessage.tr(),
-                        subject: LocaleKeys.iWantAdoptYourDog.tr(),
+                      final Uri emailLaunchUri = Uri(
+                        scheme: 'mailto',
+                        path: dog.ownerEmailAddress,
+                        query: encodeQueryParameters(
+                          <String, String>{
+                            'subject': LocaleKeys.iWantAdoptYourDog.tr(),
+                            'body': LocaleKeys.iWantAdoptYourDogMessage.tr(),
+                          },
+                        ),
                       );
+
+                      launch(emailLaunchUri.toString());
                     },
                   ),
                   const SizedBox(
@@ -66,7 +76,7 @@ class AboutDogCard extends StatelessWidget {
               ),
             ),
           ),
-          PhotoInFrame(dog.photoUrl),
+          PhotoInFrame(dog.photoUrl.first),
         ],
       ),
     );

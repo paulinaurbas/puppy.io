@@ -23,7 +23,7 @@ class DownPhotoAppBar extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              const PuppyIoBackButton(),
+              const BackButton(),
               const SizedBox(
                 height: 52,
               ),
@@ -36,8 +36,8 @@ class DownPhotoAppBar extends StatelessWidget {
   }
 }
 
-class PuppyIoBackButton extends StatelessWidget {
-  const PuppyIoBackButton({Key? key}) : super(key: key);
+class BackButton extends StatelessWidget {
+  const BackButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
