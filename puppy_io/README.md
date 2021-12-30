@@ -1,6 +1,14 @@
 # puppy_io
 
-App helping with dog adoption
+App helping with dog adoption.
+
+## Technology stack in mobile app
+- flutter_bloc
+- GetIt
+- Ease localization
+- Json serialization
+- Dio
+- Json annotation
 
 ## Getting Started
 
@@ -23,10 +31,3 @@ To add new translation please add keys to en.json and pl.json files, then run co
 To generate code required to data serialization, run
 `flutter pub run build_runner build --delete-conflicting-outputs`
 
-### Technology stack in mobile app
-- flutter_bloc
-- GetIt
-- Ease localization
-- Json serialization
-- Dio
-- Json annotation
