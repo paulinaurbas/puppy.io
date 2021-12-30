@@ -25,7 +25,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-The purpose of the application was to create a tool to help adopt dogs. Users can add adoption offers, view them, and communicate with the person offering the offer (by sending email). Application supports two language: polish/english 
+The purpose of the application was to create a tool to help adopt dogs. Users can add adoption offers, view them, and communicate with the person offering the offer (by sending email). Application supports two language: Polish/English 
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
