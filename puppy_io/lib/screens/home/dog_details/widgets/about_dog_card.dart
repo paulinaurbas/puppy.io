@@ -2,7 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
+import 'package:puppy_io/helpers/encode_query_parameters.dart';
+import 'package:puppy_io/widgets/outline_button.dart';
 import 'package:puppy_io/widgets/photo_in_frame.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class AboutDogCard extends StatelessWidget {
   final DogOffer dog;
@@ -18,7 +22,7 @@ class AboutDogCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Container(
-              height: 250.0,
+              height: 350.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: Colors.white,
@@ -47,11 +51,32 @@ class AboutDogCard extends StatelessWidget {
                     ],
                   ),
                   DogDescription(dog.description),
+                  const Spacer(),
+                  PuppyIoOutlineButton(
+                    buttonDescription: LocaleKeys.contactWithOwner.tr(),
+                    onPressed: () {
+                      final Uri emailLaunchUri = Uri(
+                        scheme: 'mailto',
+                        path: dog.ownerEmailAddress,
+                        query: encodeQueryParameters(
+                          <String, String>{
+                            'subject': LocaleKeys.iWantAdoptYourDog.tr(),
+                            'body': LocaleKeys.iWantAdoptYourDogMessage.tr(),
+                          },
+                        ),
+                      );
+
+                      launch(emailLaunchUri.toString());
+                    },
+                  ),
+                  const SizedBox(
+                    height: 32,
+                  )
                 ],
               ),
             ),
           ),
-          PhotoInFrame(dog.photoUrl),
+          PhotoInFrame(dog.photoUrl.first),
         ],
       ),
     );

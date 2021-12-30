@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puppy_io/screens/home/dog_details/bloc/dog_details_bloc.dart';
-import 'package:puppy_io/screens/home/dog_details/widgets/about_dog_card.dart';
 import 'package:puppy_io/screens/home/dog_details/widgets/down_photo.dart';
 import 'package:puppy_io/screens/home/dog_details/widgets/photo_gallery.dart';
 
@@ -21,7 +20,7 @@ class DogDetailsForm extends StatelessWidget {
                     DownPhotoAppBar(dog: state.dogOffer,),
                     const SizedBox(height: 4,),
                     PhotoGallery(
-                      listOfUrls: [(state).dogOffer.photoUrl, (state).dogOffer.photoUrl, (state).dogOffer.photoUrl],
+                      listOfUrls: state.dogOffer.photoUrl,
                       dogName: (state).dogOffer.name,
                     ),
                     //DownPhotoAppBar(),

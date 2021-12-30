@@ -21,5 +21,8 @@
   "twentyKm": "20 km",
   "moreThan30km": "+ 30 km",
   "search": "Search",
-  "photos": "More photos:"
+  "photos": "More photos:",
+  "contactWithOwner": "Contact with owner",
+  "iWantAdoptYourDog": "I want to adopt your dog",
+  "iWantAdoptYourDogMessage": "Hi, I want to adopt your dog"
 }

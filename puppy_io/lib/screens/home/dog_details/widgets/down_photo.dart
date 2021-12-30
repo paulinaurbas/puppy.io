@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
+import 'package:puppy_io/widgets/custom_app_bar.dart';
 
 import 'about_dog_card.dart';
 
@@ -12,31 +13,25 @@ class DownPhotoAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.topLeft,
-      children: <Widget>[
-        const Image(
-          image: AssetImage('assets/images/backgroun_main_scree.png'),
-          fit: BoxFit.cover,
+    return CustomAppBar(
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0),
+        child: Align(
+          alignment: Alignment.topLeft,
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 32,
+              ),
+              const BackButton(),
+              const SizedBox(
+                height: 52,
+              ),
+              AboutDogCard(dog: dog),
+            ],
+          ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 32,
-                  ),
-                  const BackButton(),
-                  const SizedBox(
-                    height: 52,
-                  ),
-                  AboutDogCard(dog: dog),
-                ],
-              )),
-        ),
-      ],
+      ),
     );
   }
 }

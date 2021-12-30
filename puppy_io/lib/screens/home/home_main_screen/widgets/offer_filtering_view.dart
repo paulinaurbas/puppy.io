@@ -24,7 +24,7 @@ class OfferFilering extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                flex: 7,
+                flex: 8,
                 child: Column(
                   children: [
                     const SizedBox(
@@ -79,19 +79,21 @@ class BreedDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeScreenMainBloc, HomeScreenMainState>(builder: (context, state) {
       if (state is FilteringOfferDogsState) {
-        return DropdownButton<String>(
-          value: (state.breed != null && state.breed!.isNotEmpty) ? state.breed : null,
-          items: breadsList.map((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(value),
-            );
-          }).toList(),
-          onChanged: (username) {
-            context.read<HomeScreenMainBloc>().add(
-                  DogBreedChanged(username ?? ''),
-                );
-          },
+        return FittedBox(
+          child: DropdownButton<String>(
+            value: (state.breed != null && state.breed!.isNotEmpty) ? state.breed : null,
+            items: breadsList.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (username) {
+              context.read<HomeScreenMainBloc>().add(
+                    DogBreedChanged(username ?? ''),
+                  );
+            },
+          ),
         );
       } else {
         return Container();
