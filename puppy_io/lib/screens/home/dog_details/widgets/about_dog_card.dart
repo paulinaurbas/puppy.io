@@ -7,6 +7,7 @@ import 'package:puppy_io/widgets/outline_button.dart';
 import 'package:puppy_io/widgets/photo_in_frame.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class AboutDogCard extends StatelessWidget {
   final DogOffer dog;
 

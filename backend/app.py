@@ -1,9 +1,13 @@
 import logging
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+import sqlite3
+import queries as qu
 
 app = Flask(__name__)
 cors = CORS(app)
+con = sqlite3.connect('database.db')
+cur = con.cursor()
 
 if __name__ != '__main__':
     gunicorn_logger = logging.getLogger('gunicorn.error')
@@ -76,5 +80,15 @@ def dog_offers():
                             'pictures':['https://i.ibb.co/2Z93JrD/249481009-204616398465717-7236909556053593142-n.jpg', 'https://i.ibb.co/YQGCsK2/257916615-424243262753574-4370146952180881383-n.jpg']}]), 200
 
 
+def initialize_db():
+    cur.execute(qu.CREATE_BREEDS_TABLE)
+    cur.execute(qu.CREATE_USERS_TABLE)
+    cur.execute(qu.CREATE_DOGS_TABLE)
+    cur.execute(qu.CREATE_LOCATIONS_TABLE)
+    cur.execute(qu.CREATE_PICTURES_TABLE)
+    con.commit()
+
+
 if __name__ == '__main__':
+    initialize_db()
     app.run()
