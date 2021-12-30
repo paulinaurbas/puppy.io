@@ -5,7 +5,10 @@ class PuppyIoOutlineButton extends StatelessWidget {
   final Function()? onPressed;
   final String buttonDescription;
 
-  const PuppyIoOutlineButton({required this.onPressed, required this.buttonDescription});
+  const PuppyIoOutlineButton({
+    required this.onPressed,
+    required this.buttonDescription,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +23,12 @@ class PuppyIoOutlineButton extends StatelessWidget {
       ),
       style: OutlinedButton.styleFrom(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12)),
-        side: const BorderSide(width: 1, color: Colors.amber,),
+          borderRadius: BorderRadius.circular(12),
+        ),
+        side: const BorderSide(
+          width: 1,
+          color: Colors.amber,
+        ),
       ),
     );
   }

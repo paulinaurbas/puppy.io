@@ -21,7 +21,8 @@ Future<void> init() async {
   getIt.registerFactory(() => SharedPreferencesHelper());
   getIt.registerFactory(() => AuthApiProvider());
   getIt.registerLazySingleton(
-      () => AuthenticationRepository(getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()));
+    () => AuthenticationRepository(getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()),
+  );
   getIt.registerFactory(() => UserRepository());
   getIt.registerFactory(() => ApiProvider());
   getIt.registerFactory(() => Repository(getIt.get<ApiProvider>()));

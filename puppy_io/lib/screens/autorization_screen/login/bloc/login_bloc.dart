@@ -6,7 +6,6 @@ import 'package:puppy_io/screens/autorization_screen/login/models/password.dart'
 import 'package:puppy_io/screens/autorization_screen/login/models/username.dart';
 
 part 'login_event.dart';
-
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -98,7 +97,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ChangedPageEvent event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.registration == true) {
+    if (state.registration) {
       emit(state.copyWith(registration: false));
     } else {
       emit(state.copyWith(registration: true));

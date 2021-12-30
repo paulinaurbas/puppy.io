@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class PhotoInFrame extends StatelessWidget {
-  PhotoInFrame(this.url);
+  const PhotoInFrame(this.url);
 
   final String url;
 

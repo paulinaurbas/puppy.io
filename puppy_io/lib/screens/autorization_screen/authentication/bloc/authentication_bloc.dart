@@ -35,6 +35,7 @@ class AuthenticationBloc
   Future<void> close() {
     _authenticationStatusSubscription.cancel();
     _authenticationRepository.dispose();
+
     return super.close();
   }
 
@@ -66,6 +67,7 @@ class AuthenticationBloc
   Future<User?> _tryGetUser() async {
     try {
       final user = await _userRepository.getUser();
+
       return user;
     } catch (_) {
       return null;

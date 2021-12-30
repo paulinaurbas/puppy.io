@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 
 class ProfileCard extends StatelessWidget {
   final Widget child;
-  ProfileCard({required this.child});
+
+  const ProfileCard({
+    required this.child,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,14 +37,12 @@ class ProfileCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-
-                    ],
+                    children: const [],
                   ),
                   const Spacer(),
                   const SizedBox(
                     height: 32,
-                  )
+                  ),
                 ],
               ),
             ),

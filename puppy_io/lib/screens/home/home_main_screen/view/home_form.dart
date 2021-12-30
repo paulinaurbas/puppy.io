@@ -15,7 +15,7 @@ class HomeForm extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           TopAppBar(),
-          OfferFilering(),
+          OfferFiltering(),
           if (state is FilteringOfferDogsState)
             Expanded(
               child: ListWithOffers(

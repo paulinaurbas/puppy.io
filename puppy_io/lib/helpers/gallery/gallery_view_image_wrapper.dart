@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
 import 'package:galleryimage/gallery_Item_model.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
@@ -61,6 +61,7 @@ class _GalleryImageViewWrapperState extends State<GalleryImageViewWrapper> {
 
   PhotoViewGalleryPageOptions _buildImage(BuildContext context, int index) {
     final GalleryItemModel item = widget.galleryItems[index];
+
     return PhotoViewGalleryPageOptions.customChild(
       child: CachedNetworkImage(
         imageUrl: item.imageUrl,

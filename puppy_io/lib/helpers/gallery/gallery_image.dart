@@ -45,15 +45,16 @@ class _GalleryImageState extends State<GalleryImage> {
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int index) {
             return ClipRRect(
-                borderRadius: const BorderRadius.all(Radius.circular(8)),
-                child: galleryItems.length > 3 && index == 2
-                    ? buildImageNumbers(index)
-                    : GalleryItemThumbnail(
-                        galleryItem: galleryItems[index],
-                        onTap: () {
-                          openImageFullScreen(index);
-                        },
-                      ));
+              borderRadius: const BorderRadius.all(Radius.circular(8)),
+              child: galleryItems.length > 3 && index == 2
+                  ? buildImageNumbers(index)
+                  : GalleryItemThumbnail(
+                      galleryItem: galleryItems[index],
+                      onTap: () {
+                        openImageFullScreen(index);
+                      },
+                    ),
+            );
           },
         ),
       ],

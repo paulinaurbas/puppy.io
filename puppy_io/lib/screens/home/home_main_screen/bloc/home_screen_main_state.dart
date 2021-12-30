@@ -19,8 +19,13 @@ class FilteringOfferDogsState extends HomeScreenMainState {
   final Distance? distance;
   final List<DogOffer> listWithDogs;
 
-  FilteringOfferDogsState copyWith(
-      {Age? age, String? breed, Sex? sex, Distance? distance, List<DogOffer>? listWithDogs}) {
+  FilteringOfferDogsState copyWith({
+    Age? age,
+    String? breed,
+    Sex? sex,
+    Distance? distance,
+    List<DogOffer>? listWithDogs,
+  }) {
     return FilteringOfferDogsState(
       distance: distance ?? this.distance,
       breed: breed ?? this.breed,

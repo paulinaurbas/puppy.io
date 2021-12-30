@@ -50,7 +50,7 @@ class MyApp extends StatelessWidget {
       locale: context.locale,
       theme: ThemeData(
         primarySwatch: Colors.amber,
-        backgroundColor: Colors.white
+        backgroundColor: Colors.white,
       ),);
   }
 }
