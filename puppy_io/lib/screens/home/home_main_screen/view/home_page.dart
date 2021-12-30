@@ -1,57 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:puppy_io/generated/locale_keys.g.dart';
-import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:get_it/get_it.dart';
+import 'package:puppy_io/screens/home/home_main_screen/bloc/home_screen_main_bloc.dart';
+
+import 'home_form.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  GetIt getIt = GetIt.instance;
 
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const HomePage());
+    return MaterialPageRoute<void>(builder: (_) => HomePage());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          _BackgroundPhoto(),
-          Builder(
-            builder: (context) {
-              final userId = context.select(
-                    (AuthenticationBloc bloc) => bloc.state.user.id,
-              );
-              return Text('UserID: $userId');
-            },
-          ),
-          ElevatedButton(
-            child: const Text('Create offer with puppy'),
-            onPressed: () {
-              //TODO
-            },
-          ),
-          ElevatedButton(
-            child: Text(LocaleKeys.logout.tr()),
-            onPressed: () {
-              context
-                  .read<AuthenticationBloc>()
-                  .add(AuthenticationLogoutRequested());
-            },
-          ),
-        ],
+      body: BlocProvider(
+        create: (BuildContext context) {
+          return getIt.get<HomeScreenMainBloc>()
+            ..add(
+              InitMainScreen(),
+            );
+        },
+        child: const HomeForm(),
       ),
-    );
-  }
-}
-
-class _BackgroundPhoto extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const Image(
-      image: AssetImage('assets/images/backgroun_main_scree.png'),
-      fit: BoxFit.cover,
     );
   }
 }

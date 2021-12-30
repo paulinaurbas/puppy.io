@@ -8,5 +8,18 @@
   "authenticationFailure": "Autotyzacja nie powiodła się, spróbuj ponownie",
   "invalidUsername": "Niepoprawny użytkownik",
   "register": "Zarejestruj się!",
-  "email": "Email"
+  "email": "Email",
+  "settings": "Ustawienia",
+  "breed": "Breed",
+  "sex": "Sex",
+  "age": "Age",
+  "oneYear": "1-2 lata",
+  "treeYears": "3-6 lat",
+  "sixYears": "6+ lat",
+  "checkOffersFromTheDistrict": "Sprawdź oferty z okolicy",
+  "tenKm": "10 km",
+  "twentyKm": "20 km",
+  "moreThan30km": "+ 30 km",
+  "search": "Szukaj",
+  "photos": "Więcej zdjęć:"
 }

@@ -8,5 +8,18 @@
   "authenticationFailure": "Authentication Failure",
   "invalidUsername": "Invalid username",
   "register": "Register!",
-  "email": "Email"
+  "email": "Email",
+  "settings": "Settings",
+  "breed": "Breed",
+  "sex": "Sex",
+  "age": "Age",
+  "oneYear": "1-2 years",
+  "treeYears": "3-6 years",
+  "sixYears": "6+ years",
+  "checkOffersFromTheDistrict": "Check offers from the district",
+  "tenKm": "10 km",
+  "twentyKm": "20 km",
+  "moreThan30km": "+ 30 km",
+  "search": "Search",
+  "photos": "More photos:"
 }
