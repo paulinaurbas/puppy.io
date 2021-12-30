@@ -17,7 +17,7 @@ class ProfileCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Container(
-              height: 200.0,
+              height: 160.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: Colors.white,
@@ -32,12 +32,14 @@ class ProfileCard extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(
-                    height: 80,
+                    height: 20,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [],
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      child,
+                    ],
                   ),
                   const Spacer(),
                   const SizedBox(

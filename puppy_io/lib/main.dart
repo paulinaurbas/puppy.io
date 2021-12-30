@@ -10,6 +10,7 @@ import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authent
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
 import 'package:puppy_io/screens/home/dog_details/bloc/dog_details_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/bloc/home_screen_main_bloc.dart';
+import 'package:puppy_io/screens/home/settings/bloc/settings_bloc.dart';
 import 'package:puppy_io/screens/main_screen.dart';
 
 import 'auth/auth_api_provider.dart';
@@ -25,14 +26,36 @@ Future<void> init() async {
   );
   getIt.registerFactory(() => UserRepository());
   getIt.registerFactory(() => ApiProvider());
-  getIt.registerFactory(() => Repository(getIt.get<ApiProvider>()));
-  getIt.registerFactory(() => AuthenticationBloc(
-        authenticationRepository: getIt.get<AuthenticationRepository>(),
-        userRepository: getIt.get<UserRepository>(),
-      ));
-  getIt.registerFactory(() => LoginBloc(authenticationRepository: getIt.get<AuthenticationRepository>()));
-  getIt.registerFactory(() => HomeScreenMainBloc(repository: getIt.get<Repository>()));
-  getIt.registerFactory(() => DogDetailsBloc(repository: getIt.get<Repository>()));
+  getIt.registerFactory(
+    () => Repository(
+      getIt.get<ApiProvider>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => AuthenticationBloc(
+      authenticationRepository: getIt.get<AuthenticationRepository>(),
+      userRepository: getIt.get<UserRepository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => LoginBloc(authenticationRepository: getIt.get<AuthenticationRepository>()),
+  );
+  getIt.registerFactory(
+    () => HomeScreenMainBloc(
+      repository: getIt.get<Repository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => DogDetailsBloc(
+      repository: getIt.get<Repository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => SettingsBloc(
+      repository: getIt.get<Repository>(),
+      userRepository: getIt.get<UserRepository>(),
+    ),
+  );
 }
 
 void main() async {
