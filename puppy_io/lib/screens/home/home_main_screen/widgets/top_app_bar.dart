@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:puppy_io/screens/home/settings/view/settings_page.dart';
+import 'package:puppy_io/screens/home/create_new_offer/view/create_new_offer_page.dart';
 
 class TopAppBar extends StatelessWidget {
   @override
@@ -23,7 +24,7 @@ class TopAppBar extends StatelessWidget {
                     height: 40,
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       Navigator.push(
                         context,
                         SettingsPage.route(),
@@ -37,7 +38,18 @@ class TopAppBar extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                 const  Icon(Icons.add, size: 25), //TODO: change icon
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        CreateNewOfferPage.route(),
+                      );
+                    },
+                    child: const Icon(
+                      Icons.add,
+                      size: 25,
+                    ),
+                  ),
                 ],
               )),
         ),
