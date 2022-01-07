@@ -2,7 +2,6 @@ import 'package:puppy_io/data/api_provider.dart';
 import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
-import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 
 class Repository {
   final ApiProvider apiProvider;
