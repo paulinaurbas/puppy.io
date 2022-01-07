@@ -115,7 +115,7 @@ class DropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
         builder: (context, state) {
-      if (state is FilteringOfferDogsState) {
+      if (state is CreatingNewOfferState) {
         return FittedBox(
           child: DropdownButton<String>(
             value: (state.breed != null && state.breed!.isNotEmpty)
@@ -149,7 +149,7 @@ class GenderSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
         builder: (context, state) {
-      if (state is FilteringOfferDogsState) {
+      if (state is CreatingNewOfferState) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [

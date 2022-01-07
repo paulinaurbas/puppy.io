@@ -1,38 +1,40 @@
 part of 'create_new_offer_bloc.dart';
 
-//TODO: Clean it up
 class CreateNewOfferState {
   const CreateNewOfferState();
 }
 
-class FilteringOfferDogsState extends CreateNewOfferState {
-  const FilteringOfferDogsState({
+class CreatingNewOfferState extends CreateNewOfferState {
+  const CreatingNewOfferState({
     required this.age,
     required this.breed,
     required this.sex,
-    required this.distance,
-    required this.listWithDogs,
+    required this.localization,
+    required this.description,
+    required this.pictures,
   });
 
   final Age? age;
   final String? breed;
   final Sex? sex;
-  final Distance? distance;
-  final List<DogOffer> listWithDogs;
+  final List<double>? localization;
+  final String? description;
+  final List<String>? pictures;
 
-  FilteringOfferDogsState copyWith(
+  CreatingNewOfferState copyWith(
       {Age? age,
       String? breed,
       Sex? sex,
-      Distance? distance,
-      List<DogOffer>? listWithDogs}) {
-    return FilteringOfferDogsState(
-      distance: distance ?? this.distance,
-      breed: breed ?? this.breed,
-      sex: sex ?? this.sex,
-      age: age ?? this.age,
-      listWithDogs: listWithDogs ?? this.listWithDogs,
-    );
+      List<double>? localization,
+      String? description,
+      List<String>? pictures}) {
+    return CreatingNewOfferState(
+        age: age ?? this.age,
+        breed: breed ?? this.breed,
+        sex: sex ?? this.sex,
+        localization: localization ?? this.localization,
+        description: description ?? this.description,
+        pictures: pictures ?? this.pictures);
   }
 }
 

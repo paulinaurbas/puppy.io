@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
-import 'package:puppy_io/data/models/search_for_dog.dart';
+import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/repository.dart';
 
-//TODO: Clean it up
 part 'create_new_offer_event.dart';
 part 'create_new_offer_state.dart';
 
@@ -21,48 +21,57 @@ class CreateNewOfferBloc
   Stream<CreateNewOfferState> mapEventToState(
     CreateNewOfferEvent event,
   ) async* {
-    if (event is InitMainScreen) {
-      final dogOffers = await _repository.getDogsOffers();
-      yield FilteringOfferDogsState(
-          listWithDogs: dogOffers,
+    if (event is InitCreateNewOfferScreen) {
+      yield const CreatingNewOfferState(
           age: null,
           sex: null,
-          distance: null,
-          breed: '');
+          breed: '',
+          description: '',
+          localization: [],
+          pictures: []);
     } else if (event is DogAgeChanged) {
-      if (state is! FilteringOfferDogsState) return;
+      if (state is! CreatingNewOfferState) return;
       final currentState = state;
-      yield (currentState as FilteringOfferDogsState).copyWith(age: event.age);
+      yield (currentState as CreatingNewOfferState).copyWith(age: event.age);
     } else if (event is DogBreedChanged) {
-      if (state is! FilteringOfferDogsState) return;
+      if (state is! CreatingNewOfferState) return;
       final currentState = state;
-      yield (currentState as FilteringOfferDogsState)
+      yield (currentState as CreatingNewOfferState)
           .copyWith(breed: event.breed);
     } else if (event is DogSexChanged) {
-      if (state is! FilteringOfferDogsState) return;
+      if (state is! CreatingNewOfferState) return;
       final currentState = state;
-      yield (currentState as FilteringOfferDogsState).copyWith(sex: event.sex);
-    } else if (event is DogDistanceChanged) {
-      if (state is! FilteringOfferDogsState) return;
+      yield (currentState as CreatingNewOfferState).copyWith(sex: event.sex);
+    } else if (event is DogDescriptionChanged) {
+      if (state is! CreatingNewOfferState) return;
       final currentState = state;
-      yield (currentState as FilteringOfferDogsState)
-          .copyWith(distance: event.distance);
-    } else if (event is SearchDog) {
-      if (state is! FilteringOfferDogsState) return;
+      yield (currentState as CreatingNewOfferState)
+          .copyWith(description: event.description);
+    } else if (event is DogPicturesChanged) {
+      if (state is! CreatingNewOfferState) return;
+      final currentState = state;
+      yield (currentState as CreatingNewOfferState)
+          .copyWith(pictures: event.pictures);
+    } else if (event is DogLocalizationChanged) {
+      if (state is! CreatingNewOfferState) return;
+      final currentState = state;
+      yield (currentState as CreatingNewOfferState)
+          .copyWith(localization: event.localization);
+    } else if (event is CreateNewOffer) {
+      if (state is! CreatingNewOfferState) return;
       final currentState = state;
 
-      final searchForDog = SearchForDog(
-        (currentState as FilteringOfferDogsState).age ?? Age.oneTwoYears,
+      final createNewOfferModel = CreateNewOfferModel(
+        (currentState as CreatingNewOfferState).age ?? Age.oneTwoYears,
         currentState.breed ?? '',
         currentState.sex ?? Sex.male,
-        currentState.distance ?? Distance.twentyKm,
+        currentState.localization ?? [],
+        currentState.description ?? '',
+        currentState.pictures ?? [],
       );
 
-      if (state is! FilteringOfferDogsState) return;
-
-      final dogOffers = await _repository.searchForOffers(searchForDog);
-
-      yield currentState.copyWith(listWithDogs: dogOffers);
+      final response = await _repository.createNewOffer(createNewOfferModel);
+      // TODO: Schould we return to the main screen with the refreshed list of offers?
     }
   }
 }
