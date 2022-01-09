@@ -11,5 +11,21 @@ abstract class  LocaleKeys {
   static const invalidUsername = 'invalidUsername';
   static const register = 'register';
   static const email = 'email';
+  static const settings = 'settings';
+  static const breed = 'breed';
+  static const sex = 'sex';
+  static const age = 'age';
+  static const oneYear = 'oneYear';
+  static const treeYears = 'treeYears';
+  static const sixYears = 'sixYears';
+  static const checkOffersFromTheDistrict = 'checkOffersFromTheDistrict';
+  static const tenKm = 'tenKm';
+  static const twentyKm = 'twentyKm';
+  static const moreThan30km = 'moreThan30km';
+  static const search = 'search';
+  static const photos = 'photos';
+  static const contactWithOwner = 'contactWithOwner';
+  static const iWantAdoptYourDog = 'iWantAdoptYourDog';
+  static const iWantAdoptYourDogMessage = 'iWantAdoptYourDogMessage';
 
 }
