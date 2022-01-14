@@ -1,4 +1,5 @@
 import 'package:puppy_io/data/api_provider.dart';
+import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
 
@@ -50,9 +51,12 @@ class Repository {
         "Women",
         "Cute dog",
         "test@test.com",
-      ),
-    );
+      ));
 
     return listWithDogs;
+  }
+
+  Future<int> createNewOffer(CreateNewOfferModel createNewOfferPayload) async {
+    return 201; // Successfully created a dog offer
   }
 }

@@ -10,6 +10,8 @@
   "register": "Register!",
   "email": "Email",
   "settings": "Settings",
+  "createNewOffer": "createNewOffer",
+  "createNewOfferButton": "createNewOfferButton",
   "breed": "Breed",
   "sex": "Sex",
   "age": "Age",

@@ -8,6 +8,7 @@ import 'package:puppy_io/data/repository.dart';
 import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
 import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
 import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart';
+import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 import 'package:puppy_io/screens/home/dog_details/bloc/dog_details_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/bloc/home_screen_main_bloc.dart';
 import 'package:puppy_io/screens/home/settings/bloc/settings_bloc.dart';
@@ -56,6 +57,23 @@ Future<void> init() async {
       userRepository: getIt.get<UserRepository>(),
     ),
   );
+  getIt.registerLazySingleton(() => AuthenticationRepository(
+      getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()));
+  getIt.registerFactory(() => UserRepository());
+  getIt.registerFactory(() => ApiProvider());
+  getIt.registerFactory(() => Repository(getIt.get<ApiProvider>()));
+  getIt.registerFactory(() => AuthenticationBloc(
+        authenticationRepository: getIt.get<AuthenticationRepository>(),
+        userRepository: getIt.get<UserRepository>(),
+      ));
+  getIt.registerFactory(() => LoginBloc(
+      authenticationRepository: getIt.get<AuthenticationRepository>()));
+  getIt.registerFactory(
+      () => HomeScreenMainBloc(repository: getIt.get<Repository>()));
+  getIt.registerFactory(
+      () => DogDetailsBloc(repository: getIt.get<Repository>()));
+  getIt.registerFactory(
+      () => CreateNewOfferBloc(repository: getIt.get<Repository>()));
 }
 
 void main() async {
