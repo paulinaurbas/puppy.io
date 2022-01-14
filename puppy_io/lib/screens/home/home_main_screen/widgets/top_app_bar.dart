@@ -33,7 +33,7 @@ class TopAppBar extends StatelessWidget {
                   child: const Icon(
                     Icons.app_settings_alt_outlined, //TODO: change icon
                     size: 25,
-                  ),
+                  ),),
                   const SizedBox(
                     height: 20,
                   ),
