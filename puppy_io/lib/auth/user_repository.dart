@@ -9,7 +9,7 @@ class UserRepository {
   UserRepository();
 
   Future<User?> getUser() async {
-    final User user = User(const Uuid().v4(), 'Ala', 'Ala ma kota', 'Ala');
+    final User user = User(const Uuid().v4(), 'Paulina', 'paulina.urbas@gmail.com', 'lalalaa');
     if (_user != null) {
       return _user;
     }
