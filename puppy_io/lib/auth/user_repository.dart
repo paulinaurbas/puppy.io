@@ -16,7 +16,12 @@ class UserRepository {
     final password = await _preferencesHelper.getStringPreference(SharedPreferencesHelper.userPassword);
     final userName = await _preferencesHelper.getStringPreference(SharedPreferencesHelper.userName);
 
-    final User user = User(userName: userName ?? '', id: const Uuid().v4(), password: password?? '', email: email ?? '');
+    final User user = User(
+      userName: userName ?? '',
+      id: const Uuid().v4(),
+      password: password ?? '',
+      email: email ?? '',
+    );
     if (_user != null) {
       return _user;
     }
