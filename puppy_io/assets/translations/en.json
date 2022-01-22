@@ -24,5 +24,9 @@
   "photos": "More photos:",
   "contactWithOwner": "Contact with owner",
   "iWantAdoptYourDog": "I want to adopt your dog",
-  "iWantAdoptYourDogMessage": "Hi, I want to adopt your dog"
+  "iWantAdoptYourDogMessage": "Hi, I want to adopt your dog",
+  "inCorrectPassword": "Incorrect password",
+  "inCorrectEmail": "Incorrect email",
+  "thisFieldCannotBeEmpty": "This field cannot be empty",
+  "somethingWentWrong": "Something went wrong"
 }
