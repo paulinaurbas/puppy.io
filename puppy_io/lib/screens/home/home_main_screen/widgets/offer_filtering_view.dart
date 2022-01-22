@@ -14,9 +14,28 @@ class OfferFiltering extends StatelessWidget {
   OfferFiltering({Key? key}) : super(key: key);
 
   List<String> breadsList = [
-    'Hovawart',
-    'Haski',
-    'Owczarek niemiecki',
+    LocaleKeys.borderCollie.tr(),
+    LocaleKeys.jackRussellTerrier.tr(),
+    LocaleKeys.pug.tr(),
+    LocaleKeys.chineseCrestedDog.tr(),
+    LocaleKeys.rottweiler.tr(),
+    LocaleKeys.beagle.tr(),
+    LocaleKeys.cavalierKingCharlesSpaniel.tr(),
+    LocaleKeys.longHairedChihuahua.tr(),
+    LocaleKeys.englishBulldog.tr(),
+    LocaleKeys.goldenRetriever.tr(),
+    LocaleKeys.polishWantedHound.tr(),
+    LocaleKeys.frenchBulldog.tr(),
+    LocaleKeys.miniatureSchnauzer.tr(),
+    LocaleKeys.siberianHusky.tr(),
+    LocaleKeys.americanStaffordshireTerrier.tr(),
+    LocaleKeys.westHighlandWhiteTerrier.tr(),
+    LocaleKeys.berneseMountainDog.tr(),
+    LocaleKeys.yorkshireTerrier.tr(),
+    LocaleKeys.labradorRetriever.tr(),
+    LocaleKeys.germanShepherd.tr(),
+    LocaleKeys.crossbreed.tr(),
+    LocaleKeys.different.tr(),
   ];
 
   @override
