@@ -10,10 +10,14 @@ import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_icon.da
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_value.dart';
 import 'package:puppy_io/widgets/primary_button.dart';
 
-class OfferFilering extends StatelessWidget {
-  OfferFilering({Key? key}) : super(key: key);
+class OfferFiltering extends StatelessWidget {
+  OfferFiltering({Key? key}) : super(key: key);
 
-  List<String> breadsList = ['Hovawart', 'Haski', 'Owczarek niemiecki'];
+  List<String> breadsList = [
+    'Hovawart',
+    'Haski',
+    'Owczarek niemiecki',
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -157,25 +161,26 @@ class AgeFiled extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                  child: TileWithValue(
-                    LocaleKeys.sixYears.tr(),
-                    PuppyIoColors.oceanBlue,
-                    state.age == Age.sixPlusYear,
-                    () {
-                      context.read<HomeScreenMainBloc>().add(
-                            const DogAgeChanged(Age.sixPlusYear),
-                          );
-                    },
+                    child: TileWithValue(
+                      LocaleKeys.sixYears.tr(),
+                      PuppyIoColors.oceanBlue,
+                      state.age == Age.sixPlusYear,
+                      () {
+                        context.read<HomeScreenMainBloc>().add(
+                              const DogAgeChanged(Age.sixPlusYear),
+                            );
+                      },
+                    ),
                   ),
-                )
-              ],
-            )
-          ],
-        );
-      } else {
-        return Container();
-      }
-    });
+                ],
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 }
 
@@ -234,25 +239,26 @@ class OfferDistance extends StatelessWidget {
                 ),
                 Expanded(
                   flex: 2,
-                  child: TileWithValue(
-                    LocaleKeys.moreThan30km.tr(),
-                    PuppyIoColors.oceanBlue,
-                    state.distance == Distance.moreThanThirtyKm,
-                    () {
-                      context.read<HomeScreenMainBloc>().add(
-                            const DogDistanceChanged(Distance.moreThanThirtyKm),
-                          );
-                    },
+                    child: TileWithValue(
+                      LocaleKeys.moreThan30km.tr(),
+                      PuppyIoColors.oceanBlue,
+                      state.distance == Distance.moreThanThirtyKm,
+                      () {
+                        context.read<HomeScreenMainBloc>().add(
+                              const DogDistanceChanged(Distance.moreThanThirtyKm),
+                            );
+                      },
+                    ),
                   ),
-                )
-              ],
-            )
-          ],
-        );
-      } else {
-        return Container();
-      }
-    });
+                ],
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 }
 
@@ -295,23 +301,24 @@ class GenderSection extends StatelessWidget {
                   flex: 2,
                   child: TileWithIcon(
                     PuppyIoColors.genderWomenColor,
-                    state.sex == Sex.female,
-                    Icons.female,
-                    () {
-                      context.read<HomeScreenMainBloc>().add(
-                            const DogSexChanged(Sex.female),
-                          );
-                    },
+                      state.sex == Sex.female,
+                      Icons.female,
+                      () {
+                        context.read<HomeScreenMainBloc>().add(
+                              const DogSexChanged(Sex.female),
+                            );
+                      },
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
-        );
-      } else {
-        return Container();
-      }
-    });
+                ],
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 }
 
@@ -319,11 +326,12 @@ class SearchOfferButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PrimaryButton(
-        buttonDescription: LocaleKeys.search.tr(),
-        onPressed: () {
-          context.read<HomeScreenMainBloc>().add(
-                SearchDog(),
-              );
-        });
+      buttonDescription: LocaleKeys.search.tr(),
+      onPressed: () {
+        context.read<HomeScreenMainBloc>().add(
+              SearchDog(),
+            );
+      },
+    );
   }
 }

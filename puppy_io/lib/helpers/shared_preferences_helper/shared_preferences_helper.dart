@@ -14,6 +14,7 @@ extension SettingAndGettingValues on SharedPreferencesHelper {
   Future<bool> setBoolPreference(String key, bool value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setBool(key, value);
+
     return true;
   }
 
@@ -24,16 +25,19 @@ extension SettingAndGettingValues on SharedPreferencesHelper {
 
   Future<String?> getStringPreference(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     return prefs.getString(key);
   }
 
   Future<bool?> getBoolPreference(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     return prefs.getBool(key);
   }
 
   Future<double?> getDoublePreference(String key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+
     return prefs.getDouble(key);
   }
 }

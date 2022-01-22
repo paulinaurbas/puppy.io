@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
 
 Widget getEmptyWidget() {
-  return SizedBox.shrink();
+  return const SizedBox.shrink();
 }

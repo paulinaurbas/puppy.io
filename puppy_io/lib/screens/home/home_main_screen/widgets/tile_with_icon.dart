@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TileWithIcon extends StatelessWidget {
-  TileWithIcon(
+  const TileWithIcon(
     this.color,
     this.isSelected,
     this.icon,

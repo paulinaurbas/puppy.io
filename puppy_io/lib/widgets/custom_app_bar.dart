@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget {
-  CustomAppBar(this.childWigdet);
+  const CustomAppBar(this.childWigdet);
 
   final Widget childWigdet;
 

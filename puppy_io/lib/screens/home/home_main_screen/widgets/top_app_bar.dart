@@ -29,17 +29,18 @@ class TopAppBar extends StatelessWidget {
                         SettingsPage.route(),
                       );
                     },
-                    child: const Icon(
-                      Icons.app_settings_alt_outlined, //TODO: change icon
-                      size: 25,
-                    ),
+                  child: const Icon(
+                    Icons.app_settings_alt_outlined, //TODO: change icon
+                    size: 25,
                   ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                 const  Icon(Icons.add, size: 25), //TODO: change icon
-                ],
-              )),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Icon(Icons.add, size: 25), //TODO: change icon
+              ],
+            ),
+          ),
         ),
       ],
     );

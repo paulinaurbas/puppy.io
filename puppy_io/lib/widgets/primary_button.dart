@@ -5,7 +5,10 @@ class PrimaryButton extends StatelessWidget {
   final Function()? onPressed;
   final String buttonDescription;
 
-  const PrimaryButton({required this.onPressed, required this.buttonDescription});
+  const PrimaryButton({
+    required this.onPressed,
+    required this.buttonDescription,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +17,13 @@ class PrimaryButton extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: Text(
           buttonDescription,
-          style:
-          const TextStyle(fontSize: 16, color: Colors.black, letterSpacing: 0.8),
+          style: const TextStyle(fontSize: 16, color: Colors.black, letterSpacing: 0.8),
         ),
       ),
       color: Colors.amber,
       shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12)),
+        borderRadius: BorderRadius.circular(12),
+      ),
       onPressed: onPressed,
       disabledColor: Colors.grey.shade300,
     );
