@@ -16,7 +16,7 @@ class CreateNewOfferForm extends StatelessWidget {
 
   static const List<String> breedList = [
     'Hovawart',
-    'Haski',
+    'Husky',
     'Owczarek niemiecki'
   ];
 

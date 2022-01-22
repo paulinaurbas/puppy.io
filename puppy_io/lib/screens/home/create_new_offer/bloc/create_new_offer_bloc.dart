@@ -28,13 +28,23 @@ class CreateNewOfferBloc
     CreateNewOfferEvent event,
   ) async* {
     if (event is InitCreateNewOfferScreen) {
-      yield const CreatingNewOfferState(
-          age: null,
-          sex: null,
-          breed: '',
-          description: '',
-          localization: [],
-          pictures: ['', '', '']);
+      if ((event as InitCreateNewOfferScreen).arg == null) {
+        yield const CreatingNewOfferState(
+            age: null,
+            sex: null,
+            breed: '',
+            description: '',
+            localization: [],
+            pictures: ['', '', '']);
+      } else {
+        yield CreatingNewOfferState(
+            age: event.arg!.age,
+            sex: stringToSex(event.arg!.gender),
+            breed: event.arg!.breed,
+            description: event.arg!.description,
+            localization: [],
+            pictures: event.arg!.photoUrl.sublist(0, 3));
+      }
     } else if (event is DogAgeChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -80,7 +90,6 @@ class CreateNewOfferBloc
       );
 
       final response = await _repository.createNewOffer(createNewOfferModel);
-      // TODO: Schould we return to the main screen with the refreshed list of offers?
       yield SuccessfulCreatedOfferState();
     }
   }
