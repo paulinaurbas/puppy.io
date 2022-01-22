@@ -28,5 +28,6 @@
   "inCorrectPassword": "Niepoprawne hasło",
   "inCorrectEmail": "Niepoprawny email",
   "thisFieldCannotBeEmpty": "To pole nie może być puste",
-  "somethingWentWrong": "Coś poszło nie tak"
+  "somethingWentWrong": "Coś poszło nie tak",
+  "myOffers": "Moje oferty: "
 }

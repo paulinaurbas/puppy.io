@@ -31,5 +31,6 @@ abstract class  LocaleKeys {
   static const inCorrectEmail = 'inCorrectEmail';
   static const thisFieldCannotBeEmpty = 'thisFieldCannotBeEmpty';
   static const somethingWentWrong = 'somethingWentWrong';
+  static const myOffers = 'myOffers';
 
 }

@@ -28,5 +28,6 @@
   "inCorrectPassword": "Incorrect password",
   "inCorrectEmail": "Incorrect email",
   "thisFieldCannotBeEmpty": "This field cannot be empty",
-  "somethingWentWrong": "Something went wrong"
+  "somethingWentWrong": "Something went wrong",
+  "myOffers": "My offers: "
 }

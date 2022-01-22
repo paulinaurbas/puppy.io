@@ -20,6 +20,7 @@ class SettingsForm extends StatelessWidget {
       builder: (context, state) {
         if (state is SettingsLoaded) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
                 Column(
@@ -53,6 +54,13 @@ class SettingsForm extends StatelessWidget {
                   onPressed: () {
                     context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                child: Text(
+                  LocaleKeys.myOffers.tr(),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
               Expanded(
