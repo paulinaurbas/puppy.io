@@ -62,6 +62,7 @@ class AuthenticationRepository {
     await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, false);
     await _preferencesHelper.setStringPreference(SharedPreferencesHelper.email, '');
     await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userPassword, '');
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userName, '');
 
     _controller.add(AuthenticationStatus.unauthenticated);
   }
