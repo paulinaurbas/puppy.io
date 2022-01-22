@@ -24,7 +24,7 @@ Future<void> init() async {
   getIt.registerLazySingleton(
     () => AuthenticationRepository(getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()),
   );
-  getIt.registerFactory(() => UserRepository());
+  getIt.registerFactory(() => UserRepository(getIt.get<SharedPreferencesHelper>()));
   getIt.registerFactory(() => ApiProvider());
   getIt.registerFactory(
     () => Repository(

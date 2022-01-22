@@ -26,13 +26,15 @@ class AuthenticationRepository {
   }
 
   Future<void> logIn({
-    required String username,
+    required String userName,
     required String password,
   }) async {
 
-    await _apiProvider.login(Login(password: password, email: username));
+    final user = await _apiProvider.login(Login(password: password, userName: userName));
     await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, true);
     await _preferencesHelper.getBoolPreference(SharedPreferencesHelper.isUserLogIn);
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.email, userName);
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userPassword, password);
 
     await Future.delayed(
       const Duration(milliseconds: 300),
@@ -58,6 +60,10 @@ class AuthenticationRepository {
 
   Future<void> logOut() async {
     await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, false);
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.email, '');
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userPassword, '');
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userName, '');
+
     _controller.add(AuthenticationStatus.unauthenticated);
   }
 

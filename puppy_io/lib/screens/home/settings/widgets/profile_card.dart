@@ -17,7 +17,7 @@ class ProfileCard extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 60),
             child: Container(
-              height: 160.0,
+              height: 170.0,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15.0),
                 color: Colors.white,
