@@ -41,7 +41,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       final LocationPermission permission = await Geolocator.requestPermission();
 
       if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
-        final Position position = await Geolocator.getCurrentPosition();
+        final Position position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 5));
         yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance, position: position);
       } else {
         yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance);
