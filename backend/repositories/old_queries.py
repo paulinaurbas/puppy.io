@@ -99,21 +99,3 @@ WHERE D.ID IN @IDs
 """
 
 #INSERT QUERIES
-INSERT_NEW_DOG = """
-INSERT INTO Dogs (
-    Name,
-    BreedID,
-    Age,
-    Sex,
-    Description,
-    OwnerID
-)
-VALUES(
-    @Name,
-    @BreedID,
-    @Age,
-    @Sex,
-    @Description,
-    @OwnerID
-)
-"""

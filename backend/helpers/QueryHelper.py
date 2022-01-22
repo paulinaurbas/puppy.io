@@ -3,7 +3,7 @@ def resolve_query(query: str, parameters: dict) -> str:
         if isinstance(parameters[key], list):
             str_value = __list_to_select_union(parameters[key])
         else:
-            str_value = parameters[key]
+            str_value = f'\'{parameters[key]}\''
 
         query = query.replace(f'@{key}', str_value)
 
@@ -12,7 +12,7 @@ def resolve_query(query: str, parameters: dict) -> str:
 def __list_to_select_union(l: list) -> str:
     output = "("
     for index, item in enumerate(l):
-        output += f"SELECT {item}"
+        output += f"SELECT \'{item}\'"
         if index < len(l) - 1:
             output += " UNION ALL "
 

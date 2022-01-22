@@ -4,4 +4,3 @@ class Dog:
     age: int
     sex: str
     description: str
-    owner_id: int
