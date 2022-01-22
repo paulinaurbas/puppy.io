@@ -11,10 +11,12 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     required this.sex,
     required this.distance,
     required this.listWithDogs,
+    this.position,
   });
 
   final Age? age;
   final String? breed;
+  final Position? position;
   final Sex? sex;
   final Distance? distance;
   final List<DogOffer> listWithDogs;
@@ -25,6 +27,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     Sex? sex,
     Distance? distance,
     List<DogOffer>? listWithDogs,
+    Position? position,
   }) {
     return FilteringOfferDogsState(
       distance: distance ?? this.distance,
@@ -32,6 +35,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
       sex: sex ?? this.sex,
       age: age ?? this.age,
       listWithDogs: listWithDogs ?? this.listWithDogs,
+      position: position ?? this.position,
     );
   }
 }
