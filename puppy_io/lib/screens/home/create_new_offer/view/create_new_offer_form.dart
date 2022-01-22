@@ -46,8 +46,6 @@ class CreateNewOfferForm extends StatelessWidget {
 
   const CreateNewOfferForm({Key? key}) : super(key: key);
 
-  //TODO: Add description and images fields
-  //TODO: While clicking the button there should be also the localization read
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,89 +58,91 @@ class CreateNewOfferForm extends StatelessWidget {
           centerTitle: true,
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-          child: Column(
-            children: [
-              Row(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Expanded(
-                    flex: 8,
-                    child: Column(
-                      children: const [
-                        Text("Breed"),
-                        SizedBox(
-                          height: 16,
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 8,
+                        child: Column(
+                          children: [
+                            Text(LocaleKeys.breed.tr()),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const BreedDropDown(
+                              breedList,
+                            ),
+                          ],
                         ),
-                        BreedDropDown(
-                          breedList,
+                      ),
+                      Expanded(
+                        flex: 8,
+                        child: Column(
+                          children: [
+                            Text(LocaleKeys.age.tr()),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            const AgeDropDown(
+                              ageList,
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    flex: 8,
-                    child: Column(
-                      children: const [
-                        Text("Age"),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        AgeDropDown(
-                          ageList,
-                        ),
-                      ],
-                    ),
+                  const SizedBox(
+                    height: 16,
                   ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 7,
+                        child: DescriptionTextField(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: const [
+                      Expanded(
+                        flex: 7,
+                        child: GenderSection(),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: const [
+                      Expanded(
+                        flex: 7,
+                        child: PictureTextField(0),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: PictureTextField(1),
+                      ),
+                      Expanded(
+                        flex: 7,
+                        child: PictureTextField(2),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  const CreateNewOfferButton(),
                 ],
               ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 7,
-                    child: DescriptionTextField(),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: const [
-                  Expanded(
-                    flex: 7,
-                    child: GenderSection(),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                children: const [
-                  Expanded(
-                    flex: 7,
-                    child: PictureTextField(0),
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: PictureTextField(1),
-                  ),
-                  Expanded(
-                    flex: 7,
-                    child: PictureTextField(2),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const CreateNewOfferButton(),
-            ],
-          ),
-        ));
+            )));
   }
 }
 
@@ -307,6 +307,8 @@ class DescriptionTextField extends StatelessWidget {
           if (state is CreatingNewOfferState) {
             return TextField(
               key: const Key('createNowOfferForm_descriptionInput_textField'),
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
               onChanged: (description) => context
                   .read<CreateNewOfferBloc>()
                   .add(DogDescriptionChanged(description)),
