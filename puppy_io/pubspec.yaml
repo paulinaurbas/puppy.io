@@ -25,8 +25,11 @@ dependencies:
   equatable: 2.0.0
   uuid: 3.0.0
   formz: 0.4.1
+  dart_code_metrics: 4.8.1
   flutter_svg: 0.23.0+1
   url_launcher: 6.0.17
+  email_validator: 2.0.1
+  geolocator: 7.6.2
 
 dev_dependencies:
   flutter_test:

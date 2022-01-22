@@ -24,17 +24,16 @@ class TopAppBar extends StatelessWidget {
                     height: 40,
                   ),
                   InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        SettingsPage.route(),
-                      );
-                    },
-                    child: const Icon(
-                      Icons.app_settings_alt_outlined, //TODO: change icon
-                      size: 25,
-                    ),
-                  ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          SettingsPage.route(),
+                        );
+                      },
+                      child: const Icon(
+                        Icons.app_settings_alt_outlined, //TODO: change icon
+                        size: 25,
+                      )),
                   const SizedBox(
                     height: 20,
                   ),

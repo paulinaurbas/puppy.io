@@ -7,7 +7,9 @@ import 'package:puppy_io/screens/home/dog_details/bloc/dog_details_bloc.dart';
 import 'dog_details_screen_form.dart';
 
 class DogDetailsPage extends StatelessWidget {
-  DogDetailsPage({required this.arg});
+  DogDetailsPage({
+    required this.arg,
+  });
 
   GetIt getIt = GetIt.instance;
 

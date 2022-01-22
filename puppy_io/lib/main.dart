@@ -11,6 +11,7 @@ import 'package:puppy_io/screens/autorization_screen/login/bloc/login_bloc.dart'
 import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 import 'package:puppy_io/screens/home/dog_details/bloc/dog_details_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/bloc/home_screen_main_bloc.dart';
+import 'package:puppy_io/screens/home/settings/bloc/settings_bloc.dart';
 import 'package:puppy_io/screens/main_screen.dart';
 
 import 'auth/auth_api_provider.dart';
@@ -21,21 +22,44 @@ GetIt getIt = GetIt.instance;
 Future<void> init() async {
   getIt.registerFactory(() => SharedPreferencesHelper());
   getIt.registerFactory(() => AuthApiProvider());
-  getIt.registerLazySingleton(() => AuthenticationRepository(
-      getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()));
-  getIt.registerFactory(() => UserRepository());
+  getIt.registerLazySingleton(
+    () => AuthenticationRepository(
+        getIt.get<AuthApiProvider>(), getIt.get<SharedPreferencesHelper>()),
+  );
+  getIt.registerFactory(
+      () => UserRepository(getIt.get<SharedPreferencesHelper>()));
   getIt.registerFactory(() => ApiProvider());
-  getIt.registerFactory(() => Repository(getIt.get<ApiProvider>()));
-  getIt.registerFactory(() => AuthenticationBloc(
-        authenticationRepository: getIt.get<AuthenticationRepository>(),
-        userRepository: getIt.get<UserRepository>(),
-      ));
-  getIt.registerFactory(() => LoginBloc(
-      authenticationRepository: getIt.get<AuthenticationRepository>()));
   getIt.registerFactory(
-      () => HomeScreenMainBloc(repository: getIt.get<Repository>()));
+    () => Repository(
+      getIt.get<ApiProvider>(),
+    ),
+  );
   getIt.registerFactory(
-      () => DogDetailsBloc(repository: getIt.get<Repository>()));
+    () => AuthenticationBloc(
+      authenticationRepository: getIt.get<AuthenticationRepository>(),
+      userRepository: getIt.get<UserRepository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => LoginBloc(
+        authenticationRepository: getIt.get<AuthenticationRepository>()),
+  );
+  getIt.registerFactory(
+    () => HomeScreenMainBloc(
+      repository: getIt.get<Repository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => DogDetailsBloc(
+      repository: getIt.get<Repository>(),
+    ),
+  );
+  getIt.registerFactory(
+    () => SettingsBloc(
+      repository: getIt.get<Repository>(),
+      userRepository: getIt.get<UserRepository>(),
+    ),
+  );
   getIt.registerFactory(
       () => CreateNewOfferBloc(repository: getIt.get<Repository>()));
 }

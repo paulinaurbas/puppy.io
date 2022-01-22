@@ -1,11 +1,11 @@
 import 'package:bloc/bloc.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
 import 'package:puppy_io/data/repository.dart';
 
 part 'home_screen_main_event.dart';
-
 part 'home_screen_main_state.dart';
 
 class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> {
@@ -38,7 +38,14 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
     } else if (event is DogDistanceChanged) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
-      yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance);
+      final LocationPermission permission = await Geolocator.requestPermission();
+
+      if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+        final Position position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 5));
+        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance, position: position);
+      } else {
+        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance);
+      }
     } else if (event is SearchDog) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;

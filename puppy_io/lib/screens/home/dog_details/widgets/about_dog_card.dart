@@ -11,7 +11,10 @@ import 'package:url_launcher/url_launcher.dart';
 class AboutDogCard extends StatelessWidget {
   final DogOffer dog;
 
-  AboutDogCard({Key? key, required this.dog}) : super(key: key);
+  const AboutDogCard({
+    Key? key,
+    required this.dog,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +74,7 @@ class AboutDogCard extends StatelessWidget {
                   ),
                   const SizedBox(
                     height: 32,
-                  )
+                  ),
                 ],
               ),
             ),

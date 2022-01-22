@@ -9,7 +9,10 @@ import 'about_dog_card.dart';
 class DownPhotoAppBar extends StatelessWidget {
   final DogOffer dog;
 
-  const DownPhotoAppBar({Key? key, required this.dog}) : super(key: key);
+  const DownPhotoAppBar({
+    Key? key,
+    required this.dog,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,7 @@ class DownPhotoAppBar extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              const BackButton(),
+              const PuppyIoBackButton(),
               const SizedBox(
                 height: 52,
               ),
@@ -36,15 +39,15 @@ class DownPhotoAppBar extends StatelessWidget {
   }
 }
 
-class BackButton extends StatelessWidget {
-  const BackButton({Key? key}) : super(key: key);
+class PuppyIoBackButton extends StatelessWidget {
+  const PuppyIoBackButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.topLeft,
       child: InkWell(
-        onTap: (){
+        onTap: () {
           Navigator.pop(context);
         },
         child: const Icon(

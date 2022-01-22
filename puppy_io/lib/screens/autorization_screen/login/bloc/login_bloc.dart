@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:formz/formz.dart';
 import 'package:puppy_io/auth/auth_repository.dart';
 import 'package:puppy_io/screens/autorization_screen/login/models/email.dart';
@@ -6,7 +7,6 @@ import 'package:puppy_io/screens/autorization_screen/login/models/password.dart'
 import 'package:puppy_io/screens/autorization_screen/login/models/username.dart';
 
 part 'login_event.dart';
-
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
@@ -51,10 +51,20 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     Emitter<LoginState> emit,
   ) {
     final email = Email.dirty(event.email);
-    emit(state.copyWith(
-      email: email,
-      status: Formz.validate([email, state.email]),
-    ));
+
+    final bool isValid = EmailValidator.validate(event.email);
+    if (isValid) {
+      emit(state.copyWith(
+        email: email,
+        status: Formz.validate([email, state.email]),
+      ));
+    } else {
+      final email = Email.dirty(event.email);
+      emit(state.copyWith(
+        email: email,
+        status: FormzStatus.invalid,
+      ));
+    }
   }
 
   void _onSubmittedLogin(
@@ -65,7 +75,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         await _authenticationRepository.logIn(
-          username: state.email.value,
+          userName: state.username!.value,
           password: state.password.value,
         );
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
@@ -98,7 +108,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     ChangedPageEvent event,
     Emitter<LoginState> emit,
   ) async {
-    if (state.registration == true) {
+    if (state.registration) {
       emit(state.copyWith(registration: false));
     } else {
       emit(state.copyWith(registration: true));
