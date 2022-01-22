@@ -14,7 +14,7 @@ class CreatingNewOfferState extends CreateNewOfferState {
     required this.pictures,
   });
 
-  final Age? age;
+  final int? age;
   final String? breed;
   final Sex? sex;
   final List<double>? localization;
@@ -22,7 +22,7 @@ class CreatingNewOfferState extends CreateNewOfferState {
   final List<String>? pictures;
 
   CreatingNewOfferState copyWith(
-      {Age? age,
+      {int? age,
       String? breed,
       Sex? sex,
       List<double>? localization,

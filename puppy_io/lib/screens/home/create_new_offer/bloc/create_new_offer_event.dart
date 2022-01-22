@@ -17,7 +17,7 @@ class DogSexChanged extends CreateNewOfferEvent {
 }
 
 class DogAgeChanged extends CreateNewOfferEvent {
-  final Age age;
+  final int age;
   const DogAgeChanged(this.age);
 }
 

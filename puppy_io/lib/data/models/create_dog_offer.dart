@@ -5,7 +5,7 @@ part 'create_dog_offer.g.dart';
 
 @JsonSerializable()
 class CreateNewOfferModel {
-  final Age age;
+  final int age;
   final String breed;
   final Sex sex;
   final List<double> localization;

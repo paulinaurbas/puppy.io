@@ -13,7 +13,13 @@ class CreateNewOfferBloc
   CreateNewOfferBloc({
     required Repository repository,
   })  : _repository = repository,
-        super(const LoadingScreenMainState());
+        super(const CreatingNewOfferState(
+            age: null,
+            sex: null,
+            breed: '',
+            description: '',
+            localization: [],
+            pictures: []));
 
   final Repository _repository;
 
@@ -62,7 +68,7 @@ class CreateNewOfferBloc
       final currentState = state;
 
       final createNewOfferModel = CreateNewOfferModel(
-        (currentState as CreatingNewOfferState).age ?? Age.oneTwoYears,
+        (currentState as CreatingNewOfferState).age ?? 0,
         currentState.breed ?? '',
         currentState.sex ?? Sex.male,
         currentState.localization ?? [],

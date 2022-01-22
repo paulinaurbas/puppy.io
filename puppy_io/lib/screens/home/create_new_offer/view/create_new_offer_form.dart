@@ -13,7 +13,7 @@ class CreateNewOfferForm extends StatelessWidget {
     return MaterialPageRoute<void>(builder: (_) => const CreateNewOfferForm());
   }
 
-  static const List<String> breadsList = [
+  static const List<String> breedList = [
     'Hovawart',
     'Haski',
     'Owczarek niemiecki'
@@ -45,7 +45,6 @@ class CreateNewOfferForm extends StatelessWidget {
 
   const CreateNewOfferForm({Key? key}) : super(key: key);
 
-  //TODO: Add Provider and split it into page and form files
   //TODO: Add description and images fields
   //TODO: While clicking the button there should be also the localization read
   @override
@@ -69,21 +68,41 @@ class CreateNewOfferForm extends StatelessWidget {
                     flex: 8,
                     child: Column(
                       children: const [
+                        Text("Breed"),
                         SizedBox(
                           height: 16,
                         ),
-                        DropDown(
-                          breadsList,
+                        BreedDropDown(
+                          breedList,
                         ),
                       ],
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 8,
-                    child: DropDown(
-                      ageList,
+                    child: Column(
+                      children: const [
+                        Text("Age"),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        AgeDropDown(
+                          ageList,
+                        ),
+                      ],
                     ),
                   ),
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: DescriptionTextField(),
+                  )
                 ],
               ),
               const SizedBox(
@@ -107,8 +126,8 @@ class CreateNewOfferForm extends StatelessWidget {
   }
 }
 
-class DropDown extends StatelessWidget {
-  const DropDown(this.options);
+class BreedDropDown extends StatelessWidget {
+  const BreedDropDown(this.options);
 
   final List<String> options;
 
@@ -131,6 +150,39 @@ class DropDown extends StatelessWidget {
             onChanged: (breed) {
               context.read<CreateNewOfferBloc>().add(
                     DogBreedChanged(breed ?? ''),
+                  );
+            },
+          ),
+        );
+      } else {
+        return Container();
+      }
+    });
+  }
+}
+
+class AgeDropDown extends StatelessWidget {
+  const AgeDropDown(this.options);
+
+  final List<String> options;
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
+        builder: (context, state) {
+      if (state is CreatingNewOfferState) {
+        return FittedBox(
+          child: DropdownButton<int>(
+            value: (state.age != null) ? state.age : 0,
+            items: options.map((String value) {
+              return DropdownMenuItem<int>(
+                value: int.parse(value),
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (age) {
+              context.read<CreateNewOfferBloc>().add(
+                    DogAgeChanged(age ?? 0),
                   );
             },
           ),
@@ -214,5 +266,40 @@ class CreateNewOfferButton extends StatelessWidget {
                 CreateNewOffer(),
               );
         });
+  }
+}
+
+class DescriptionTextField extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
+      child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
+        buildWhen: (previous, current) =>
+            (previous as CreatingNewOfferState).description !=
+            (current as CreatingNewOfferState).description,
+        builder: (context, state) {
+          if (state is CreatingNewOfferState) {
+            return TextField(
+              key: const Key('createNowOfferForm_descriptionInput_textField'),
+              onChanged: (description) => context
+                  .read<CreateNewOfferBloc>()
+                  .add(DogDescriptionChanged(description)),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                      width: 1, style: BorderStyle.solid, color: Colors.black),
+                ),
+                hintStyle: TextStyle(color: Colors.grey[800]),
+                labelText: LocaleKeys.dogDescription.tr(),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 }
