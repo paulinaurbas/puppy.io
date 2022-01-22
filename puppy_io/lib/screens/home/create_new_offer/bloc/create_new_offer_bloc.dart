@@ -37,13 +37,18 @@ class CreateNewOfferBloc
             localization: [],
             pictures: ['', '', '']);
       } else {
+        var pic = ['', '', ''];
+        for (var i = 0; i < event.arg!.photoUrl.length; i++) {
+          pic[i] = event.arg!.photoUrl[i];
+        }
+
         yield CreatingNewOfferState(
             age: event.arg!.age,
             sex: stringToSex(event.arg!.gender),
             breed: event.arg!.breed,
             description: event.arg!.description,
             localization: [],
-            pictures: event.arg!.photoUrl.sublist(0, 3));
+            pictures: pic);
       }
     } else if (event is DogAgeChanged) {
       if (state is! CreatingNewOfferState) return;
