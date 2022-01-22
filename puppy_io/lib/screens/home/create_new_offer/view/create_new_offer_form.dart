@@ -14,10 +14,29 @@ class CreateNewOfferForm extends StatelessWidget {
     return MaterialPageRoute<void>(builder: (_) => const CreateNewOfferForm());
   }
 
-  static const List<String> breedList = [
-    'Hovawart',
-    'Haski',
-    'Owczarek niemiecki'
+  static List<String> breedList = [
+    LocaleKeys.borderCollie.tr(),
+    LocaleKeys.jackRussellTerrier.tr(),
+    LocaleKeys.pug.tr(),
+    LocaleKeys.chineseCrestedDog.tr(),
+    LocaleKeys.rottweiler.tr(),
+    LocaleKeys.beagle.tr(),
+    LocaleKeys.cavalierKingCharlesSpaniel.tr(),
+    LocaleKeys.longHairedChihuahua.tr(),
+    LocaleKeys.englishBulldog.tr(),
+    LocaleKeys.goldenRetriever.tr(),
+    LocaleKeys.polishWantedHound.tr(),
+    LocaleKeys.frenchBulldog.tr(),
+    LocaleKeys.miniatureSchnauzer.tr(),
+    LocaleKeys.siberianHusky.tr(),
+    LocaleKeys.americanStaffordshireTerrier.tr(),
+    LocaleKeys.westHighlandWhiteTerrier.tr(),
+    LocaleKeys.berneseMountainDog.tr(),
+    LocaleKeys.yorkshireTerrier.tr(),
+    LocaleKeys.labradorRetriever.tr(),
+    LocaleKeys.germanShepherd.tr(),
+    LocaleKeys.crossbreed.tr(),
+    LocaleKeys.different.tr(),
   ];
 
   static const List<String> ageList = [
@@ -73,7 +92,7 @@ class CreateNewOfferForm extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            const BreedDropDown(
+                            BreedDropDown(
                               breedList,
                             ),
                           ],
@@ -147,7 +166,7 @@ class CreateNewOfferForm extends StatelessWidget {
 }
 
 class BreedDropDown extends StatelessWidget {
-  const BreedDropDown(this.options);
+  BreedDropDown(this.options);
 
   final List<String> options;
 

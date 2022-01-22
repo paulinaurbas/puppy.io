@@ -35,5 +35,28 @@ abstract class  LocaleKeys {
   static const inCorrectEmail = 'inCorrectEmail';
   static const thisFieldCannotBeEmpty = 'thisFieldCannotBeEmpty';
   static const somethingWentWrong = 'somethingWentWrong';
+  static const myOffers = 'myOffers';
+  static const borderCollie = 'borderCollie';
+  static const jackRussellTerrier = 'jackRussellTerrier';
+  static const pug = 'pug';
+  static const chineseCrestedDog = 'chineseCrestedDog';
+  static const rottweiler = 'rottweiler';
+  static const beagle = 'beagle';
+  static const cavalierKingCharlesSpaniel = 'cavalierKingCharlesSpaniel';
+  static const longHairedChihuahua = 'longHairedChihuahua';
+  static const englishBulldog = 'englishBulldog';
+  static const goldenRetriever = 'goldenRetriever';
+  static const polishWantedHound = 'polishWantedHound';
+  static const frenchBulldog = 'frenchBulldog';
+  static const miniatureSchnauzer = 'miniatureSchnauzer';
+  static const siberianHusky = 'siberianHusky';
+  static const americanStaffordshireTerrier = 'americanStaffordshireTerrier';
+  static const westHighlandWhiteTerrier = 'westHighlandWhiteTerrier';
+  static const berneseMountainDog = 'berneseMountainDog';
+  static const yorkshireTerrier = 'yorkshireTerrier';
+  static const labradorRetriever = 'labradorRetriever';
+  static const germanShepherd = 'germanShepherd';
+  static const crossbreed = 'crossbreed';
+  static const different = 'different';
 
 }

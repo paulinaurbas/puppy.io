@@ -103,4 +103,5 @@ class Repository {
   Future<int> createNewOffer(CreateNewOfferModel createNewOfferPayload) async {
     return 201; // Successfully created a dog offer
   }
+
 }
