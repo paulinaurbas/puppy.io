@@ -24,5 +24,9 @@
   "photos": "Więcej zdjęć:",
   "contactWithOwner": "Skontaktuj się z właścicielem",
   "iWantAdoptYourDog": "Chcę adopotować Twojego psa",
-  "iWantAdoptYourDogMessage": "Cześć, chcę adopotować Twojego psa"
+  "iWantAdoptYourDogMessage": "Cześć, chcę adopotować Twojego psa",
+  "inCorrectPassword": "Niepoprawne hasło",
+  "inCorrectEmail": "Niepoprawny email",
+  "thisFieldCannotBeEmpty": "To pole nie może być puste",
+  "somethingWentWrong": "Coś poszło nie tak"
 }

@@ -27,5 +27,9 @@ abstract class  LocaleKeys {
   static const contactWithOwner = 'contactWithOwner';
   static const iWantAdoptYourDog = 'iWantAdoptYourDog';
   static const iWantAdoptYourDogMessage = 'iWantAdoptYourDogMessage';
+  static const inCorrectPassword = 'inCorrectPassword';
+  static const inCorrectEmail = 'inCorrectEmail';
+  static const thisFieldCannotBeEmpty = 'thisFieldCannotBeEmpty';
+  static const somethingWentWrong = 'somethingWentWrong';
 
 }
