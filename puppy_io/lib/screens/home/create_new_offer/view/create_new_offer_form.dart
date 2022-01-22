@@ -119,6 +119,25 @@ class CreateNewOfferForm extends StatelessWidget {
               const SizedBox(
                 height: 16,
               ),
+              Row(
+                children: const [
+                  Expanded(
+                    flex: 7,
+                    child: PictureTextField(0),
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: PictureTextField(1),
+                  ),
+                  Expanded(
+                    flex: 7,
+                    child: PictureTextField(2),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: 16,
+              ),
               const CreateNewOfferButton(),
             ],
           ),
@@ -293,6 +312,45 @@ class DescriptionTextField extends StatelessWidget {
                 ),
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 labelText: LocaleKeys.dogDescription.tr(),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class PictureTextField extends StatelessWidget {
+  const PictureTextField(this.pictureIndex);
+
+  final int pictureIndex;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
+        buildWhen: (previous, current) =>
+            (previous as CreatingNewOfferState).pictures?[pictureIndex] !=
+            (current as CreatingNewOfferState).pictures?[pictureIndex],
+        builder: (context, state) {
+          if (state is CreatingNewOfferState) {
+            return TextField(
+              key: const Key('createNowOfferForm_pictureInput_textField'),
+              onChanged: (picture) => context
+                  .read<CreateNewOfferBloc>()
+                  .add(DogPicturesChanged(picture, pictureIndex)),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                      width: 1, style: BorderStyle.solid, color: Colors.black),
+                ),
+                hintStyle: TextStyle(color: Colors.grey[800]),
+                labelText: LocaleKeys.dogPicture.tr(),
               ),
             );
           } else {

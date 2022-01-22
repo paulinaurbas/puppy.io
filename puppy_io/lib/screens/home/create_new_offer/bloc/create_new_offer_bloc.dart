@@ -19,7 +19,7 @@ class CreateNewOfferBloc
             breed: '',
             description: '',
             localization: [],
-            pictures: []));
+            pictures: ['', '', '']));
 
   final Repository _repository;
 
@@ -34,7 +34,7 @@ class CreateNewOfferBloc
           breed: '',
           description: '',
           localization: [],
-          pictures: []);
+          pictures: ['', '', '']);
     } else if (event is DogAgeChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -56,8 +56,11 @@ class CreateNewOfferBloc
     } else if (event is DogPicturesChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
+      var pictures =
+          List<String>.from((currentState as CreatingNewOfferState).pictures!);
+      pictures[event.pictureIndex] = event.picture;
       yield (currentState as CreatingNewOfferState)
-          .copyWith(pictures: event.pictures);
+          .copyWith(pictures: pictures);
     } else if (event is DogLocalizationChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;

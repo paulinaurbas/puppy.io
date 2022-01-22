@@ -32,8 +32,9 @@ class DogDescriptionChanged extends CreateNewOfferEvent {
 }
 
 class DogPicturesChanged extends CreateNewOfferEvent {
-  final List<String> pictures;
-  const DogPicturesChanged(this.pictures);
+  final String picture;
+  final int pictureIndex;
+  const DogPicturesChanged(this.picture, this.pictureIndex);
 }
 
 class DogLocalizationChanged extends CreateNewOfferEvent {
