@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
@@ -280,7 +281,12 @@ class CreateNewOfferButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return PrimaryButton(
         buttonDescription: LocaleKeys.createNewOfferButton.tr(),
-        onPressed: () {
+        onPressed: () async {
+          final Position position = await Geolocator.getCurrentPosition();
+          final localization = [position.latitude, position.longitude];
+          context
+              .read<CreateNewOfferBloc>()
+              .add(DogLocalizationChanged(localization));
           context.read<CreateNewOfferBloc>().add(
                 CreateNewOffer(),
               );
