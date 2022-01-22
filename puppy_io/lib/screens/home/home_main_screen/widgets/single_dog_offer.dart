@@ -8,18 +8,26 @@ import 'package:puppy_io/widgets/dog_photo.dart';
 
 class SingleDogOffer extends StatelessWidget {
   final DogOffer _dog;
+  final bool isEditView;
 
-  const SingleDogOffer(this._dog);
+  const SingleDogOffer(
+    this._dog, {
+    this.isEditView = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
-          return DogDetailsPage(
-            arg: DogDetailsArg(_dog),
-          );
-        }));
+        if(!isEditView) {
+          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+            return DogDetailsPage(
+              arg: DogDetailsArg(_dog),
+            );
+          }));
+        } else {
+          //TODO: Navigate to offer ride
+        }
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16),
