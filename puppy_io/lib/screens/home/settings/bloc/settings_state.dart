@@ -9,7 +9,11 @@ class LoadingSettingsState extends SettingsState {
 }
 
 class SettingsLoaded extends SettingsState {
-  const SettingsLoaded(this.user);
+  const SettingsLoaded({
+    required this.user,
+    required this.listWithDogs,
+  });
 
+  final List<DogOffer> listWithDogs;
   final User user;
 }

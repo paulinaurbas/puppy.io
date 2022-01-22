@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/screens/autorization_screen/authentication/bloc/authentication_bloc.dart';
 import 'package:puppy_io/screens/home/dog_details/widgets/down_photo.dart';
+import 'package:puppy_io/screens/home/home_main_screen/widgets/list_with_offers.dart';
 import 'package:puppy_io/screens/home/settings/bloc/settings_bloc.dart';
 import 'package:puppy_io/screens/home/settings/widgets/profile_card.dart';
 import 'package:puppy_io/screens/home/settings/widgets/user_name_label.dart';
 import 'package:puppy_io/widgets/custom_app_bar.dart';
-import 'package:easy_localization/easy_localization.dart';
 
 class SettingsForm extends StatelessWidget {
   const SettingsForm({Key? key}) : super(key: key);
@@ -55,10 +55,18 @@ class SettingsForm extends StatelessWidget {
                   },
                 ),
               ),
+              Expanded(
+                child: ListWithOffers(
+                  listWithDogsOffers: state.listWithDogs,
+                  isEditView: true,
+                ),
+              )
             ],
           );
         } else {
-          return Container();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         }
       },
     );
