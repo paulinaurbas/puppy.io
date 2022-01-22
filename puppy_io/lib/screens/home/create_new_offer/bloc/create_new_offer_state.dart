@@ -4,6 +4,8 @@ class CreateNewOfferState {
   const CreateNewOfferState();
 }
 
+class SuccessfulCreatedOfferState extends CreateNewOfferState {}
+
 class CreatingNewOfferState extends CreateNewOfferState {
   const CreatingNewOfferState({
     required this.age,

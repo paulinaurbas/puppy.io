@@ -153,8 +153,12 @@ class BreedDropDown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        builder: (context, state) {
+    return BlocConsumer<CreateNewOfferBloc, CreateNewOfferState>(
+        listener: (context, state) {
+      if (state is SuccessfulCreatedOfferState) {
+        Navigator.pop(context);
+      }
+    }, builder: (context, state) {
       if (state is CreatingNewOfferState) {
         return FittedBox(
           child: DropdownButton<String>(

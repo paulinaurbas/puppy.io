@@ -81,6 +81,7 @@ class CreateNewOfferBloc
 
       final response = await _repository.createNewOffer(createNewOfferModel);
       // TODO: Schould we return to the main screen with the refreshed list of offers?
+      yield SuccessfulCreatedOfferState();
     }
   }
 }
