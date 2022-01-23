@@ -36,7 +36,7 @@ class SettingsForm extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            UserNameLabel(userName: state.user.userName, title: LocaleKeys.username.tr(),),
+                            UserNameLabel(userName: state.user.username, title: LocaleKeys.username.tr(),),
                             const SizedBox(height: 16,),
                             UserNameLabel(userName: state.user.email, title: LocaleKeys.email.tr(),),
                             const SizedBox(height: 16,),

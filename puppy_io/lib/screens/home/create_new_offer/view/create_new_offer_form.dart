@@ -15,28 +15,28 @@ class CreateNewOfferForm extends StatelessWidget {
   }
 
   static List<String> breedList = [
-    LocaleKeys.borderCollie.tr(),
-    LocaleKeys.jackRussellTerrier.tr(),
-    LocaleKeys.pug.tr(),
-    LocaleKeys.chineseCrestedDog.tr(),
-    LocaleKeys.rottweiler.tr(),
-    LocaleKeys.beagle.tr(),
-    LocaleKeys.cavalierKingCharlesSpaniel.tr(),
-    LocaleKeys.longHairedChihuahua.tr(),
-    LocaleKeys.englishBulldog.tr(),
-    LocaleKeys.goldenRetriever.tr(),
-    LocaleKeys.polishWantedHound.tr(),
-    LocaleKeys.frenchBulldog.tr(),
-    LocaleKeys.miniatureSchnauzer.tr(),
-    LocaleKeys.siberianHusky.tr(),
-    LocaleKeys.americanStaffordshireTerrier.tr(),
-    LocaleKeys.westHighlandWhiteTerrier.tr(),
-    LocaleKeys.berneseMountainDog.tr(),
-    LocaleKeys.yorkshireTerrier.tr(),
-    LocaleKeys.labradorRetriever.tr(),
-    LocaleKeys.germanShepherd.tr(),
-    LocaleKeys.crossbreed.tr(),
-    LocaleKeys.different.tr(),
+    LocaleKeys.borderCollie,
+    LocaleKeys.jackRussellTerrier,
+    LocaleKeys.pug,
+    LocaleKeys.chineseCrestedDog,
+    LocaleKeys.rottweiler,
+    LocaleKeys.beagle,
+    LocaleKeys.cavalierKingCharlesSpaniel,
+    LocaleKeys.longHairedChihuahua,
+    LocaleKeys.englishBulldog,
+    LocaleKeys.goldenRetriever,
+    LocaleKeys.polishWantedHound,
+    LocaleKeys.frenchBulldog,
+    LocaleKeys.miniatureSchnauzer,
+    LocaleKeys.siberianHusky,
+    LocaleKeys.americanStaffordshireTerrier,
+    LocaleKeys.westHighlandWhiteTerrier,
+    LocaleKeys.berneseMountainDog,
+    LocaleKeys.yorkshireTerrier,
+    LocaleKeys.labradorRetriever,
+    LocaleKeys.germanShepherd,
+    LocaleKeys.crossbreed,
+    LocaleKeys.different,
   ];
 
   static const List<String> ageList = [
@@ -187,7 +187,7 @@ class BreedDropDown extends StatelessWidget {
             items: options.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value.tr()),
               );
             }).toList(),
             onChanged: (breed) {

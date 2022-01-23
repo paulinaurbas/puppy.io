@@ -13,29 +13,29 @@ import 'package:puppy_io/widgets/primary_button.dart';
 class OfferFiltering extends StatelessWidget {
   OfferFiltering({Key? key}) : super(key: key);
 
-  List<String> breadsList = [
-    LocaleKeys.borderCollie.tr(),
-    LocaleKeys.jackRussellTerrier.tr(),
-    LocaleKeys.pug.tr(),
-    LocaleKeys.chineseCrestedDog.tr(),
-    LocaleKeys.rottweiler.tr(),
-    LocaleKeys.beagle.tr(),
-    LocaleKeys.cavalierKingCharlesSpaniel.tr(),
-    LocaleKeys.longHairedChihuahua.tr(),
-    LocaleKeys.englishBulldog.tr(),
-    LocaleKeys.goldenRetriever.tr(),
-    LocaleKeys.polishWantedHound.tr(),
-    LocaleKeys.frenchBulldog.tr(),
-    LocaleKeys.miniatureSchnauzer.tr(),
-    LocaleKeys.siberianHusky.tr(),
-    LocaleKeys.americanStaffordshireTerrier.tr(),
-    LocaleKeys.westHighlandWhiteTerrier.tr(),
-    LocaleKeys.berneseMountainDog.tr(),
-    LocaleKeys.yorkshireTerrier.tr(),
-    LocaleKeys.labradorRetriever.tr(),
-    LocaleKeys.germanShepherd.tr(),
-    LocaleKeys.crossbreed.tr(),
-    LocaleKeys.different.tr(),
+  List<String> breedList = [
+    LocaleKeys.borderCollie,
+    LocaleKeys.jackRussellTerrier,
+    LocaleKeys.pug,
+    LocaleKeys.chineseCrestedDog,
+    LocaleKeys.rottweiler,
+    LocaleKeys.beagle,
+    LocaleKeys.cavalierKingCharlesSpaniel,
+    LocaleKeys.longHairedChihuahua,
+    LocaleKeys.englishBulldog,
+    LocaleKeys.goldenRetriever,
+    LocaleKeys.polishWantedHound,
+    LocaleKeys.frenchBulldog,
+    LocaleKeys.miniatureSchnauzer,
+    LocaleKeys.siberianHusky,
+    LocaleKeys.americanStaffordshireTerrier,
+    LocaleKeys.westHighlandWhiteTerrier,
+    LocaleKeys.berneseMountainDog,
+    LocaleKeys.yorkshireTerrier,
+    LocaleKeys.labradorRetriever,
+    LocaleKeys.germanShepherd,
+    LocaleKeys.crossbreed,
+    LocaleKeys.different,
   ];
 
   @override
@@ -54,7 +54,7 @@ class OfferFiltering extends StatelessWidget {
                       height: 16,
                     ),
                     BreedDropDown(
-                      breadsList,
+                      breedList,
                     ),
                   ],
                 ),
@@ -108,7 +108,7 @@ class BreedDropDown extends StatelessWidget {
             items: breadsList.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value.tr()),
               );
             }).toList(),
             onChanged: (username) {

@@ -6,10 +6,10 @@ part 'register_model.g.dart';
 class Register {
   final String email;
   final String password;
-  final String userName;
+  final String username;
 
   Register({
-    required this.userName,
+    required this.username,
     required this.email,
     required this.password,
   });

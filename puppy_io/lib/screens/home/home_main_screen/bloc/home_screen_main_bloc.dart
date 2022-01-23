@@ -21,8 +21,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
     HomeScreenMainEvent event,
   ) async* {
     if (event is InitMainScreen) {
-      final dogOffers = await _repository.getDogsOffers();
-      yield FilteringOfferDogsState(listWithDogs: dogOffers, age: null, sex: null, distance: null, breed: '');
+      yield const FilteringOfferDogsState(listWithDogs: [], age: null, sex: null, distance: null, breed: '');
     } else if (event is DogAgeChanged) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
@@ -50,11 +49,20 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
 
+      List<double> listWithLatLon = [];
+
+      if ((currentState as FilteringOfferDogsState).position != null) {
+        listWithLatLon = [];
+        listWithLatLon.add(currentState.position!.latitude);
+        listWithLatLon.add(currentState.position!.longitude);
+      }
+
       final searchForDog = SearchForDog(
-        (currentState as FilteringOfferDogsState).age ?? Age.oneTwoYears,
-        currentState.breed ?? '',
-        currentState.sex ?? Sex.male,
-        currentState.distance ?? Distance.twentyKm,
+        ageLow: getLowAge((currentState).age),
+        breed: currentState.breed,
+        localizationRange: getDistance(currentState.distance),
+        localization: listWithLatLon,
+        isMale: getSex(currentState.sex),
       );
 
       if (state is! FilteringOfferDogsState) return;
