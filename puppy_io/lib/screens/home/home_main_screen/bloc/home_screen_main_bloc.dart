@@ -62,7 +62,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
         breed: currentState.breed,
         localizationRange: getDistance(currentState.distance),
         localization: listWithLatLon,
-        isMale: getSex(currentState.sex),
+        isMale: getIsFemale(currentState.sex),
       );
 
       if (state is! FilteringOfferDogsState) return;

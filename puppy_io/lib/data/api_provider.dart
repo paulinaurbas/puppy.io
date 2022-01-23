@@ -13,10 +13,10 @@ class ApiProvider {
     });
   }
 
-  Future<List<DogOffer>> userOffers() async {
-    List<DogOffer> listWithDogs = [];
-
-    return listWithDogs;
+  Future<DogOfferResponse> userOffers(String userName) async {
+    return _dio.post('https://puppy-io.herokuapp.com/dogOffers/$userName').then((value) {
+      return DogOfferResponse.fromJson(value.data);
+    });
   }
 
   Future<int> createNewOffer(CreateNewOfferModel createNewOfferPayload) async {

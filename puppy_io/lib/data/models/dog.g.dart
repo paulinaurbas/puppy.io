@@ -10,7 +10,7 @@ DogOffer _$DogOfferFromJson(Map<String, dynamic> json) => DogOffer(
       (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
       json['name'] as String,
       json['age'] as int,
-      json['gender'] as String,
+      json['sex'] as String,
       json['breed'] as String,
       json['description'] as String,
       json['ownerEmail'] as String,

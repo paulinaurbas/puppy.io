@@ -30,9 +30,7 @@ Future<void> init() async {
       () => UserRepository(getIt.get<SharedPreferencesHelper>()));
   getIt.registerFactory(() => ApiProvider());
   getIt.registerFactory(
-    () => Repository(
-      getIt.get<ApiProvider>(),
-    ),
+    () => Repository(getIt.get<ApiProvider>(), getIt.get<SharedPreferencesHelper>()),
   );
   getIt.registerFactory(
     () => AuthenticationBloc(

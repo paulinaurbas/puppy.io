@@ -2,68 +2,36 @@ import 'package:puppy_io/data/api_provider.dart';
 import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
+import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
 
 class Repository {
   final ApiProvider apiProvider;
+  final SharedPreferencesHelper _preferencesHelper;
 
   Repository(
     this.apiProvider,
+    this._preferencesHelper,
   );
 
   Future<List<DogOffer>> searchForOffers(SearchForDog searchForDog) async {
     try {
       final listWithDogs = await apiProvider.getDogsOffers(searchForDog);
       return listWithDogs.dogOffers;
-    } catch (e){
+    } catch (e) {
       print(e);
       return[];
     }
   }
 
   Future<List<DogOffer>> userOffers() async {
-    List<DogOffer> listWithDogs = [];
-    listWithDogs.add(
-      DogOffer(
-        [
-          'https://images.pexels.com/photos/7210704/pexels-photo-7210704.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        ],
-        "Hasanka",
-        2,
-        "Female",
-        "Husky",
-        "Cute dog",
-        "test@test.com",
-      ),
-    );
-    listWithDogs.add(
-      DogOffer(
-        [
-          'https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-        ],
-        "Hasanka",
-        2,
-        "Female",
-        "Husky",
-        "Cute dog",
-        "test@test.com",
-      ),
-    );
-
-    listWithDogs.add(
-      DogOffer(
-        [
-          'https://images.pexels.com/photos/97082/weimaraner-puppy-dog-snout-97082.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2',
-        ],
-        "Hasanka",
-        2,
-        "Female",
-        "Husky",
-        "Cute dog",
-        "test@test.com",
-      ),
-    );
-
-    return listWithDogs;
+    try {
+      final userName = await _preferencesHelper.getStringPreference(SharedPreferencesHelper.userName);
+      final listWithDogs = await apiProvider.userOffers(userName!);
+      return listWithDogs.dogOffers;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   Future<int> createNewOffer(CreateNewOfferModel createNewOfferPayload) async {
