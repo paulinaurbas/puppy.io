@@ -64,10 +64,10 @@ class SettingsForm extends StatelessWidget {
                 ),
               ),
               Expanded(
-                child: ListWithOffers(
+                child: (state.listWithDogs.isNotEmpty) ? ListWithOffers(
                   listWithDogsOffers: state.listWithDogs,
                   isEditView: true,
-                ),
+                ) : EmptyOffers(),
               )
             ],
           );

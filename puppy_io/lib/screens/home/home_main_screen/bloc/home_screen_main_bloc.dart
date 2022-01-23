@@ -21,7 +21,14 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
     HomeScreenMainEvent event,
   ) async* {
     if (event is InitMainScreen) {
-      yield const FilteringOfferDogsState(listWithDogs: [], age: null, sex: null, distance: null, breed: '');
+      yield const FilteringOfferDogsState(
+        listWithDogs: [],
+        age: null,
+        sex: null,
+        distance: null,
+        breed: '',
+        isFirstScreen: true,
+      );
     } else if (event is DogAgeChanged) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
@@ -67,9 +74,9 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
 
       if (state is! FilteringOfferDogsState) return;
 
-      final dogOffers = await _repository.searchForOffers(searchForDog);
+      final dogOffers = await _repository.searchForOffers(searchForDog,);
 
-      yield currentState.copyWith(listWithDogs: dogOffers);
+      yield currentState.copyWith(listWithDogs: dogOffers, isFirstScreen: false,);
     }
   }
 }
