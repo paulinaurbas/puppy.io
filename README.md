@@ -132,7 +132,7 @@ git subtree push --prefix backend heroku  master
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [DataBase] - Postgres
+- [DataBase] (https://www.postgresql.org) - Postgres
 - [Flask](https://flask.palletsprojects.com) - Server Framework
 - [Flutter](https://flutter.dev) - Mobile Framework
 - [Python](https://www.python.org) - Server Environment
