@@ -8,6 +8,8 @@ import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_icon.dart';
 import 'package:puppy_io/widgets/primary_button.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CreateNewOfferForm extends StatelessWidget {
   static Route route() {
@@ -200,6 +202,17 @@ class BreedDropDown extends StatelessWidget {
         listener: (context, state) {
       if (state is SuccessfulCreatedOfferState) {
         Navigator.pop(context);
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+        }
+      } else if(state is ErrorCreatedOfferState){
+        showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+            message:
+            LocaleKeys.somethingWentWrong.tr()
+          ),
+        );
       }
     }, builder: (context, state) {
       if (state is CreatingNewOfferState) {

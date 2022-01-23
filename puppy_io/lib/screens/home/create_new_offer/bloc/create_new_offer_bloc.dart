@@ -92,6 +92,11 @@ class CreateNewOfferBloc
     } else if (event is OfferDeleted) {
       if (state is! CreatingNewOfferState) return;
       final response = await _repository.deleteOffer(event.offerID);
+      if (response == 204) {
+        yield SuccessfulCreatedOfferState();
+      } else {
+        yield ErrorCreatedOfferState();
+      }
     } else if (event is CreateNewOffer) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -112,7 +117,11 @@ class CreateNewOfferBloc
               currentState.offerID!,
             )
           : await _repository.createNewOffer(createNewOfferModel);
-      yield SuccessfulCreatedOfferState();
+      if (response == 204) {
+        yield SuccessfulCreatedOfferState();
+      } else {
+        yield ErrorCreatedOfferState();
+      }
     }
   }
 }

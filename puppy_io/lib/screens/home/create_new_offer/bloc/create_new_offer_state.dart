@@ -6,6 +6,8 @@ class CreateNewOfferState {
 
 class SuccessfulCreatedOfferState extends CreateNewOfferState {}
 
+class ErrorCreatedOfferState extends CreateNewOfferState {}
+
 class CreatingNewOfferState extends CreateNewOfferState {
   const CreatingNewOfferState({
     required this.name,

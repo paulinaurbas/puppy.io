@@ -47,8 +47,7 @@ class ApiProvider {
 
   Future<int> deleteOffer(int offerID, String userName) async {
     return _dio
-        .delete('https://puppy-io.herokuapp.com/dogOffer/$offerID',
-            options: Options(headers: {'username': userName}))
+        .delete('https://puppy-io.herokuapp.com/dogOffer/$offerID',)
         .then((value) {
       return value.statusCode ?? 500;
     });
