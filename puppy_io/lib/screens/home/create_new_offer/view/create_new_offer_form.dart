@@ -8,12 +8,16 @@ import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_icon.dart';
 import 'package:puppy_io/widgets/primary_button.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
+import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class CreateNewOfferForm extends StatelessWidget {
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => const CreateNewOfferForm());
+    return MaterialPageRoute<void>(builder: (_) => CreateNewOfferForm());
   }
 
+  bool isEditMode;
+  CreateNewOfferForm({this.isEditMode = false});
 
   static List<String> breedList = [
     LocaleKeys.borderCollie,
@@ -64,8 +68,6 @@ class CreateNewOfferForm extends StatelessWidget {
     "20"
   ];
 
-  const CreateNewOfferForm({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,103 +79,115 @@ class CreateNewOfferForm extends StatelessWidget {
           title: Text(LocaleKeys.createNewOffer.tr()),
           centerTitle: true,
         ),
-        body: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
+        body: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
+            builder: (context, state) {
+          if (state is CreatingNewOfferState) {
+            return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+                child: SingleChildScrollView(
+                  child: Column(
                     children: [
-                      Expanded(
-                        flex: 7,
-                        child: NameTextField(),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 8,
-                        child: Column(
-                          children: [
-                            Text(LocaleKeys.breed.tr()),
-                            const SizedBox(
-                              height: 16,
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 7,
+                            child: NameTextField(),
+                          )
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 8,
+                            child: Column(
+                              children: [
+                                Text(LocaleKeys.breed.tr()),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                BreedDropDown(
+                                  breedList,
+                                ),
+                              ],
                             ),
-                            BreedDropDown(
-                              breedList,
+                          ),
+                          Expanded(
+                            flex: 8,
+                            child: Column(
+                              children: [
+                                Text(LocaleKeys.age.tr()),
+                                const SizedBox(
+                                  height: 16,
+                                ),
+                                const AgeDropDown(
+                                  ageList,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      Expanded(
-                        flex: 8,
-                        child: Column(
-                          children: [
-                            Text(LocaleKeys.age.tr()),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            const AgeDropDown(
-                              ageList,
-                            ),
-                          ],
-                        ),
+                      const SizedBox(
+                        height: 16,
                       ),
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 7,
+                            child: DescriptionTextField(),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: const [
+                          Expanded(
+                            flex: 7,
+                            child: GenderSection(),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Row(
+                        children: const [
+                          Expanded(
+                            flex: 7,
+                            child: PictureTextField(0),
+                          ),
+                          Expanded(
+                            flex: 7,
+                            child: PictureTextField(1),
+                          ),
+                          Expanded(
+                            flex: 7,
+                            child: PictureTextField(2),
+                          )
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const CreateNewOfferButton(),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      if (isEditMode)
+                        DeleteOffer((state as CreatingNewOfferState).offerID!)
                     ],
                   ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 7,
-                        child: DescriptionTextField(),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: const [
-                      Expanded(
-                        flex: 7,
-                        child: GenderSection(),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  Row(
-                    children: const [
-                      Expanded(
-                        flex: 7,
-                        child: PictureTextField(0),
-                      ),
-                      Expanded(
-                        flex: 7,
-                        child: PictureTextField(1),
-                      ),
-                      Expanded(
-                        flex: 7,
-                        child: PictureTextField(2),
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const CreateNewOfferButton(),
-                ],
-              ),
-            )));
+                ));
+          } else {
+            return Container();
+          }
+        }));
   }
 }
 
@@ -188,6 +202,17 @@ class BreedDropDown extends StatelessWidget {
         listener: (context, state) {
       if (state is SuccessfulCreatedOfferState) {
         Navigator.pop(context);
+        if(Navigator.canPop(context)){
+          Navigator.pop(context);
+        }
+      } else if(state is ErrorCreatedOfferState){
+        showTopSnackBar(
+          context,
+          CustomSnackBar.error(
+            message:
+            LocaleKeys.somethingWentWrong.tr()
+          ),
+        );
       }
     }, builder: (context, state) {
       if (state is CreatingNewOfferState) {
@@ -357,7 +382,8 @@ class _NameTextFieldState extends State<NameTextField> {
           if (state is CreatingNewOfferState) {
             if (myController.text != state.name) {
               myController.text = state.name ?? '';
-              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+              myController.selection = TextSelection.fromPosition(
+                  TextPosition(offset: myController.text.length));
             }
             return TextField(
               controller: myController,
@@ -368,7 +394,8 @@ class _NameTextFieldState extends State<NameTextField> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
+                  borderSide: const BorderSide(
+                      width: 1, style: BorderStyle.solid, color: Colors.black),
                 ),
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 labelText: LocaleKeys.dogName.tr(),
@@ -411,14 +438,17 @@ class _DescriptionTextFieldState extends State<DescriptionTextField> {
           if (state is CreatingNewOfferState) {
             if (myController.text != state.description) {
               myController.text = state.description ?? '';
-              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+              myController.selection = TextSelection.fromPosition(
+                  TextPosition(offset: myController.text.length));
             }
             return TextField(
               controller: myController,
               key: const Key('createNowOfferForm_descriptionInput_textField'),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              onChanged: (description) => context.read<CreateNewOfferBloc>().add(DogDescriptionChanged(description)),
+              onChanged: (description) => context
+                  .read<CreateNewOfferBloc>()
+                  .add(DogDescriptionChanged(description)),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -473,17 +503,20 @@ class _PictureTextFieldState extends State<PictureTextField> {
           if (state is CreatingNewOfferState) {
             if (myController.text != state.pictures?[pictureIndex]) {
               myController.text = state.pictures?[pictureIndex] ?? '';
-              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+              myController.selection = TextSelection.fromPosition(
+                  TextPosition(offset: myController.text.length));
             }
             return TextField(
               controller: myController,
               key: const Key('createNowOfferForm_pictureInput_textField'),
-              onChanged: (picture) =>
-                  context.read<CreateNewOfferBloc>().add(DogPicturesChanged(picture, widget.pictureIndex)),
+              onChanged: (picture) => context
+                  .read<CreateNewOfferBloc>()
+                  .add(DogPicturesChanged(picture, widget.pictureIndex)),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
+                  borderSide: const BorderSide(
+                      width: 1, style: BorderStyle.solid, color: Colors.black),
                 ),
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 labelText: LocaleKeys.dogPicture.tr(),
@@ -493,6 +526,29 @@ class _PictureTextFieldState extends State<PictureTextField> {
             return Container();
           }
         },
+      ),
+    );
+  }
+}
+
+class DeleteOffer extends StatelessWidget {
+  const DeleteOffer(this.ID);
+
+  final int ID;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        context.read<CreateNewOfferBloc>().add(OfferDeleted(ID));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [Text(LocaleKeys.deleteOffer.tr())],
+        ),
       ),
     );
   }

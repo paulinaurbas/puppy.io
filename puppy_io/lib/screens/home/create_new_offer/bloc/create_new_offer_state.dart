@@ -6,6 +6,8 @@ class CreateNewOfferState {
 
 class SuccessfulCreatedOfferState extends CreateNewOfferState {}
 
+class ErrorCreatedOfferState extends CreateNewOfferState {}
+
 class CreatingNewOfferState extends CreateNewOfferState {
   const CreatingNewOfferState({
     required this.name,
@@ -15,6 +17,7 @@ class CreatingNewOfferState extends CreateNewOfferState {
     required this.localization,
     required this.description,
     required this.pictures,
+    required this.offerID,
   });
 
   final String? name;
@@ -24,6 +27,7 @@ class CreatingNewOfferState extends CreateNewOfferState {
   final List<double>? localization;
   final String? description;
   final List<String>? pictures;
+  final int? offerID;
 
   CreatingNewOfferState copyWith(
       {String? name,
@@ -32,7 +36,8 @@ class CreatingNewOfferState extends CreateNewOfferState {
       Sex? sex,
       List<double>? localization,
       String? description,
-      List<String>? pictures}) {
+      List<String>? pictures,
+      int? offerID}) {
     return CreatingNewOfferState(
         name: name ?? this.name,
         age: age ?? this.age,
@@ -40,7 +45,8 @@ class CreatingNewOfferState extends CreateNewOfferState {
         sex: sex ?? this.sex,
         localization: localization ?? this.localization,
         description: description ?? this.description,
-        pictures: pictures ?? this.pictures);
+        pictures: pictures ?? this.pictures,
+        offerID: offerID ?? this.offerID);
   }
 }
 

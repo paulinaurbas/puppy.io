@@ -15,5 +15,5 @@ DogOfferResponse _$DogOfferResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$DogOfferResponseToJson(DogOfferResponse instance) =>
     <String, dynamic>{
-      'dogOffers': instance.dogOffers,
+      'offers': instance.dogOffers,
     };

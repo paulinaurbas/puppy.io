@@ -14,6 +14,7 @@ DogOffer _$DogOfferFromJson(Map<String, dynamic> json) => DogOffer(
       json['breed'] as String,
       json['description'] as String,
       json['ownerEmail'] as String,
+      json['id'] as int,
     );
 
 Map<String, dynamic> _$DogOfferToJson(DogOffer instance) => <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$DogOfferToJson(DogOffer instance) => <String, dynamic>{
       'breed': instance.breed,
       'description': instance.description,
       'ownerEmailAddress': instance.ownerEmailAddress,
+      'id': instance.id,
     };

@@ -23,7 +23,9 @@ class CreateNewOfferPage extends StatelessWidget {
               InitCreateNewOfferScreen(arg?.Offer),
             );
         },
-        child: const CreateNewOfferForm(),
+        child: CreateNewOfferForm(
+          isEditMode: arg != null,
+        ),
       ),
     );
   }
