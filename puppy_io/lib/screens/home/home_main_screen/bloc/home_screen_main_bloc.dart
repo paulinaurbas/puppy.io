@@ -39,12 +39,19 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
       final LocationPermission permission = await Geolocator.requestPermission();
-
+      yield (currentState as FilteringOfferDogsState).copyWith(isLoading: true);
       if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
         final Position position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 5));
-        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance, position: position);
+        yield currentState.copyWith(
+          distance: event.distance,
+          position: position,
+          isLoading: false,
+        );
       } else {
-        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance);
+        yield currentState.copyWith(
+          distance: event.distance,
+          isLoading: false,
+        );
       }
     } else if (event is SearchDog) {
       if (state is! FilteringOfferDogsState) return;
@@ -57,11 +64,9 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
         currentState.distance ?? Distance.twentyKm,
       );
 
-      if (state is! FilteringOfferDogsState) return;
-
       final dogOffers = await _repository.searchForOffers(searchForDog);
 
-      yield currentState.copyWith(listWithDogs: dogOffers);
+      yield currentState.copyWith(listWithDogs: dogOffers, isLoading: false);
     }
   }
 }
