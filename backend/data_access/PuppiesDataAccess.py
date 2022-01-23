@@ -57,9 +57,9 @@ class PuppiesDataAccess:
         if age_low or age_high:
             all_offers = fh.filter_by_age(all_offers, 0 if not age_low else age_low, 100 if not age_high else age_high)
 
-        sexes = data.get('sexes')
-        if sexes:
-            all_offers = fh.filter_by_sex(all_offers, sexes)
+        is_male = data.get('isMale')
+        if is_male is not None:
+            all_offers = fh.filter_by_sex(all_offers, is_male)
 
         return all_offers
 

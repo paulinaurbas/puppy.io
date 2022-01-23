@@ -86,7 +86,7 @@ def dog_offer_by_owner_id(id):
     return jsonify(offers=[dog.toJSON() for dog in dogs]), 200
 
 
-@app.route('/dogOffers', methods=['GET'])
+@app.route('/dogOffers', methods=['POST'])
 def dog_offers():
     app.logger.info('GET /dogOffers')
     dogs = puppies_data_access.get_filtered_dog_offers(request.get_json(force=True))

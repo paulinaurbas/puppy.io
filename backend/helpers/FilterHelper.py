@@ -34,10 +34,10 @@ def filter_by_age(offers: [], age_low: int, age_high: int) -> []:
     return filtered
 
 
-def filter_by_sex(offers: [], sexes: []) -> []:
+def filter_by_sex(offers: [], is_male: bool) -> []:
     filtered = []
     for offer in offers:
-        if offer.sex in sexes:
+        if (offer.sex == 'Male' and is_male) or (offer.sex == 'Female' and not is_male):
             filtered.append(offer)
 
     return filtered
