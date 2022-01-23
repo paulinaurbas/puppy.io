@@ -59,5 +59,6 @@ abstract class  LocaleKeys {
   static const germanShepherd = 'germanShepherd';
   static const crossbreed = 'crossbreed';
   static const different = 'different';
+  static const noResults = 'noResults';
 
 }
