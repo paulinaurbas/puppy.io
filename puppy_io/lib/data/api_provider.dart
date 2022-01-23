@@ -18,7 +18,7 @@ class ApiProvider {
 
   Future<DogOfferResponse> userOffers(String userName) async {
     return _dio
-        .post('https://puppy-io.herokuapp.com/dogOffers/$userName')
+        .get('https://puppy-io.herokuapp.com/dogOffersByOwner/$userName')
         .then((value) {
       return DogOfferResponse.fromJson(value.data);
     });

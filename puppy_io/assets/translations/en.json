@@ -57,5 +57,6 @@
   "labradorRetriever": "Labrador retriever",
   "germanShepherd": "German Shepherd",
   "crossbreed": "Crossbreed",
-  "different": "Different"
+  "different": "Different",
+  "noResults": "No results"
 }

@@ -57,5 +57,6 @@
   "labradorRetriever": "Labrador retriever",
   "germanShepherd": "Owczarek niemiecki",
   "crossbreed": "Mieszaniec",
-  "different": "Inna"
+  "different": "Inna",
+  "noResults": "Niestety nie znaleźliśmy oferty zgodnej z Twoimi wymaganiami"
 }

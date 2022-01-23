@@ -18,9 +18,9 @@ class HomeForm extends StatelessWidget {
           OfferFiltering(),
           if (state is FilteringOfferDogsState)
             Expanded(
-              child: ListWithOffers(
+              child: (state.listWithDogs.isNotEmpty || state.isFirstScreen) ? ListWithOffers(
                 listWithDogsOffers: state.listWithDogs,
-              ),
+              ) : EmptyOffers(),
             )
           else
             Container(),

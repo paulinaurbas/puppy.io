@@ -19,10 +19,11 @@ SearchForDog _$SearchForDogFromJson(Map<String, dynamic> json) => SearchForDog(
 
 Map<String, dynamic> _$SearchForDogToJson(SearchForDog instance) =>
     <String, dynamic>{
-      'ageLow': instance.ageLow,
-      'ageHight': instance.ageHight,
-      'breed': instance.breed,
-      'isMale': instance.isMale,
-      'localizationRange': instance.localizationRange,
-      'localization': instance.localization,
+      if (instance.ageLow != null) 'ageLow': instance.ageLow,
+      if (instance.ageHight != null) 'ageHigh': instance.ageHight,
+      if (instance.breed != null) 'breed': instance.breed,
+      if (instance.isMale != null) 'isMale': instance.isMale,
+      if (instance.localizationRange != null)
+        'localizationRange': instance.localizationRange,
+      if (instance.localization != null) 'localization': instance.localization,
     };

@@ -11,6 +11,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     required this.sex,
     required this.distance,
     required this.listWithDogs,
+    this.isFirstScreen = false,
     this.position,
   });
 
@@ -19,6 +20,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
   final Position? position;
   final Sex? sex;
   final Distance? distance;
+  final bool isFirstScreen;
   final List<DogOffer> listWithDogs;
 
   FilteringOfferDogsState copyWith({
@@ -28,6 +30,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     Distance? distance,
     List<DogOffer>? listWithDogs,
     Position? position,
+    bool? isFirstScreen
   }) {
     return FilteringOfferDogsState(
       distance: distance ?? this.distance,
@@ -36,6 +39,7 @@ class FilteringOfferDogsState extends HomeScreenMainState {
       age: age ?? this.age,
       listWithDogs: listWithDogs ?? this.listWithDogs,
       position: position ?? this.position,
+      isFirstScreen: isFirstScreen ?? this.isFirstScreen,
     );
   }
 }
