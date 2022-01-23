@@ -8,12 +8,15 @@ class DogOffer {
   final String name;
   final int age;
   final String gender;
+  final String breed;
   final String description;
   final String ownerEmailAddress;
 
-  DogOffer(this.photoUrl, this.name, this.age, this.gender, this.description, this.ownerEmailAddress);
+  DogOffer(this.photoUrl, this.name, this.age, this.gender, this.breed,
+      this.description, this.ownerEmailAddress);
 
-  factory DogOffer.fromJson(Map<String, dynamic> json) => _$DogOfferFromJson(json);
+  factory DogOffer.fromJson(Map<String, dynamic> json) =>
+      _$DogOfferFromJson(json);
 
   Map<String, dynamic> toJson() => _$DogOfferToJson(this);
 }

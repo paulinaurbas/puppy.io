@@ -4,7 +4,16 @@ abstract class CreateNewOfferEvent {
   const CreateNewOfferEvent();
 }
 
-class InitCreateNewOfferScreen extends CreateNewOfferEvent {}
+class InitCreateNewOfferScreen extends CreateNewOfferEvent {
+  final DogOffer? arg;
+
+  InitCreateNewOfferScreen(this.arg);
+}
+
+class DogNameChanged extends CreateNewOfferEvent {
+  final String name;
+  const DogNameChanged(this.name);
+}
 
 class DogBreedChanged extends CreateNewOfferEvent {
   final String breed;

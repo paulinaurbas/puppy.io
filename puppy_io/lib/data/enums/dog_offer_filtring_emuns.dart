@@ -35,7 +35,18 @@ enum Sex {
   female,
 }
 
-bool? getSex(Sex? sex){
+String? getSex(Sex? sex) {
+  switch (sex) {
+    case Sex.male:
+      return "Male";
+    case Sex.female:
+      return "Female";
+    default:
+      return null;
+  }
+}
+
+bool? getIsFemale(Sex? sex){
   switch (sex) {
     case Sex.male:
       return true;
@@ -43,6 +54,18 @@ bool? getSex(Sex? sex){
       return false;
     default:
       return null;
+  }
+}
+
+
+Sex stringToSex(String sex) {
+  switch (sex) {
+    case "Male":
+      return Sex.male;
+    case "Female":
+      return Sex.female;
+    default:
+      return Sex.female;
   }
 }
 

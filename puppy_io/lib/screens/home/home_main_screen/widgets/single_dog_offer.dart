@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
+import 'package:puppy_io/screens/home/create_new_offer/view/create_new_offer_page.dart';
 import 'package:puppy_io/screens/home/dog_details/view/dog_details_screen_page.dart';
 import 'package:puppy_io/widgets/dog_photo.dart';
 
@@ -19,14 +20,21 @@ class SingleDogOffer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        if(!isEditView) {
-          Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) {
+        if (!isEditView) {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
             return DogDetailsPage(
               arg: DogDetailsArg(_dog),
             );
           }));
         } else {
           //TODO: Navigate to offer ride
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (BuildContext context) {
+            return CreateNewOfferPage(
+              arg: OfferArg(_dog),
+            );
+          }));
         }
       },
       child: Padding(
@@ -67,7 +75,8 @@ class DogNameAndAge extends StatelessWidget {
   final int age;
   final IconData icon;
 
-  const DogNameAndAge({required this.name, required this.age, required this.icon});
+  const DogNameAndAge(
+      {required this.name, required this.age, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +89,9 @@ class DogNameAndAge extends StatelessWidget {
             name,
             style: const TextStyle(fontSize: 18),
           ),
-          const SizedBox(height: 4,),
+          const SizedBox(
+            height: 4,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -94,7 +105,9 @@ class DogNameAndAge extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 32,),
+          const SizedBox(
+            height: 32,
+          ),
           Icon(icon),
         ],
       ),

@@ -5,6 +5,7 @@ part 'create_dog_offer.g.dart';
 
 @JsonSerializable()
 class CreateNewOfferModel {
+  final String name;
   final int age;
   final String breed;
   final Sex sex;
@@ -12,8 +13,8 @@ class CreateNewOfferModel {
   final String description;
   final List<String> pictures;
 
-  CreateNewOfferModel(this.age, this.breed, this.sex, this.localization,
-      this.description, this.pictures);
+  CreateNewOfferModel(this.name, this.age, this.breed, this.sex,
+      this.localization, this.description, this.pictures);
 
   factory CreateNewOfferModel.fromJson(Map<String, dynamic> json) =>
       _$CreateNewOfferModelFromJson(json);

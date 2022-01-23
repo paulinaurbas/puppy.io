@@ -8,6 +8,7 @@ part of 'create_dog_offer.dart';
 
 CreateNewOfferModel _$CreateNewOfferModelFromJson(Map<String, dynamic> json) =>
     CreateNewOfferModel(
+      json['name'] as String,
       json['age'] as int,
       json['breed'] as String,
       $enumDecode(_$SexEnumMap, json['sex']),
@@ -21,6 +22,7 @@ CreateNewOfferModel _$CreateNewOfferModelFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$CreateNewOfferModelToJson(
         CreateNewOfferModel instance) =>
     <String, dynamic>{
+      'name': instance.name,
       'age': instance.age,
       'breed': instance.breed,
       'sex': _$SexEnumMap[instance.sex],

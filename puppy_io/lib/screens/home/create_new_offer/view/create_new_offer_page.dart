@@ -7,9 +7,11 @@ import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_blo
 import 'create_new_offer_form.dart';
 
 class CreateNewOfferPage extends StatelessWidget {
-  CreateNewOfferPage({Key? key}) : super(key: key);
+  CreateNewOfferPage({this.arg});
 
   GetIt getIt = GetIt.instance;
+
+  final OfferArg? arg;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class CreateNewOfferPage extends StatelessWidget {
         create: (BuildContext context) {
           return getIt.get<CreateNewOfferBloc>()
             ..add(
-              InitCreateNewOfferScreen(),
+              InitCreateNewOfferScreen(arg?.Offer),
             );
         },
         child: const CreateNewOfferForm(),
@@ -29,4 +31,10 @@ class CreateNewOfferPage extends StatelessWidget {
   static Route route() {
     return MaterialPageRoute<void>(builder: (_) => CreateNewOfferPage());
   }
+}
+
+class OfferArg {
+  final DogOffer Offer;
+
+  OfferArg(this.Offer);
 }

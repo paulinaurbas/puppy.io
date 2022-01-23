@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
 import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
@@ -14,6 +13,7 @@ class CreateNewOfferBloc
     required Repository repository,
   })  : _repository = repository,
         super(const CreatingNewOfferState(
+            name: '',
             age: null,
             sex: null,
             breed: '',
@@ -28,13 +28,30 @@ class CreateNewOfferBloc
     CreateNewOfferEvent event,
   ) async* {
     if (event is InitCreateNewOfferScreen) {
-      yield const CreatingNewOfferState(
-          age: null,
-          sex: null,
-          breed: '',
-          description: '',
-          localization: [],
-          pictures: ['', '', '']);
+      if (event.arg == null) {
+        yield const CreatingNewOfferState(
+            name: '',
+            age: null,
+            sex: null,
+            breed: '',
+            description: '',
+            localization: [],
+            pictures: ['', '', '']);
+      } else {
+        var pic = ['', '', ''];
+        for (var i = 0; i < event.arg!.photoUrl.length; i++) {
+          pic[i] = event.arg!.photoUrl[i];
+        }
+
+        yield CreatingNewOfferState(
+            name: event.arg!.name,
+            age: event.arg!.age,
+            sex: stringToSex(event.arg!.gender),
+            breed: event.arg!.breed,
+            description: event.arg!.description,
+            localization: [],
+            pictures: pic);
+      }
     } else if (event is DogAgeChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -44,6 +61,10 @@ class CreateNewOfferBloc
       final currentState = state;
       yield (currentState as CreatingNewOfferState)
           .copyWith(breed: event.breed);
+    } else if (event is DogNameChanged) {
+      if (state is! CreatingNewOfferState) return;
+      final currentState = state;
+      yield (currentState as CreatingNewOfferState).copyWith(name: event.name);
     } else if (event is DogSexChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -59,8 +80,7 @@ class CreateNewOfferBloc
       var pictures =
           List<String>.from((currentState as CreatingNewOfferState).pictures!);
       pictures[event.pictureIndex] = event.picture;
-      yield (currentState as CreatingNewOfferState)
-          .copyWith(pictures: pictures);
+      yield currentState.copyWith(pictures: pictures);
     } else if (event is DogLocalizationChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -71,16 +91,16 @@ class CreateNewOfferBloc
       final currentState = state;
 
       final createNewOfferModel = CreateNewOfferModel(
-        (currentState as CreatingNewOfferState).age ?? 0,
+        (currentState as CreatingNewOfferState).name ?? '',
+        currentState.age ?? 0,
         currentState.breed ?? '',
         currentState.sex ?? Sex.male,
         currentState.localization ?? [],
         currentState.description ?? '',
-        currentState.pictures ?? [],
+        currentState.pictures ?? ['', '', ''],
       );
 
       final response = await _repository.createNewOffer(createNewOfferModel);
-      // TODO: Schould we return to the main screen with the refreshed list of offers?
       yield SuccessfulCreatedOfferState();
     }
   }
