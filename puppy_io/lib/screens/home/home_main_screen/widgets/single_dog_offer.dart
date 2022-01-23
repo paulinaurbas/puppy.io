@@ -56,7 +56,7 @@ class SingleDogOffer extends StatelessWidget {
               DogNameAndAge(
                 name: _dog.name,
                 age: _dog.age,
-                icon: Icons.male,
+                icon: _dog.gender.contains('Female') ? Icons.female : Icons.male,
               ),
               const Spacer(),
               DogPhoto(
