@@ -20,7 +20,7 @@ class CreateNewOfferBloc
             description: '',
             localization: [],
             pictures: ['', '', ''],
-            offerID: 0));
+            offerID: -1));
 
   final Repository _repository;
 
@@ -38,7 +38,7 @@ class CreateNewOfferBloc
             description: '',
             localization: [],
             pictures: ['', '', ''],
-            offerID: 0);
+            offerID: -1);
       } else {
         var pic = ['', '', ''];
         for (var i = 0; i < event.arg!.photoUrl.length; i++) {
@@ -106,7 +106,12 @@ class CreateNewOfferBloc
         currentState.pictures ?? ['', '', ''],
       );
 
-      final response = await _repository.createNewOffer(createNewOfferModel);
+      final response = (currentState.offerID != -1)
+          ? await _repository.updateOffer(
+              createNewOfferModel,
+              currentState.offerID!,
+            )
+          : await _repository.createNewOffer(createNewOfferModel);
       yield SuccessfulCreatedOfferState();
     }
   }

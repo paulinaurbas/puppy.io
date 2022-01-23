@@ -34,6 +34,16 @@ class ApiProvider {
       return value.statusCode ?? 500;
     });
   }
+  Future<int> updateNewOffer(
+      CreateNewOfferModel createNewOfferPayload, String userName, String id) async {
+    return _dio
+        .put('https://puppy-io.herokuapp.com/dogOffer/$id',
+        data: createNewOfferPayload.toJson(),
+        options: Options(headers: {'username': userName}))
+        .then((value) {
+      return value.statusCode ?? 500;
+    });
+  }
 
   Future<int> deleteOffer(int offerID, String userName) async {
     return _dio

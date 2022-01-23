@@ -49,6 +49,19 @@ class Repository {
     }
   }
 
+  Future<int> updateOffer(CreateNewOfferModel createNewOfferPayload, int offerId) async {
+    try {
+      final userName = await _preferencesHelper
+          .getStringPreference(SharedPreferencesHelper.userName);
+      final statusCode =
+      await apiProvider.updateNewOffer(createNewOfferPayload, userName!, offerId.toString());
+      return statusCode;
+    } catch (e) {
+      print(e);
+      return 500;
+    }
+  }
+
   Future<int> deleteOffer(int offerID) async {
     try {
       final userName = await _preferencesHelper
