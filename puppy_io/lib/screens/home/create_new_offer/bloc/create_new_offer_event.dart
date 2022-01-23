@@ -10,6 +10,11 @@ class InitCreateNewOfferScreen extends CreateNewOfferEvent {
   InitCreateNewOfferScreen(this.arg);
 }
 
+class DogNameChanged extends CreateNewOfferEvent {
+  final String name;
+  const DogNameChanged(this.name);
+}
+
 class DogBreedChanged extends CreateNewOfferEvent {
   final String breed;
   const DogBreedChanged(this.breed);

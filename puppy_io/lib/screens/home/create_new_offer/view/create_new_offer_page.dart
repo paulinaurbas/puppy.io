@@ -20,7 +20,7 @@ class CreateNewOfferPage extends StatelessWidget {
         create: (BuildContext context) {
           return getIt.get<CreateNewOfferBloc>()
             ..add(
-              InitCreateNewOfferScreen(arg!.Offer),
+              InitCreateNewOfferScreen(arg?.Offer),
             );
         },
         child: const CreateNewOfferForm(),

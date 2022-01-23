@@ -15,6 +15,7 @@ abstract class  LocaleKeys {
   static const createNewOffer = 'createNewOffer';
   static const createNewOfferButton = 'createNewOfferButton';
   static const dogDescription = 'dogDescription';
+  static const dogName = 'dogName';
   static const dogPicture = 'dogPicture';
   static const breed = 'breed';
   static const sex = 'sex';

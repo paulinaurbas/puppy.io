@@ -63,6 +63,17 @@ class CreateNewOfferForm extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 7,
+                        child: NameTextField(),
+                      )
+                    ],
+                  ),
                   Row(
                     children: [
                       Expanded(
@@ -298,18 +309,93 @@ class CreateNewOfferButton extends StatelessWidget {
   }
 }
 
-class DescriptionTextField extends StatelessWidget {
+class NameTextField extends StatefulWidget {
+  @override
+  State<NameTextField> createState() => _NameTextFieldState();
+}
+
+class _NameTextFieldState extends State<NameTextField> {
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
       child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        buildWhen: (previous, current) =>
-            (previous as CreatingNewOfferState).description !=
-            (current as CreatingNewOfferState).description,
+        // buildWhen: (previous, current) =>
+        //     (previous as CreatingNewOfferState).name !=
+        //     (current as CreatingNewOfferState).name,
         builder: (context, state) {
           if (state is CreatingNewOfferState) {
+            myController.text = state.name ?? '';
             return TextField(
+              controller: myController,
+              key: const Key('createNowOfferForm_nameInput_textField'),
+              onChanged: (name) {
+                context.read<CreateNewOfferBloc>().add(DogNameChanged(name));
+              },
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12.0),
+                  borderSide: const BorderSide(
+                      width: 1, style: BorderStyle.solid, color: Colors.black),
+                ),
+                hintStyle: TextStyle(color: Colors.grey[800]),
+                labelText: LocaleKeys.dogName.tr(),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
+  }
+}
+
+class DescriptionTextField extends StatefulWidget {
+  @override
+  State<DescriptionTextField> createState() => _DescriptionTextFieldState();
+}
+
+class _DescriptionTextFieldState extends State<DescriptionTextField> {
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
+      child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
+        // buildWhen: (previous, current) =>
+        // (previous as CreatingNewOfferState).description !=
+        // (current as CreatingNewOfferState).description,
+        builder: (context, state) {
+          if (state is CreatingNewOfferState) {
+            myController.text = state.description ?? '';
+            return TextField(
+              controller: myController,
               key: const Key('createNowOfferForm_descriptionInput_textField'),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -335,26 +421,49 @@ class DescriptionTextField extends StatelessWidget {
   }
 }
 
-class PictureTextField extends StatelessWidget {
+class PictureTextField extends StatefulWidget {
   const PictureTextField(this.pictureIndex);
 
   final int pictureIndex;
+
+  @override
+  State<PictureTextField> createState() => _PictureTextFieldState(pictureIndex);
+}
+
+class _PictureTextFieldState extends State<PictureTextField> {
+  _PictureTextFieldState(this.pictureIndex);
+  final int pictureIndex;
+
+  final myController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        buildWhen: (previous, current) =>
-            (previous as CreatingNewOfferState).pictures?[pictureIndex] !=
-            (current as CreatingNewOfferState).pictures?[pictureIndex],
+        // buildWhen: (previous, current) =>
+        //     (previous as CreatingNewOfferState).pictures?[pictureIndex] !=
+        //     (current as CreatingNewOfferState).pictures?[pictureIndex],
         builder: (context, state) {
           if (state is CreatingNewOfferState) {
+            myController.text = state.pictures?[pictureIndex] ?? '';
             return TextField(
+              controller: myController,
               key: const Key('createNowOfferForm_pictureInput_textField'),
               onChanged: (picture) => context
                   .read<CreateNewOfferBloc>()
-                  .add(DogPicturesChanged(picture, pictureIndex)),
+                  .add(DogPicturesChanged(picture, widget.pictureIndex)),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),

@@ -14,6 +14,7 @@ class CreateNewOfferBloc
     required Repository repository,
   })  : _repository = repository,
         super(const CreatingNewOfferState(
+            name: '',
             age: null,
             sex: null,
             breed: '',
@@ -28,8 +29,9 @@ class CreateNewOfferBloc
     CreateNewOfferEvent event,
   ) async* {
     if (event is InitCreateNewOfferScreen) {
-      if ((event as InitCreateNewOfferScreen).arg == null) {
+      if (event.arg == null) {
         yield const CreatingNewOfferState(
+            name: '',
             age: null,
             sex: null,
             breed: '',
@@ -43,6 +45,7 @@ class CreateNewOfferBloc
         }
 
         yield CreatingNewOfferState(
+            name: event.arg!.name,
             age: event.arg!.age,
             sex: stringToSex(event.arg!.gender),
             breed: event.arg!.breed,
@@ -59,6 +62,10 @@ class CreateNewOfferBloc
       final currentState = state;
       yield (currentState as CreatingNewOfferState)
           .copyWith(breed: event.breed);
+    } else if (event is DogNameChanged) {
+      if (state is! CreatingNewOfferState) return;
+      final currentState = state;
+      yield (currentState as CreatingNewOfferState).copyWith(name: event.name);
     } else if (event is DogSexChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;
@@ -86,12 +93,13 @@ class CreateNewOfferBloc
       final currentState = state;
 
       final createNewOfferModel = CreateNewOfferModel(
-        (currentState as CreatingNewOfferState).age ?? 0,
+        (currentState as CreatingNewOfferState).name ?? '',
+        currentState.age ?? 0,
         currentState.breed ?? '',
         currentState.sex ?? Sex.male,
         currentState.localization ?? [],
         currentState.description ?? '',
-        currentState.pictures ?? [],
+        currentState.pictures ?? ['', '', ''],
       );
 
       final response = await _repository.createNewOffer(createNewOfferModel);
