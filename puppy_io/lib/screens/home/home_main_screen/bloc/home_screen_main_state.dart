@@ -13,11 +13,13 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     required this.listWithDogs,
     this.isFirstScreen = false,
     this.position,
+    this.isLoading = false,
   });
 
   final Age? age;
   final String? breed;
   final Position? position;
+  final bool isLoading;
   final Sex? sex;
   final Distance? distance;
   final bool isFirstScreen;
@@ -30,9 +32,11 @@ class FilteringOfferDogsState extends HomeScreenMainState {
     Distance? distance,
     List<DogOffer>? listWithDogs,
     Position? position,
-    bool? isFirstScreen
+    bool? isFirstScreen,
+    bool? isLoading,
   }) {
     return FilteringOfferDogsState(
+      isLoading: isLoading ?? this.isLoading,
       distance: distance ?? this.distance,
       breed: breed ?? this.breed,
       sex: sex ?? this.sex,

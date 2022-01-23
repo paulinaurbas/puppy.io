@@ -41,20 +41,38 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
       yield (currentState as FilteringOfferDogsState).copyWith(sex: event.sex);
-    } else if (event is DogDistanceChanged) {
+    } else if (event is CleanFilthers) {
+      yield const FilteringOfferDogsState(
+        listWithDogs: [],
+        age: null,
+        sex: null,
+        distance: null,
+        breed: '',
+        isFirstScreen: true,
+      );
+    }
+    if (event is DogDistanceChanged) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
       final LocationPermission permission = await Geolocator.requestPermission();
-
+      yield (currentState as FilteringOfferDogsState).copyWith(isLoading: true);
       if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
         final Position position = await Geolocator.getCurrentPosition().timeout(const Duration(seconds: 5));
-        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance, position: position);
+        yield currentState.copyWith(
+          distance: event.distance,
+          position: position,
+          isLoading: false,
+        );
       } else {
-        yield (currentState as FilteringOfferDogsState).copyWith(distance: event.distance);
+        yield currentState.copyWith(
+          distance: event.distance,
+          isLoading: false,
+        );
       }
     } else if (event is SearchDog) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
+
 
       List<double> listWithLatLon = [];
 
@@ -63,6 +81,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
         listWithLatLon.add(currentState.position!.latitude);
         listWithLatLon.add(currentState.position!.longitude);
       }
+      yield currentState.copyWith(isLoading: true);
 
       final searchForDog = SearchForDog(
         ageLow: getLowAge((currentState).age),
@@ -77,7 +96,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
 
       final dogOffers = await _repository.searchForOffers(searchForDog,);
 
-      yield currentState.copyWith(listWithDogs: dogOffers, isFirstScreen: false,);
+      yield currentState.copyWith(listWithDogs: dogOffers, isFirstScreen: false, isLoading: false);
     }
   }
 }

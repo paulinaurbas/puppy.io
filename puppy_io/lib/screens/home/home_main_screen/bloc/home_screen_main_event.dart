@@ -33,3 +33,7 @@ class DogDistanceChanged extends HomeScreenMainEvent {
 class SearchDog extends HomeScreenMainEvent {
   SearchDog();
 }
+
+class CleanFilthers extends HomeScreenMainEvent {
+  CleanFilthers();
+}

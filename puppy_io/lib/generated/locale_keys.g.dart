@@ -61,5 +61,6 @@ abstract class  LocaleKeys {
   static const crossbreed = 'crossbreed';
   static const different = 'different';
   static const noResults = 'noResults';
+  static const cleanFilthers = 'cleanFilthers';
 
 }
