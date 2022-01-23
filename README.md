@@ -97,10 +97,21 @@ python -V
 5. Press contact with owner 
 
 #### Add offer 
+1. Log in to the application
+2. Go to create new offer page
+3. Add data about the dog
+4. Publish your offer!
 
-#### Edit offer  
+#### Edit offer 
+1. Log in to the application
+2. Go to settings
+3. Find the offer you want to edit
+4. Edit data about the dog
+5. Update your offer!
 
 #### Display user profile 
+1. Log in to the application
+2. Go to settings
 
 ## 🚀 Deployment, host it on Heroku <a name = "deployment"></a>
 
@@ -121,7 +132,7 @@ git subtree push --prefix backend heroku  master
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [DataBase] - Database //TODO 
+- [DataBase] - Postgres
 - [Flask](https://flask.palletsprojects.com) - Server Framework
 - [Flutter](https://flutter.dev) - Mobile Framework
 - [Python](https://www.python.org) - Server Environment
