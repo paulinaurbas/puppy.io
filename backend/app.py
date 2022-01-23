@@ -98,6 +98,13 @@ def dog_offers():
 
     return jsonify(offers=[dog.toJSON() for dog in dogs]), 200
 
+@app.route('/rollback', methods=['GET'])
+def rollback():
+    app.logger.info('GET /rollback')
+    puppies_data_access.rollback()
+
+    return {}, 200
+
 
 if __name__ == '__main__':
     app.run()

@@ -76,3 +76,7 @@ class PuppiesRepository:
     def delete_dog(self, id: int):
         self.db_client.execute_with_parameters(DogQueries.DELETE_DOG, {"ID": id})
 
+    def rollback(self):
+        self.db_client.rollback()
+
+

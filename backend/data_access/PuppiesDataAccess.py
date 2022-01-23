@@ -79,3 +79,7 @@ class PuppiesDataAccess:
 
     def delete_dog(self, id: int):
         self.repo.delete_dog(id)
+
+    def rollback(self):
+        self.repo.rollback()
+

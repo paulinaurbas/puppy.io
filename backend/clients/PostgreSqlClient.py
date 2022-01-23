@@ -27,3 +27,9 @@ class PostgreSqlClient:
 
     def execute_with_parameters(self, query: str, parameters: dict):
         return self.execute(qh.resolve_query(query, parameters))
+
+    def rollback(self):
+        cursor = self.connection.cursor()
+        cursor.execute("ROLLBACK")
+        self.connection.commit()
+        cursor.close()
