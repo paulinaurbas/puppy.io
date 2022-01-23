@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:puppy_io/data/models/create_dog_offer.dart';
-import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/dog_offers_response.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
 

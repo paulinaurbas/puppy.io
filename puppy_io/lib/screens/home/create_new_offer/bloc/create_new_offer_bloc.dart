@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
 import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
@@ -81,8 +80,7 @@ class CreateNewOfferBloc
       var pictures =
           List<String>.from((currentState as CreatingNewOfferState).pictures!);
       pictures[event.pictureIndex] = event.picture;
-      yield (currentState as CreatingNewOfferState)
-          .copyWith(pictures: pictures);
+      yield currentState.copyWith(pictures: pictures);
     } else if (event is DogLocalizationChanged) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;

@@ -1,13 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:puppy_io/generated/locale_keys.g.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:puppy_io/data/enums/dog_offer_filtring_emuns.dart';
-import 'package:puppy_io/widgets/primary_button.dart';
+import 'package:puppy_io/generated/locale_keys.g.dart';
 import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 import 'package:puppy_io/screens/home/create_new_offer/bloc/create_new_offer_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_icon.dart';
+import 'package:puppy_io/widgets/primary_button.dart';
 
 class CreateNewOfferForm extends StatelessWidget {
   static Route route() {
@@ -353,12 +353,12 @@ class _NameTextFieldState extends State<NameTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
       child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        // buildWhen: (previous, current) =>
-        //     (previous as CreatingNewOfferState).name !=
-        //     (current as CreatingNewOfferState).name,
         builder: (context, state) {
           if (state is CreatingNewOfferState) {
-            myController.text = state.name ?? '';
+            if (myController.text != state.name) {
+              myController.text = state.name ?? '';
+              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+            }
             return TextField(
               controller: myController,
               key: const Key('createNowOfferForm_nameInput_textField'),
@@ -368,8 +368,7 @@ class _NameTextFieldState extends State<NameTextField> {
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: const BorderSide(
-                      width: 1, style: BorderStyle.solid, color: Colors.black),
+                  borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
                 ),
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 labelText: LocaleKeys.dogName.tr(),
@@ -408,20 +407,18 @@ class _DescriptionTextFieldState extends State<DescriptionTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 80.0, vertical: 8),
       child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        // buildWhen: (previous, current) =>
-        // (previous as CreatingNewOfferState).description !=
-        // (current as CreatingNewOfferState).description,
         builder: (context, state) {
           if (state is CreatingNewOfferState) {
-            myController.text = state.description ?? '';
+            if (myController.text != state.description) {
+              myController.text = state.description ?? '';
+              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+            }
             return TextField(
               controller: myController,
               key: const Key('createNowOfferForm_descriptionInput_textField'),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              onChanged: (description) => context
-                  .read<CreateNewOfferBloc>()
-                  .add(DogDescriptionChanged(description)),
+              onChanged: (description) => context.read<CreateNewOfferBloc>().add(DogDescriptionChanged(description)),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
@@ -472,23 +469,21 @@ class _PictureTextFieldState extends State<PictureTextField> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: BlocBuilder<CreateNewOfferBloc, CreateNewOfferState>(
-        // buildWhen: (previous, current) =>
-        //     (previous as CreatingNewOfferState).pictures?[pictureIndex] !=
-        //     (current as CreatingNewOfferState).pictures?[pictureIndex],
         builder: (context, state) {
           if (state is CreatingNewOfferState) {
-            myController.text = state.pictures?[pictureIndex] ?? '';
+            if (myController.text != state.pictures?[pictureIndex]) {
+              myController.text = state.pictures?[pictureIndex] ?? '';
+              myController.selection = TextSelection.fromPosition(TextPosition(offset: myController.text.length));
+            }
             return TextField(
               controller: myController,
               key: const Key('createNowOfferForm_pictureInput_textField'),
-              onChanged: (picture) => context
-                  .read<CreateNewOfferBloc>()
-                  .add(DogPicturesChanged(picture, widget.pictureIndex)),
+              onChanged: (picture) =>
+                  context.read<CreateNewOfferBloc>().add(DogPicturesChanged(picture, widget.pictureIndex)),
               decoration: InputDecoration(
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12.0),
-                  borderSide: const BorderSide(
-                      width: 1, style: BorderStyle.solid, color: Colors.black),
+                  borderSide: const BorderSide(width: 1, style: BorderStyle.solid, color: Colors.black),
                 ),
                 hintStyle: TextStyle(color: Colors.grey[800]),
                 labelText: LocaleKeys.dogPicture.tr(),
