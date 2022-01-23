@@ -66,6 +66,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
 
       final searchForDog = SearchForDog(
         ageLow: getLowAge((currentState).age),
+        ageHight: getHighAge(currentState.age),
         breed: currentState.breed,
         localizationRange: getDistance(currentState.distance),
         localization: listWithLatLon,
