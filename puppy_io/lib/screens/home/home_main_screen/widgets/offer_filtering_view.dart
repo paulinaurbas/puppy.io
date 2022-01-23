@@ -13,10 +13,29 @@ import 'package:puppy_io/widgets/primary_button.dart';
 class OfferFiltering extends StatelessWidget {
   OfferFiltering({Key? key}) : super(key: key);
 
-  List<String> breadsList = [
-    'Hovawart',
-    'Haski',
-    'Owczarek niemiecki',
+  List<String> breedList = [
+    LocaleKeys.borderCollie,
+    LocaleKeys.jackRussellTerrier,
+    LocaleKeys.pug,
+    LocaleKeys.chineseCrestedDog,
+    LocaleKeys.rottweiler,
+    LocaleKeys.beagle,
+    LocaleKeys.cavalierKingCharlesSpaniel,
+    LocaleKeys.longHairedChihuahua,
+    LocaleKeys.englishBulldog,
+    LocaleKeys.goldenRetriever,
+    LocaleKeys.polishWantedHound,
+    LocaleKeys.frenchBulldog,
+    LocaleKeys.miniatureSchnauzer,
+    LocaleKeys.siberianHusky,
+    LocaleKeys.americanStaffordshireTerrier,
+    LocaleKeys.westHighlandWhiteTerrier,
+    LocaleKeys.berneseMountainDog,
+    LocaleKeys.yorkshireTerrier,
+    LocaleKeys.labradorRetriever,
+    LocaleKeys.germanShepherd,
+    LocaleKeys.crossbreed,
+    LocaleKeys.different,
   ];
 
   @override
@@ -35,7 +54,7 @@ class OfferFiltering extends StatelessWidget {
                       height: 16,
                     ),
                     BreedDropDown(
-                      breadsList,
+                      breedList,
                     ),
                   ],
                 ),
@@ -89,7 +108,7 @@ class BreedDropDown extends StatelessWidget {
             items: breadsList.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value.tr()),
               );
             }).toList(),
             onChanged: (username) {

@@ -20,6 +20,7 @@ class SettingsForm extends StatelessWidget {
       builder: (context, state) {
         if (state is SettingsLoaded) {
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomAppBar(
                 Column(
@@ -35,7 +36,7 @@ class SettingsForm extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            UserNameLabel(userName: state.user.userName, title: LocaleKeys.username.tr(),),
+                            UserNameLabel(userName: state.user.username, title: LocaleKeys.username.tr(),),
                             const SizedBox(height: 16,),
                             UserNameLabel(userName: state.user.email, title: LocaleKeys.email.tr(),),
                             const SizedBox(height: 16,),
@@ -53,6 +54,13 @@ class SettingsForm extends StatelessWidget {
                   onPressed: () {
                     context.read<AuthenticationBloc>().add(AuthenticationLogoutRequested());
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0, top: 16.0),
+                child: Text(
+                  LocaleKeys.myOffers.tr(),
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
               Expanded(

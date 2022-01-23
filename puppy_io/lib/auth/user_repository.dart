@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:puppy_io/data/models/user.dart';
 import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
-import 'package:uuid/uuid.dart';
 
 class UserRepository {
   User? _user;
@@ -17,9 +16,7 @@ class UserRepository {
     final userName = await _preferencesHelper.getStringPreference(SharedPreferencesHelper.userName);
 
     final User user = User(
-      userName: userName ?? '',
-      id: const Uuid().v4(),
-      password: password ?? '',
+      username: userName ?? '',
       email: email ?? '',
     );
     if (_user != null) {

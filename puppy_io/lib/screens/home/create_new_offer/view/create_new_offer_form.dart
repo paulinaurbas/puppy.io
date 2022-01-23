@@ -14,10 +14,30 @@ class CreateNewOfferForm extends StatelessWidget {
     return MaterialPageRoute<void>(builder: (_) => const CreateNewOfferForm());
   }
 
-  static const List<String> breedList = [
-    'Hovawart',
-    'Husky',
-    'Owczarek niemiecki'
+
+  static List<String> breedList = [
+    LocaleKeys.borderCollie,
+    LocaleKeys.jackRussellTerrier,
+    LocaleKeys.pug,
+    LocaleKeys.chineseCrestedDog,
+    LocaleKeys.rottweiler,
+    LocaleKeys.beagle,
+    LocaleKeys.cavalierKingCharlesSpaniel,
+    LocaleKeys.longHairedChihuahua,
+    LocaleKeys.englishBulldog,
+    LocaleKeys.goldenRetriever,
+    LocaleKeys.polishWantedHound,
+    LocaleKeys.frenchBulldog,
+    LocaleKeys.miniatureSchnauzer,
+    LocaleKeys.siberianHusky,
+    LocaleKeys.americanStaffordshireTerrier,
+    LocaleKeys.westHighlandWhiteTerrier,
+    LocaleKeys.berneseMountainDog,
+    LocaleKeys.yorkshireTerrier,
+    LocaleKeys.labradorRetriever,
+    LocaleKeys.germanShepherd,
+    LocaleKeys.crossbreed,
+    LocaleKeys.different,
   ];
 
   static const List<String> ageList = [
@@ -84,7 +104,7 @@ class CreateNewOfferForm extends StatelessWidget {
                             const SizedBox(
                               height: 16,
                             ),
-                            const BreedDropDown(
+                            BreedDropDown(
                               breedList,
                             ),
                           ],
@@ -158,7 +178,7 @@ class CreateNewOfferForm extends StatelessWidget {
 }
 
 class BreedDropDown extends StatelessWidget {
-  const BreedDropDown(this.options);
+  BreedDropDown(this.options);
 
   final List<String> options;
 
@@ -179,7 +199,7 @@ class BreedDropDown extends StatelessWidget {
             items: options.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
-                child: Text(value),
+                child: Text(value.tr()),
               );
             }).toList(),
             onChanged: (breed) {

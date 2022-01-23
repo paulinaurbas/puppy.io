@@ -7,33 +7,19 @@ part of 'search_for_dog.dart';
 // **************************************************************************
 
 SearchForDog _$SearchForDogFromJson(Map<String, dynamic> json) => SearchForDog(
-      $enumDecode(_$AgeEnumMap, json['age']),
-      json['breed'] as String,
-      $enumDecode(_$SexEnumMap, json['sex']),
-      $enumDecode(_$DistanceEnumMap, json['distance']),
+      breed: json['breed'] as String?,
+      localization: (json['localization'] as List<dynamic>?)?.map((e) => (e as num).toDouble()).toList(),
+      isMale: json['isMale'] as bool?,
+      ageLow: json['ageLow'] as int?,
+      ageHight: json['ageHight'] as int?,
+      localizationRange: json['localizationRange'] as int?,
     );
 
-Map<String, dynamic> _$SearchForDogToJson(SearchForDog instance) =>
-    <String, dynamic>{
-      'age': _$AgeEnumMap[instance.age],
-      'breed': instance.breed,
-      'sex': _$SexEnumMap[instance.sex],
-      'distance': _$DistanceEnumMap[instance.distance],
+Map<String, dynamic> _$SearchForDogToJson(SearchForDog instance) => <String, dynamic>{
+      if (instance.ageLow != null) 'ageLow': instance.ageLow,
+      if (instance.ageHight != null)'ageHight': instance.ageHight,
+      if (instance.breed != null)'breed': instance.breed,
+      if (instance.isMale != null)'isMale': instance.isMale,
+      if (instance.localizationRange != null)'localizationRange': instance.localizationRange,
+      if (instance.localization != null)'localization': instance.localization,
     };
-
-const _$AgeEnumMap = {
-  Age.oneTwoYears: 'oneTwoYears',
-  Age.threeSixYears: 'threeSixYears',
-  Age.sixPlusYear: 'sixPlusYear',
-};
-
-const _$SexEnumMap = {
-  Sex.male: 'male',
-  Sex.female: 'female',
-};
-
-const _$DistanceEnumMap = {
-  Distance.tenKm: 'tenKm',
-  Distance.twentyKm: 'twentyKm',
-  Distance.moreThanThirtyKm: 'moreThanThirtyKm',
-};

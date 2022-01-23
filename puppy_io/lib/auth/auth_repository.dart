@@ -33,7 +33,8 @@ class AuthenticationRepository {
     final user = await _apiProvider.login(Login(password: password, userName: userName));
     await _preferencesHelper.setBoolPreference(SharedPreferencesHelper.isUserLogIn, true);
     await _preferencesHelper.getBoolPreference(SharedPreferencesHelper.isUserLogIn);
-    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.email, userName);
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.email, user.email);
+    await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userName, user.username);
     await _preferencesHelper.setStringPreference(SharedPreferencesHelper.userPassword, password);
 
     await Future.delayed(
@@ -49,7 +50,7 @@ class AuthenticationRepository {
     required String password,
     required String email,
   }) async {
-    _apiProvider.register(Register(password: password, email: email, userName: username));
+    _apiProvider.register(Register(password: password, email: email, username: username));
     await Future.delayed(
       const Duration(milliseconds: 300),
       () {
