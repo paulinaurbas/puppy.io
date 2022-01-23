@@ -7,13 +7,14 @@ part of 'dog.dart';
 // **************************************************************************
 
 DogOffer _$DogOfferFromJson(Map<String, dynamic> json) => DogOffer(
-      (json['pictures'] as List<dynamic>).map((e) => e as String).toList(),
+      (json['photoUrl'] as List<dynamic>).map((e) => e as String).toList(),
       json['name'] as String,
       json['age'] as int,
-      json['sex'] as String,
+      json['gender'] as String,
       json['breed'] as String,
       json['description'] as String,
-      json['ownerEmail'] as String,
+      json['ownerEmailAddress'] as String,
+      json['id'] as int,
     );
 
 Map<String, dynamic> _$DogOfferToJson(DogOffer instance) => <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$DogOfferToJson(DogOffer instance) => <String, dynamic>{
       'breed': instance.breed,
       'description': instance.description,
       'ownerEmailAddress': instance.ownerEmailAddress,
+      'id': instance.id,
     };

@@ -51,6 +51,11 @@ class DogLocalizationChanged extends CreateNewOfferEvent {
   const DogLocalizationChanged(this.localization);
 }
 
+class OfferDeleted extends CreateNewOfferEvent {
+  final int offerID;
+  const OfferDeleted(this.offerID);
+}
+
 class CreateNewOffer extends CreateNewOfferEvent {
   CreateNewOffer();
 }

@@ -8,7 +8,7 @@ part of 'dog_offers_response.dart';
 
 DogOfferResponse _$DogOfferResponseFromJson(Map<String, dynamic> json) =>
     DogOfferResponse(
-      (json['offers'] as List<dynamic>)
+      (json['dogOffers'] as List<dynamic>)
           .map((e) => DogOffer.fromJson(e as Map<String, dynamic>))
           .toList(),
     );

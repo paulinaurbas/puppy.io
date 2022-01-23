@@ -11,9 +11,10 @@ class DogOffer {
   final String breed;
   final String description;
   final String ownerEmailAddress;
+  final int id;
 
   DogOffer(this.photoUrl, this.name, this.age, this.gender, this.breed,
-      this.description, this.ownerEmailAddress);
+      this.description, this.ownerEmailAddress, this.id);
 
   factory DogOffer.fromJson(Map<String, dynamic> json) =>
       _$DogOfferFromJson(json);

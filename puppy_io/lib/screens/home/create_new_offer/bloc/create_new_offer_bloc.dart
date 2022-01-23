@@ -19,7 +19,8 @@ class CreateNewOfferBloc
             breed: '',
             description: '',
             localization: [],
-            pictures: ['', '', '']));
+            pictures: ['', '', ''],
+            offerID: 0));
 
   final Repository _repository;
 
@@ -36,7 +37,8 @@ class CreateNewOfferBloc
             breed: '',
             description: '',
             localization: [],
-            pictures: ['', '', '']);
+            pictures: ['', '', ''],
+            offerID: 0);
       } else {
         var pic = ['', '', ''];
         for (var i = 0; i < event.arg!.photoUrl.length; i++) {
@@ -50,7 +52,8 @@ class CreateNewOfferBloc
             breed: event.arg!.breed,
             description: event.arg!.description,
             localization: [],
-            pictures: pic);
+            pictures: pic,
+            offerID: event.arg!.id);
       }
     } else if (event is DogAgeChanged) {
       if (state is! CreatingNewOfferState) return;
@@ -86,6 +89,9 @@ class CreateNewOfferBloc
       final currentState = state;
       yield (currentState as CreatingNewOfferState)
           .copyWith(localization: event.localization);
+    } else if (event is OfferDeleted) {
+      if (state is! CreatingNewOfferState) return;
+      final response = await _repository.deleteOffer(event.offerID);
     } else if (event is CreateNewOffer) {
       if (state is! CreatingNewOfferState) return;
       final currentState = state;

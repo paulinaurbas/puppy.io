@@ -3,6 +3,7 @@ import 'package:puppy_io/data/models/create_dog_offer.dart';
 import 'package:puppy_io/data/models/dog.dart';
 import 'package:puppy_io/data/models/search_for_dog.dart';
 import 'package:puppy_io/helpers/shared_preferences_helper/shared_preferences_helper.dart';
+import 'package:puppy_io/screens/home/create_new_offer/view/create_new_offer_form.dart';
 
 class Repository {
   final ApiProvider apiProvider;
@@ -19,13 +20,14 @@ class Repository {
       return listWithDogs.dogOffers;
     } catch (e) {
       print(e);
-      return[];
+      return [];
     }
   }
 
   Future<List<DogOffer>> userOffers() async {
     try {
-      final userName = await _preferencesHelper.getStringPreference(SharedPreferencesHelper.userName);
+      final userName = await _preferencesHelper
+          .getStringPreference(SharedPreferencesHelper.userName);
       final listWithDogs = await apiProvider.userOffers(userName!);
       return listWithDogs.dogOffers;
     } catch (e) {
@@ -35,7 +37,27 @@ class Repository {
   }
 
   Future<int> createNewOffer(CreateNewOfferModel createNewOfferPayload) async {
-    return 201; // Successfully created a dog offer
+    try {
+      final userName = await _preferencesHelper
+          .getStringPreference(SharedPreferencesHelper.userName);
+      final statusCode =
+          await apiProvider.createNewOffer(createNewOfferPayload, userName!);
+      return statusCode;
+    } catch (e) {
+      print(e);
+      return 500;
+    }
   }
 
+  Future<int> deleteOffer(int offerID) async {
+    try {
+      final userName = await _preferencesHelper
+          .getStringPreference(SharedPreferencesHelper.userName);
+      final statusCode = await apiProvider.deleteOffer(offerID, userName!);
+      return statusCode;
+    } catch (e) {
+      print(e);
+      return 500;
+    }
+  }
 }
