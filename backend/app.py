@@ -78,10 +78,15 @@ def dog_offer_id(id):
         return {}, 204
 
 
-@app.route('/dogOffersByOwner/<id>', methods=['GET'])
-def dog_offer_by_owner_id(id):
+@app.route('/dogOffersByOwner/<username>', methods=['GET'])
+def dog_offer_by_owner_id(username):
     app.logger.info('GET /dogOffersByOwner')
-    dogs = puppies_data_access.get_dog_offers(int(id))
+    user_id = puppies_data_access.get_user_id_by_str(username)
+
+    if user_id == 0:
+        return jsonify(error="User doesn't exist"), 400
+
+    dogs = puppies_data_access.get_dog_offers(int(user_id))
 
     return jsonify(offers=[dog.toJSON() for dog in dogs]), 200
 

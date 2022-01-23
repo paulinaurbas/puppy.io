@@ -22,6 +22,9 @@ class PuppiesDataAccess:
     def get_user_id(self, data) -> int:
         return self.repo.get_user_id(data.get('username'))
 
+    def get_user_id_by_str(self, username: str) -> int:
+        return self.repo.get_user_id(username)
+
     def add_dog(self, data, username: str):
         dog = Dog()
         pictures = data.get("pictures")
