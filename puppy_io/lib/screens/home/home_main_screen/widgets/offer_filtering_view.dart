@@ -8,6 +8,7 @@ import 'package:puppy_io/helpers/colors/puppy_io_colors.dart';
 import 'package:puppy_io/screens/home/home_main_screen/bloc/home_screen_main_bloc.dart';
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_icon.dart';
 import 'package:puppy_io/screens/home/home_main_screen/widgets/tile_with_value.dart';
+import 'package:puppy_io/widgets/outline_button.dart';
 import 'package:puppy_io/widgets/primary_button.dart';
 
 class OfferFiltering extends StatelessWidget {
@@ -86,7 +87,16 @@ class OfferFiltering extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          SearchOfferButton(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SearchOfferButton(),
+              const SizedBox(
+                width: 16,
+              ),
+              CleanResultsOfferButton()
+            ],
+          ),
         ],
       ),
     );
@@ -350,6 +360,20 @@ class SearchOfferButton extends StatelessWidget {
         context.read<HomeScreenMainBloc>().add(
               SearchDog(),
             );
+      },
+    );
+  }
+}
+
+class CleanResultsOfferButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return PuppyIoOutlineButton(
+      buttonDescription: LocaleKeys.cleanFilthers.tr(),
+      onPressed: () {
+        context.read<HomeScreenMainBloc>().add(
+          CleanFilthers(),
+        );
       },
     );
   }

@@ -117,10 +117,11 @@ class CreateNewOfferBloc
               currentState.offerID!,
             )
           : await _repository.createNewOffer(createNewOfferModel);
-      if (response == 204) {
+      if (response == 204 || response == 201) {
         yield SuccessfulCreatedOfferState();
       } else {
         yield ErrorCreatedOfferState();
+        yield currentState;
       }
     }
   }

@@ -41,7 +41,17 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
       yield (currentState as FilteringOfferDogsState).copyWith(sex: event.sex);
-    } else if (event is DogDistanceChanged) {
+    } else if (event is CleanFilthers) {
+      yield const FilteringOfferDogsState(
+        listWithDogs: [],
+        age: null,
+        sex: null,
+        distance: null,
+        breed: '',
+        isFirstScreen: true,
+      );
+    }
+    if (event is DogDistanceChanged) {
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
       final LocationPermission permission = await Geolocator.requestPermission();
