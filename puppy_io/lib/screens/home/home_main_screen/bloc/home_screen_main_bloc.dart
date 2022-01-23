@@ -73,6 +73,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
       if (state is! FilteringOfferDogsState) return;
       final currentState = state;
 
+
       List<double> listWithLatLon = [];
 
       if ((currentState as FilteringOfferDogsState).position != null) {
@@ -80,6 +81,7 @@ class HomeScreenMainBloc extends Bloc<HomeScreenMainEvent, HomeScreenMainState> 
         listWithLatLon.add(currentState.position!.latitude);
         listWithLatLon.add(currentState.position!.longitude);
       }
+      yield currentState.copyWith(isLoading: true);
 
       final searchForDog = SearchForDog(
         ageLow: getLowAge((currentState).age),
